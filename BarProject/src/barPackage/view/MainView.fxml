@@ -9,44 +9,49 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="mainPan" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.MainViewController">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0">
          <top>
             <MenuBar BorderPane.alignment="CENTER">
               <menus>
+                  <Menu fx:id="homeBtn" mnemonicParsing="false" onAction="#OnHomeBtnClick" text="Accueil">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#OnHomeBtnClick" text="Accueille" />
+                     </items>
+                  </Menu>
                   <Menu mnemonicParsing="false" text="Consommables">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Gestion" />
-                        <MenuItem mnemonicParsing="false" text="Disponibilités" />
-                        <MenuItem mnemonicParsing="false" text="Périmés" />
+                      <MenuItem fx:id="manageConsumableBtn" mnemonicParsing="false" onAction="#OnManageConsumableBtnClick" text="Gestion" />
+                        <MenuItem fx:id="supplyConsumableBtn" mnemonicParsing="false" text="Disponibilités" />
+                        <MenuItem fx:id="outdatedConsumableBtn" mnemonicParsing="false" text="Périmés" />
                     </items>
                   </Menu>
                 <Menu mnemonicParsing="false" text="Matériels">
                   <items>
-                        <MenuItem mnemonicParsing="false" text="Gestion" />
+                        <MenuItem fx:id="manageToolBtn" mnemonicParsing="false" onAction="#OnManageToolBtnClick" text="Gestion" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Recettes">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Gestion" />
-                        <MenuItem mnemonicParsing="false" text="Favoris" />
+                        <MenuItem fx:id="manageRecipeBtn" mnemonicParsing="false" onAction="#OnManageRecipeBtnClick" text="Gestion" />
+                        <MenuItem fx:id="favRecipeBtn" mnemonicParsing="false" text="Favoris" />
                      </items>
                 </Menu>
-                  <Menu mnemonicParsing="false" text="Statistiques" />
-                <Menu mnemonicParsing="false" text="Paramètres" />
+                  <Menu fx:id="statBtn" mnemonicParsing="false" text="Statistiques" />
+                <Menu fx:id="settingsBtn" mnemonicParsing="false" text="Paramètres" />
               </menus>
             </MenuBar>
          </top>
          <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="middleP" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <Text layoutX="220.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chef, un p'tit verre ?">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Button layoutX="259.0" layoutY="194.0" mnemonicParsing="false" text="Consommer" />
+                  <Button fx:id="consumeBtn" layoutX="259.0" layoutY="194.0" mnemonicParsing="false" text="Consommer" />
                </children>
             </AnchorPane>
          </center>

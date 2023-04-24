@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnectionSingleton {
+public class SingletonConnexion {
     private static Connection connection;
 
     public static Connection getConnection() throws ConnectionException {
