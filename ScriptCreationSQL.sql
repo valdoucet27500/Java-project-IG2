@@ -1,3 +1,6 @@
+set @@global.time_zone = '+00:00' ;
+set @@session.time_zone = '+00:00' ;
+
 -- tool table
 CREATE TABLE tool (
     tool_name VARCHAR(32),
@@ -87,5 +90,5 @@ CREATE TABLE ingredient (
     recipe_id NUMERIC(4) NOT NULL,
     consumable_id VARCHAR(32) NOT NULL,
     CONSTRAINT ingredient_consumable_id_fk FOREIGN KEY (consumable_id) REFERENCES consumable(consumable_name),
-    CONSTRAINT ingredient_recipe_id_fk FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id) ON DELETE CASCADE,
+    CONSTRAINT ingredient_recipe_id_fk FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id) ON DELETE CASCADE
 );
