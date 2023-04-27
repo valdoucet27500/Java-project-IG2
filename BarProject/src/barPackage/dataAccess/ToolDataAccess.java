@@ -1,12 +1,10 @@
-package barPackage.interfaces;
+package barPackage.dataAccess;
 
 import barPackage.exceptions.AddErrorException;
 import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
 import barPackage.model.Tool;
 import javafx.collections.ObservableList;
-
-import java.util.ArrayList;
 
 
 public interface ToolDataAccess {

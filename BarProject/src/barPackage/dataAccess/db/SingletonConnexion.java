@@ -1,4 +1,4 @@
-package barPackage.dataAccess;
+package barPackage.dataAccess.db;
 
 import barPackage.exceptions.ConnectionException;
 

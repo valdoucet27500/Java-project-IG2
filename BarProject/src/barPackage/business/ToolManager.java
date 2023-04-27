@@ -1,26 +1,24 @@
 package barPackage.business;
 
-import barPackage.dataAccess.ToolDBAccess;
+import barPackage.dataAccess.DataConfiguration;
 import barPackage.exceptions.AddErrorException;
 import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
-import barPackage.interfaces.ToolDataAccess;
+import barPackage.dataAccess.ToolDataAccess;
 import barPackage.model.Tool;
 import javafx.collections.ObservableList;
 
-public class ToolManager implements ToolDataAccess {
+public class ToolManager {
     ToolDataAccess toolDataAccess;
 
     public ToolManager() {
-        toolDataAccess = new ToolDBAccess();
+        toolDataAccess = DataConfiguration.getToolDataAccess();
     }
 
-    @Override
     public void addTool(Tool tool) throws AddErrorException {
         toolDataAccess.addTool(tool);
     }
 
-    @Override
     public ObservableList<Tool> getAllTools() throws ReadErrorException {
         return toolDataAccess.getAllTools();
     }
