@@ -112,7 +112,7 @@ public class MainViewController {
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
         }
     }
     @FXML
@@ -123,7 +123,7 @@ public class MainViewController {
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
         }
     }
     @FXML
@@ -134,7 +134,7 @@ public class MainViewController {
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
         }
     }
 }
