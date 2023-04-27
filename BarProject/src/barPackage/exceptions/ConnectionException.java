@@ -1,4 +1,4 @@
-package barPackage.exception;
+package barPackage.exceptions;
 
 public class ConnectionException extends Exception {
 

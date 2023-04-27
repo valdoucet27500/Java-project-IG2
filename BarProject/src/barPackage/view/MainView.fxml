@@ -15,26 +15,26 @@
          <top>
             <MenuBar BorderPane.alignment="CENTER">
               <menus>
-                  <Menu fx:id="homeBtn" mnemonicParsing="false" onAction="#OnHomeBtnClick" text="Accueil">
+                  <Menu fx:id="homeBtn" mnemonicParsing="false" text="Accueil">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#OnHomeBtnClick" text="Accueille" />
+                        <MenuItem mnemonicParsing="false" onAction="#onHomeBtnClick" text="Accueil" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Consommables">
                     <items>
-                      <MenuItem fx:id="manageConsumableBtn" mnemonicParsing="false" onAction="#OnManageConsumableBtnClick" text="Gestion" />
+                      <MenuItem fx:id="manageConsumableBtn" mnemonicParsing="false" onAction="#onManageConsumableBtnClick" text="Gestion" />
                         <MenuItem fx:id="supplyConsumableBtn" mnemonicParsing="false" text="Disponibilités" />
                         <MenuItem fx:id="outdatedConsumableBtn" mnemonicParsing="false" text="Périmés" />
                     </items>
                   </Menu>
                 <Menu mnemonicParsing="false" text="Matériels">
                   <items>
-                        <MenuItem fx:id="manageToolBtn" mnemonicParsing="false" onAction="#OnManageToolBtnClick" text="Gestion" />
+                        <MenuItem fx:id="manageToolBtn" mnemonicParsing="false" onAction="#onManageToolBtnClick" text="Gestion" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Recettes">
                      <items>
-                        <MenuItem fx:id="manageRecipeBtn" mnemonicParsing="false" onAction="#OnManageRecipeBtnClick" text="Gestion" />
+                        <MenuItem fx:id="manageRecipeBtn" mnemonicParsing="false" onAction="#onManageRecipeBtnClick" text="Gestion" />
                         <MenuItem fx:id="favRecipeBtn" mnemonicParsing="false" text="Favoris" />
                      </items>
                 </Menu>
@@ -44,7 +44,7 @@
             </MenuBar>
          </top>
          <center>
-            <AnchorPane fx:id="middleP" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="middlePane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <Text layoutX="220.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chef, un p'tit verre ?">
                      <font>

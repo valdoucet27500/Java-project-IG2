@@ -1,11 +1,9 @@
 <component name="libraryTable">
-  <library name="lib">
+  <library name="mysql-connector-java-8.0.25">
     <CLASSES>
-      <root url="file://$PATH_TO_FX$" />
       <root url="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL ConnectorJ/8.0.25/mysql-connector-java-8.0.25.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
-    <jarDirectory url="file://$PATH_TO_FX$" recursive="false" />
   </library>
 </component>

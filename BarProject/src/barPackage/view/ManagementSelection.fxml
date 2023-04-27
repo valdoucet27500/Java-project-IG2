@@ -5,12 +5,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="primaryPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" spacing="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Création">
+            <Button fx:id="createBtn" mnemonicParsing="false" onAction="#onCreateBtnClick" prefHeight="30.0" prefWidth="180.0" text="Création">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -18,7 +17,7 @@
                   <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                </padding>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Consultation">
+            <Button fx:id="viewBtn" mnemonicParsing="false" onAction="#onViewBtnClick" prefHeight="30.0" prefWidth="180.0" text="Consultation">
                <padding>
                   <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                </padding>
@@ -26,7 +25,7 @@
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Mise à jour">
+            <Button fx:id="updateBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Mise à jour">
                <padding>
                   <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                </padding>
@@ -34,7 +33,7 @@
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Suppression">
+            <Button fx:id="removeBtn" mnemonicParsing="false" onAction="#onRemoveBtnClick" prefHeight="30.0" prefWidth="180.0" text="Suppression">
                <padding>
                   <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                </padding>

@@ -16,7 +16,7 @@ public class MainViewController {
     private AnchorPane mainPan;
 
     @FXML
-    private AnchorPane middleP;
+    private AnchorPane middlePane;
 
     @FXML
     private Button consumeBtn;
@@ -49,43 +49,43 @@ public class MainViewController {
     private Menu homeBtn;
 
     @FXML
-    public void OnManageConsumableBtnClick() {
+    public void onManageConsumableBtnClick() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/ManagementSelection.fxml")));
             fxmlLoader.setController(new ConsumableManagementChoice());
             Parent root = fxmlLoader.load();
-            middleP.getChildren().setAll(root);
+            middlePane.getChildren().setAll(root);
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
     @FXML
-    public void OnManageRecipeBtnClick() {
+    public void onManageRecipeBtnClick() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/ManagementSelection.fxml")));
             fxmlLoader.setController(new RecipeManagementChoice());
             Parent root = fxmlLoader.load();
-            middleP.getChildren().setAll(root);
+            middlePane.getChildren().setAll(root);
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
     @FXML
-    public void OnManageToolBtnClick() {
+    public void onManageToolBtnClick() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/ManagementSelection.fxml")));
             fxmlLoader.setController(new ToolManagementChoice());
             Parent root = fxmlLoader.load();
-            middleP.getChildren().setAll(root);
+            middlePane.getChildren().setAll(root);
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
     @FXML
-    public void OnHomeBtnClick() {
+    public void onHomeBtnClick() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/MainView.fxml")));
             Parent root = fxmlLoader.load();

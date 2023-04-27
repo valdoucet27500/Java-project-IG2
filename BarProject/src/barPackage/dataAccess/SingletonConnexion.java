@@ -1,6 +1,6 @@
 package barPackage.dataAccess;
 
-import barPackage.exception.ConnectionException;
+import barPackage.exceptions.ConnectionException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,14 +10,14 @@ public class SingletonConnexion {
     private static Connection connection;
 
     public static Connection getConnection() throws ConnectionException {
-        try {
-            if (connection == null) {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library",
+        if (connection == null) {
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/barproject",
                         "root",
                         "root");
+            } catch (SQLException e) {
+                throw new ConnectionException("Impossible de se connecter à la base de données");
             }
-        } catch (SQLException e) {
-            throw new ConnectionException("Impossible de se connecter à la base de données");
         }
         return connection;
     }
