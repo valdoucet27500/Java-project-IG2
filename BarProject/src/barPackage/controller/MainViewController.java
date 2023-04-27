@@ -49,6 +49,14 @@ public class MainViewController {
     private Menu homeBtn;
 
     @FXML
+    private MenuItem manageUnityBtn;
+
+    @FXML
+    private MenuItem manageDrinkTypeBtn;
+
+    @FXML
+    private MenuItem manageConsumableTypeBtn;
+    @FXML
     public void onManageConsumableBtnClick() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/ManagementSelection.fxml")));
@@ -90,6 +98,39 @@ public class MainViewController {
             FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/MainView.fxml")));
             Parent root = fxmlLoader.load();
             mainPan.getChildren().setAll(root);
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    @FXML
+    public void onManageUnityBtnClick() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/ManagementSelection.fxml")));
+            fxmlLoader.setController(new UnityManagementChoice());
+            Parent root = fxmlLoader.load();
+            middlePane.getChildren().setAll(root);
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    @FXML
+    public void onManageConsumableTypeBtnClick() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/ManagementSelection.fxml")));
+            fxmlLoader.setController(new ConsumableTypeManagementChoice());
+            Parent root = fxmlLoader.load();
+            middlePane.getChildren().setAll(root);
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    @FXML
+    public void onManageDrinkTypeBtnClick() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/ManagementSelection.fxml")));
+            fxmlLoader.setController(new DrinkTypeManagementChoice());
+            Parent root = fxmlLoader.load();
+            middlePane.getChildren().setAll(root);
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
