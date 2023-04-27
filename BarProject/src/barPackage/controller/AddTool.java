@@ -4,6 +4,9 @@ import barPackage.business.ToolManager;
 import barPackage.exceptions.AddErrorException;
 import barPackage.exceptions.StringInputSizeException;
 import barPackage.model.Tool;
+import barPackage.view.AlertFactoryType;
+import barPackage.view.ToolAlertFactory;
+import barPackage.view.ViewAlertFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,14 +38,9 @@ public class AddTool {
             toolManager.addTool(new Tool(toolNameArea.getText()));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             toolNameArea.clear();
-            alert.setTitle("Ajout réussi");
-            alert.setContentText("L'outil a été ajouté avec succès.");
-            alert.show();
+            ToolAlertFactory.getAlert(AlertFactoryType.ADD_PASS).showAndWait();
         } catch (AddErrorException | StringInputSizeException exception) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur d'ajout");
-            alert.setContentText("Une erreur est survenue lors de l'ajout de l'outil\n" + exception.getMessage());
-            alert.show();
+            ToolAlertFactory.getAlert(AlertFactoryType.ADD_FAIL).showAndWait();
         }
     }
 
@@ -53,7 +51,7 @@ public class AddTool {
             Parent root = fxmlLoader.load();
             primaryPan.getScene().setRoot(root);
         } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
         }
     }
 }

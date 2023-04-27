@@ -1,5 +1,7 @@
 package barPackage.controller;
 
+import barPackage.view.AlertFactoryType;
+import barPackage.view.ViewAlertFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -56,7 +58,7 @@ public class MainViewController {
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
         }
     }
 
@@ -68,7 +70,7 @@ public class MainViewController {
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
         }
     }
 
@@ -80,7 +82,7 @@ public class MainViewController {
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
         }
     }
 
@@ -91,7 +93,7 @@ public class MainViewController {
             Parent root = fxmlLoader.load();
             mainPan.getChildren().setAll(root);
         } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
         }
     }
 }

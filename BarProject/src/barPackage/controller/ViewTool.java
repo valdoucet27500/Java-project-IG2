@@ -3,11 +3,12 @@ package barPackage.controller;
 import barPackage.business.ToolManager;
 import barPackage.exceptions.ReadErrorException;
 import barPackage.model.Tool;
-import javafx.collections.ObservableList;
+import barPackage.view.AlertFactoryType;
+import barPackage.view.ToolAlertFactory;
+import barPackage.view.ViewAlertFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -37,10 +38,7 @@ public class ViewTool {
             ToolManager toolManager = new ToolManager();
             tableView.setItems(toolManager.getAllTools());
         } catch (ReadErrorException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur de lecture");
-            alert.setContentText("Une erreur est survenue lors de la lecture des outils");
-            alert.show();
+            ToolAlertFactory.getAlert(AlertFactoryType.READ_FAIL).showAndWait();
         }
     }
 
@@ -51,7 +49,7 @@ public class ViewTool {
             Parent root = fxmlLoader.load();
             primaryPan.getScene().setRoot(root);
         } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
         }
     }
 }
