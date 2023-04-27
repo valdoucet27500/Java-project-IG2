@@ -1,5 +1,7 @@
 package barPackage.controller;
 
+import barPackage.view.AlertFactoryType;
+import barPackage.view.ViewAlertFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -32,7 +34,7 @@ public class ToolManagementChoice {
             Parent root = fxmlLoader.load();
             primaryPane.getChildren().setAll(root);
         } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
         }
     }
 
@@ -43,7 +45,7 @@ public class ToolManagementChoice {
             Parent root = fxmlLoader.load();
             primaryPane.getChildren().setAll(root);
         } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
         }
     }
 
@@ -54,7 +56,7 @@ public class ToolManagementChoice {
             Parent root = fxmlLoader.load();
             primaryPane.getChildren().setAll(root);
         } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
         }
     }
 }
