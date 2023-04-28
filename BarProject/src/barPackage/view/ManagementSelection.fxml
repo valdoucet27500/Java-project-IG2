@@ -25,7 +25,7 @@
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button fx:id="updateBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Mise à jour">
+            <Button fx:id="updateBtn" mnemonicParsing="false" onAction="#onUpdateBtnClick" prefHeight="30.0" prefWidth="180.0" text="Mise à jour">
                <padding>
                   <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                </padding>
