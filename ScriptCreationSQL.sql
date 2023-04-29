@@ -21,9 +21,9 @@ CREATE TABLE recipe (
 CREATE TABLE utensil (
     tool_id VARCHAR(32) NOT NULL,
     recipe_id NUMERIC(4) NOT NULL,
-    CONSTRAINT tool_id_fk FOREIGN KEY (tool_id) REFERENCES tool(tool_name),
+    CONSTRAINT tool_id_fk FOREIGN KEY (tool_id) REFERENCES tool(tool_name) ON UPDATE CASCADE,
     CONSTRAINT utensil_pk PRIMARY KEY (tool_id, recipe_id),
-    CONSTRAINT recipe_id_fk FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id) ON DELETE CASCADE
+    CONSTRAINT recipe_id_fk FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id) ON UPDATE CASCADE 
 );
 
 -- unit table
@@ -59,7 +59,7 @@ CREATE TABLE content (
         AND quantity <= 99999999
     ) NOT NULL,
     expiration_date DATE,
-    CONSTRAINT consumable_id_fk FOREIGN KEY (consumable_id) REFERENCES consumable(consumable_name) ON DELETE CASCADE
+    CONSTRAINT consumable_id_fk FOREIGN KEY (consumable_id) REFERENCES consumable(consumable_name) ON UPDATE CASCADE
 );
 
 -- alcohol_type table
@@ -77,7 +77,7 @@ CREATE TABLE drink (
         alcohol_level >= 0
         AND alcohol_level <= 100
     ) NOT NULL,
-    CONSTRAINT drink_name_fk FOREIGN KEY (drink_name) REFERENCES consumable(consumable_name) ON DELETE CASCADE,
+    CONSTRAINT drink_name_fk FOREIGN KEY (drink_name) REFERENCES consumable(consumable_name)  ,
     CONSTRAINT alcohol_type_fk FOREIGN KEY (alcohol_type_id) REFERENCES alcohol_type(alcohol_type_name)
 );
 
@@ -89,6 +89,6 @@ CREATE TABLE ingredient (
     ) NOT NULL,
     recipe_id NUMERIC(4) NOT NULL,
     consumable_id VARCHAR(32) NOT NULL,
-    CONSTRAINT ingredient_consumable_id_fk FOREIGN KEY (consumable_id) REFERENCES consumable(consumable_name),
-    CONSTRAINT ingredient_recipe_id_fk FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id) ON DELETE CASCADE
+    CONSTRAINT ingredient_consumable_id_fk FOREIGN KEY (consumable_id) REFERENCES consumable(consumable_name) ON UPDATE CASCADE,
+    CONSTRAINT ingredient_recipe_id_fk FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id) ON UPDATE CASCADE
 );

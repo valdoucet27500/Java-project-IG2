@@ -1,5 +1,6 @@
 package barPackage.controller;
 
+import barPackage.controller.tool.ToolManagementChoice;
 import barPackage.view.AlertFactoryType;
 import barPackage.view.ViewAlertFactory;
 import javafx.fxml.FXML;

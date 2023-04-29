@@ -1,4 +1,4 @@
-package barPackage.controller;
+package barPackage.controller.tool;
 
 import barPackage.business.ToolManager;
 import barPackage.exceptions.ReadErrorException;
@@ -45,7 +45,7 @@ public class ViewTool {
     @FXML
     public void onBackBtnClick() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/MainView.fxml")));
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../../view/MainView.fxml")));
             Parent root = fxmlLoader.load();
             primaryPan.getScene().setRoot(root);
         } catch (IOException e) {
