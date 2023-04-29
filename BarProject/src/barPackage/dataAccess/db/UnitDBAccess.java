@@ -1,6 +1,6 @@
 package barPackage.dataAccess.db;
 
-import barPackage.dataAccess.UnitDataAccess;
+import barPackage.dataAccess.utils.UnitDataAccess;
 import barPackage.exceptions.AddErrorException;
 import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;

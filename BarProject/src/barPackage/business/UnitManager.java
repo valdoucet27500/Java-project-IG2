@@ -1,7 +1,7 @@
 package barPackage.business;
 
-import barPackage.dataAccess.DataConfiguration;
-import barPackage.dataAccess.UnitDataAccess;
+import barPackage.dataAccess.utils.DataConfiguration;
+import barPackage.dataAccess.utils.UnitDataAccess;
 import barPackage.exceptions.AddErrorException;
 import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;

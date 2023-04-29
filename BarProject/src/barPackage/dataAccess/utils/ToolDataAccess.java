@@ -1,4 +1,4 @@
-package barPackage.dataAccess;
+package barPackage.dataAccess.utils;
 
 import barPackage.exceptions.AddErrorException;
 import barPackage.exceptions.DeleteErrorException;

@@ -1,4 +1,4 @@
-package barPackage.controller;
+package barPackage.controller.drinkType;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

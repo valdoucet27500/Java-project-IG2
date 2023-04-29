@@ -1,10 +1,10 @@
 package barPackage.business;
 
-import barPackage.dataAccess.DataConfiguration;
+import barPackage.dataAccess.utils.DataConfiguration;
 import barPackage.exceptions.AddErrorException;
 import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
-import barPackage.dataAccess.ToolDataAccess;
+import barPackage.dataAccess.utils.ToolDataAccess;
 import barPackage.model.Tool;
 import javafx.collections.ObservableList;
 

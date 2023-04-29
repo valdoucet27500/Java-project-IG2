@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="primaryPan" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.Unit.UpdateUnit">
+<AnchorPane fx:id="primaryPan" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.unit.UpdateUnit">
     <children>
         <ComboBox fx:id="comboBox" layoutX="190.0" layoutY="130.0" prefHeight="26.0" prefWidth="220.0" />
         <Text layoutX="250.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unité à modifier">

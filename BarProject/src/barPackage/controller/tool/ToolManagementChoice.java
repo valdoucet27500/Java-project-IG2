@@ -1,7 +1,7 @@
 package barPackage.controller.tool;
 
-import barPackage.view.AlertFactoryType;
-import barPackage.view.ViewAlertFactory;
+import barPackage.view.alert.AlertFactoryType;
+import barPackage.view.alert.ViewAlertFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,7 +30,7 @@ public class ToolManagementChoice {
     @FXML
     public void onCreateBtnClick() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../../view/AddTool.fxml")));
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../../view/tool/AddTool.fxml")));
             Parent root = fxmlLoader.load();
             primaryPane.getChildren().setAll(root);
         } catch (IOException e) {
@@ -41,7 +41,7 @@ public class ToolManagementChoice {
     @FXML
     public void onViewBtnClick() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../../view/ViewTool.fxml")));
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../../view/tool/ViewTool.fxml")));
             Parent root = fxmlLoader.load();
             primaryPane.getChildren().setAll(root);
         } catch (IOException e) {
@@ -52,7 +52,7 @@ public class ToolManagementChoice {
     @FXML
     public void onRemoveBtnClick() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../../view/DeleteTool.fxml")));
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../../view/tool/DeleteTool.fxml")));
             Parent root = fxmlLoader.load();
             primaryPane.getChildren().setAll(root);
         } catch (IOException e) {

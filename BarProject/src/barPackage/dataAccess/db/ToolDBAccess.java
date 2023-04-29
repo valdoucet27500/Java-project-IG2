@@ -3,7 +3,7 @@ package barPackage.dataAccess.db;
 import barPackage.exceptions.AddErrorException;
 import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
-import barPackage.dataAccess.ToolDataAccess;
+import barPackage.dataAccess.utils.ToolDataAccess;
 import barPackage.model.Tool;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

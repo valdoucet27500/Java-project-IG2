@@ -1,25 +1,27 @@
-package barPackage.controller.Unit;
-
+package barPackage.controller.unit;
 
 import barPackage.business.UnitManager;
-import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
 import barPackage.exceptions.StringInputSizeException;
+import barPackage.exceptions.UpdateErrorException;
 import barPackage.model.Unit;
-import barPackage.view.AlertFactoryType;
-import barPackage.view.UnitAlertFactory;
-import barPackage.view.ViewAlertFactory;
+import barPackage.view.alert.AlertFactoryType;
+import barPackage.view.alert.UnitAlertFactory;
+import barPackage.view.alert.ViewAlertFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.util.Objects;
 
-public class DeleteUnit {
+public class UpdateUnit {
+    @FXML
+    private TextField UnitNameArea;
     @FXML
     private Button cancelBtn;
 
@@ -27,10 +29,10 @@ public class DeleteUnit {
     private ComboBox<String> comboBox;
 
     @FXML
-    private Button deleteBtn;
+    private AnchorPane primaryPan;
 
     @FXML
-    private AnchorPane primaryPan;
+    private Button updateBtn;
 
     @FXML
     private void initialize() {
@@ -56,17 +58,17 @@ public class DeleteUnit {
     }
 
     @FXML
-    public void onDeleteBtnClick() {
+    public void onUpdateBtnClick() {
         try {
             UnitManager unitManager = new UnitManager();
-            unitManager.deleteUnit(new Unit(comboBox.getValue()));
-            UnitAlertFactory.getAlert(AlertFactoryType.DELETE_PASS).showAndWait();
+            unitManager.updateUnit(new Unit(comboBox.getValue()), new Unit(UnitNameArea.getText()));
+            UnitAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
             comboBox.getItems().clear();
             for (Unit unit : unitManager.getAllUnits()) {
                 comboBox.getItems().add(unit.getName());
             }
-        } catch (ReadErrorException | StringInputSizeException | DeleteErrorException e) {
-            UnitAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL).showAndWait();
+        } catch (ReadErrorException | StringInputSizeException | UpdateErrorException e) {
+            UnitAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL).showAndWait();
         }
     }
 }

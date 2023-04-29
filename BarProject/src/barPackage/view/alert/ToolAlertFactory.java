@@ -1,4 +1,4 @@
-package barPackage.view;
+package barPackage.view.alert;
 
 import javafx.scene.control.Alert;
 

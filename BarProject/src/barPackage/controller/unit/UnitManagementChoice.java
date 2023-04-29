@@ -1,7 +1,7 @@
-package barPackage.controller;
+package barPackage.controller.unit;
 
-import barPackage.view.AlertFactoryType;
-import barPackage.view.ViewAlertFactory;
+import barPackage.view.alert.AlertFactoryType;
+import barPackage.view.alert.ViewAlertFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,7 +30,7 @@ public class UnitManagementChoice {
     @FXML
     public void onCreateBtnClick() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/Unit/AddUnit.fxml")));
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../../view/Unit/AddUnit.fxml")));
             Parent root = fxmlLoader.load();
             primaryPane.getChildren().setAll(root);
         } catch (IOException e) {
@@ -41,7 +41,7 @@ public class UnitManagementChoice {
     @FXML
     public void onRemoveBtnClick() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/Unit/DeleteUnit.fxml")));
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../../view/Unit/DeleteUnit.fxml")));
             Parent root = fxmlLoader.load();
             primaryPane.getChildren().setAll(root);
         } catch (IOException e) {
@@ -52,7 +52,7 @@ public class UnitManagementChoice {
     @FXML
     public void onUpdateBtnClick() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/Unit/UpdateUnit.fxml")));
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../../view/Unit/UpdateUnit.fxml")));
             Parent root = fxmlLoader.load();
             primaryPane.getChildren().setAll(root);
         } catch (IOException e) {
@@ -63,7 +63,7 @@ public class UnitManagementChoice {
     @FXML
     public void onViewBtnClick() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/Unit/ViewUnit.fxml")));
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../../view/Unit/ViewUnit.fxml")));
             Parent root = fxmlLoader.load();
             primaryPane.getChildren().setAll(root);
         } catch (IOException e) {

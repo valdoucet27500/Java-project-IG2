@@ -1,10 +1,10 @@
-package barPackage.controller;
+package barPackage.controller.recipe;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
-public class ConsumableManagementChoice {
+public class RecipeManagementChoice {
     @FXML
     private AnchorPane primaryPane;
 

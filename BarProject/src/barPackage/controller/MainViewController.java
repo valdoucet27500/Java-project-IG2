@@ -1,8 +1,13 @@
 package barPackage.controller;
 
+import barPackage.controller.consumable.ConsumableManagementChoice;
+import barPackage.controller.consumableType.ConsumableTypeManagementChoice;
+import barPackage.controller.drinkType.DrinkTypeManagementChoice;
+import barPackage.controller.recipe.RecipeManagementChoice;
+import barPackage.controller.unit.UnitManagementChoice;
 import barPackage.controller.tool.ToolManagementChoice;
-import barPackage.view.AlertFactoryType;
-import barPackage.view.ViewAlertFactory;
+import barPackage.view.alert.AlertFactoryType;
+import barPackage.view.alert.ViewAlertFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

@@ -1,12 +1,12 @@
-package barPackage.controller.Unit;
+package barPackage.controller.unit;
 
 import barPackage.business.UnitManager;
 import barPackage.exceptions.AddErrorException;
 import barPackage.exceptions.StringInputSizeException;
 import barPackage.model.Unit;
-import barPackage.view.AlertFactoryType;
-import barPackage.view.UnitAlertFactory;
-import barPackage.view.ViewAlertFactory;
+import barPackage.view.alert.AlertFactoryType;
+import barPackage.view.alert.UnitAlertFactory;
+import barPackage.view.alert.ViewAlertFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
