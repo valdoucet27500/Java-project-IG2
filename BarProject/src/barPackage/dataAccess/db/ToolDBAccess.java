@@ -4,6 +4,7 @@ import barPackage.exceptions.AddErrorException;
 import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
 import barPackage.dataAccess.utils.ToolDataAccess;
+import barPackage.exceptions.UpdateErrorException;
 import barPackage.model.Tool;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -59,5 +60,19 @@ public class ToolDBAccess implements ToolDataAccess {
             throw new ReadErrorException("Erreur lors de la lecture des outils dans la base de données");
         }
         return tools;
+    }
+
+    @Override
+    public void updateTool(Tool tool, Tool newTool) throws UpdateErrorException {
+        try {
+            Connection connection = SingletonConnexion.getConnection();
+            String sqlInstruction = "update tool set tool_name = ? where tool_name = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            preparedStatement.setString(1, newTool.getName());
+            preparedStatement.setString(2, tool.getName());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            throw new UpdateErrorException("Erreur lors de la mise à jour de l'outil dans la base de données");
+        }
     }
 }

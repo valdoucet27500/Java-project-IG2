@@ -62,6 +62,13 @@ public class ToolManagementChoice {
 
     @FXML
     public void onUpdateBtnClick() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../../view/tool/UpdateTool.fxml")));
+            Parent root = fxmlLoader.load();
+            primaryPane.getChildren().setAll(root);
+        } catch (IOException e) {
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
+        }
 
     }
 }

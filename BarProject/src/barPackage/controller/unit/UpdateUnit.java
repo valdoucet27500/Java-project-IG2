@@ -21,7 +21,7 @@ import java.util.Objects;
 
 public class UpdateUnit {
     @FXML
-    private TextField UnitNameArea;
+    private TextField unitNameArea;
     @FXML
     private Button cancelBtn;
 
@@ -61,7 +61,7 @@ public class UpdateUnit {
     public void onUpdateBtnClick() {
         try {
             UnitManager unitManager = new UnitManager();
-            unitManager.updateUnit(new Unit(comboBox.getValue()), new Unit(UnitNameArea.getText()));
+            unitManager.updateUnit(new Unit(comboBox.getValue()), new Unit(unitNameArea.getText()));
             UnitAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
             comboBox.getItems().clear();
             for (Unit unit : unitManager.getAllUnits()) {
