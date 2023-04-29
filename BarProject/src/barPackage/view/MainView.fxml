@@ -41,7 +41,7 @@
                   <Menu fx:id="statBtn" mnemonicParsing="false" text="Statistiques" />
                 <Menu fx:id="settingsBtn" mnemonicParsing="false" text="Paramètres">
                      <items>
-                        <MenuItem fx:id="manageUnityBtn" mnemonicParsing="false" onAction="#onManageUnityBtnClick" text="Unité" />
+                        <MenuItem fx:id="manageUnitBtn" mnemonicParsing="false" onAction="#onManageUnitBtnClick" text="Unité" />
                         <MenuItem fx:id="manageDrinkTypeBtn" mnemonicParsing="false" onAction="#onManageDrinkTypeBtnClick" text="Type boisson" />
                         <MenuItem fx:id="manageConsumableTypeBtn" mnemonicParsing="false" onAction="#onManageConsumableTypeBtnClick" text="Type consommable" />
                      </items></Menu>

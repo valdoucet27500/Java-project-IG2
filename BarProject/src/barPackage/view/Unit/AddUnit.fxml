@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="primaryPan" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.Unit.AddUnit">
+    <children>
+        <TextField fx:id="UnitNameArea" layoutX="190.0" layoutY="173.0" prefHeight="26.0" prefWidth="220.0" promptText="Nom de l'unité" />
+        <Button fx:id="addBtn" layoutX="208.0" layoutY="227.0" mnemonicParsing="false" onAction="#onAddBtnClick" prefHeight="20.0" prefWidth="75.0" text="Ajouter" />
+        <Button fx:id="cancelBtn" layoutX="316.0" layoutY="227.0" mnemonicParsing="false" onAction="#onCancelBtnClick" prefHeight="20.0" prefWidth="75.0" text="Annuler" />
+        <Text layoutX="256.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de l'unité">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Text>
+    </children>
+</AnchorPane>

@@ -52,7 +52,7 @@ public class MainViewController {
     private Menu homeBtn;
 
     @FXML
-    private MenuItem manageUnityBtn;
+    private MenuItem manageUnitBtn;
 
     @FXML
     private MenuItem manageDrinkTypeBtn;
@@ -106,10 +106,10 @@ public class MainViewController {
         }
     }
     @FXML
-    public void onManageUnityBtnClick() {
+    public void onManageUnitBtnClick() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/ManagementSelection.fxml")));
-            fxmlLoader.setController(new UnityManagementChoice());
+            fxmlLoader.setController(new UnitManagementChoice());
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {
