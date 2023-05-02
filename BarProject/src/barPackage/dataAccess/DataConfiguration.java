@@ -12,4 +12,20 @@ public class DataConfiguration {
             return null;
         }
     }
+
+    public static UnitDataAccess getUnitDataAccess() {
+        if (DATA_PERSISTENCE.equals("DB")) {
+            return new barPackage.dataAccess.db.UnitDBAccess();
+        } else {
+            return null;
+        }
+    }
+
+    public static ConsumableTypeDataAccess getConsumableTypeDataAccess() {
+        if (DATA_PERSISTENCE.equals("DB")) {
+            return new barPackage.dataAccess.db.ConsumableTypeDBAccess();
+        } else {
+            return null;
+        }
+    }
 }

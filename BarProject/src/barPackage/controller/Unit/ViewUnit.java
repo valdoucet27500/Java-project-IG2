@@ -35,8 +35,8 @@ public class ViewUnit {
     private void initialize() {
         try {
             unitNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-            UnitManager toolManager = new UnitManager();
-            tableView.setItems(toolManager.getAllUnits());
+            UnitManager unitManager = new UnitManager();
+            tableView.setItems(unitManager.getAllUnits());
         } catch (ReadErrorException e) {
             UnitAlertFactory.getAlert(AlertFactoryType.READ_FAIL).showAndWait();
         }
