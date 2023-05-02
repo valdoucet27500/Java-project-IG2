@@ -1,9 +1,10 @@
-package barPackage.controller.unit;
+package barPackage.controller.consumableType;
 
-import barPackage.business.UnitManager;
+import barPackage.business.ConsumableTypeManager;
 import barPackage.exceptions.ReadErrorException;
-import barPackage.model.Unit;
+import barPackage.model.ConsumableType;
 import barPackage.view.alert.AlertFactoryType;
+import barPackage.view.alert.ConsumableTypeAlertFactory;
 import barPackage.view.alert.UnitAlertFactory;
 import barPackage.view.alert.ViewAlertFactory;
 import javafx.fxml.FXML;
@@ -18,7 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.util.Objects;
 
-public class ViewUnit {
+public class ViewConsumableType {
     @FXML
     private AnchorPane primaryPan;
 
@@ -26,17 +27,17 @@ public class ViewUnit {
     private Button backBtn;
 
     @FXML
-    private TableView<Unit> tableView;
+    private TableView<ConsumableType> tableView;
 
     @FXML
-    private TableColumn<Unit, String> unitNameColumn;
+    private TableColumn<ConsumableType, String> consumableTypeNameColumn;
 
     @FXML
     private void initialize() {
         try {
-            unitNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-            UnitManager unitManager = new UnitManager();
-            tableView.setItems(unitManager.getAllUnits());
+            consumableTypeNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            ConsumableTypeManager consumableTypeManager= new ConsumableTypeManager();
+            tableView.setItems(consumableTypeManager.getAllConsumableTypes());
         } catch (ReadErrorException e) {
             UnitAlertFactory.getAlert(AlertFactoryType.READ_FAIL).showAndWait();
         }

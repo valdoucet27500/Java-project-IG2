@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="primaryPan" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.consumableType.ViewConsumableType">
+    <children>
+        <TableView fx:id="tableView" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0">
+            <columns>
+                <TableColumn fx:id="consumableTypeNameColumn" editable="false" prefWidth="198.0" resizable="false" text="Nom" />
+            </columns>
+        </TableView>
+        <Button fx:id="backBtn" layoutX="274.0" layoutY="333.0" mnemonicParsing="false" onAction="#onBackBtnClick" text="Retour" />
+    </children>
+</AnchorPane>
