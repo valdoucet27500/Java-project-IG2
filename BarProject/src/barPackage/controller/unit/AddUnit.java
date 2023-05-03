@@ -37,11 +37,10 @@ public class AddUnit {
         try {
             UnitManager unitManager = new UnitManager();
             unitManager.addUnit(new Unit(UnitNameArea.getText()));
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             UnitNameArea.clear();
             UnitAlertFactory.getAlert(AlertFactoryType.ADD_PASS).showAndWait();
-        } catch (AddErrorException | StringInputSizeException exception) {
-            UnitAlertFactory.getAlert(AlertFactoryType.ADD_FAIL).showAndWait();
+        } catch (AddErrorException | StringInputSizeException e) {
+            UnitAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, e.getMessage()).showAndWait();
         }
     }
     @FXML
@@ -51,7 +50,7 @@ public class AddUnit {
             Parent root = fxmlLoader.load();
             primaryPan.getScene().setRoot(root);
         } catch (IOException e) {
-            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
         }
     }
 }

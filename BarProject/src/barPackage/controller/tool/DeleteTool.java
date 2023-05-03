@@ -39,7 +39,7 @@ public class DeleteTool {
                 comboBox.getItems().add(tool.getName());
             }
         } catch (ReadErrorException e) {
-            ToolAlertFactory.getAlert(AlertFactoryType.READ_FAIL).showAndWait();
+            ToolAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
         }
     }
 
@@ -50,22 +50,26 @@ public class DeleteTool {
             Parent root = fxmlLoader.load();
             primaryPan.getScene().setRoot(root);
         } catch (IOException e) {
-            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
         }
     }
 
     @FXML
     public void onDeleteBtnClick() {
         try {
-            ToolManager toolManager = new ToolManager();
-            toolManager.deleteTool(new Tool(comboBox.getValue()));
-            ToolAlertFactory.getAlert(AlertFactoryType.DELETE_PASS).showAndWait();
-            comboBox.getItems().clear();
-            for (Tool tool : toolManager.getAllTools()) {
-                comboBox.getItems().add(tool.getName());
+            if (comboBox.getValue() == null) {
+                ToolAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, "Veuillez selectionner un outils à supprimer.").showAndWait();
+            } else {
+                ToolManager toolManager = new ToolManager();
+                toolManager.deleteTool(new Tool(comboBox.getValue()));
+                ToolAlertFactory.getAlert(AlertFactoryType.DELETE_PASS).showAndWait();
+                comboBox.getItems().clear();
+                for (Tool tool : toolManager.getAllTools()) {
+                    comboBox.getItems().add(tool.getName());
+                }
             }
         } catch (ReadErrorException | StringInputSizeException | DeleteErrorException e) {
-            ToolAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL).showAndWait();
+            ToolAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, e.getMessage()).showAndWait();
         }
     }
 }

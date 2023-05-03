@@ -39,7 +39,7 @@ public class ViewConsumableType {
             ConsumableTypeManager consumableTypeManager= new ConsumableTypeManager();
             tableView.setItems(consumableTypeManager.getAllConsumableTypes());
         } catch (ReadErrorException e) {
-            UnitAlertFactory.getAlert(AlertFactoryType.READ_FAIL).showAndWait();
+            UnitAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
         }
     }
 
@@ -50,7 +50,7 @@ public class ViewConsumableType {
             Parent root = fxmlLoader.load();
             primaryPan.getScene().setRoot(root);
         } catch (IOException e) {
-            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
         }
     }
 }

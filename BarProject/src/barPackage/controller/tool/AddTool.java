@@ -36,11 +36,10 @@ public class AddTool {
         try {
             ToolManager toolManager = new ToolManager();
             toolManager.addTool(new Tool(toolNameArea.getText()));
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             toolNameArea.clear();
             ToolAlertFactory.getAlert(AlertFactoryType.ADD_PASS).showAndWait();
-        } catch (AddErrorException | StringInputSizeException exception) {
-            ToolAlertFactory.getAlert(AlertFactoryType.ADD_FAIL).showAndWait();
+        } catch (AddErrorException | StringInputSizeException e) {
+            ToolAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, e.getMessage()).showAndWait();
         }
     }
 
@@ -51,7 +50,7 @@ public class AddTool {
             Parent root = fxmlLoader.load();
             primaryPan.getScene().setRoot(root);
         } catch (IOException e) {
-            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
         }
     }
 }

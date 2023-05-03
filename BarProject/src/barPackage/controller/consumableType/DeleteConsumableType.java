@@ -38,7 +38,7 @@ public class DeleteConsumableType {
                 comboBox.getItems().add(consumableType.getName());
             }
         } catch (ReadErrorException e) {
-            ConsumableTypeAlertFactory.getAlert(AlertFactoryType.READ_FAIL).showAndWait();
+            ConsumableTypeAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
         }
     }
     @FXML
@@ -48,21 +48,25 @@ public class DeleteConsumableType {
             Parent root = fxmlLoader.load();
             primaryPan.getScene().setRoot(root);
         } catch (IOException e) {
-            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
         }
     }
     @FXML
     public void onDeleteBtnClick() {
         try {
-            ConsumableTypeManager consumableTypeManager = new ConsumableTypeManager();
-            consumableTypeManager.deleteConsumableType(new ConsumableType(comboBox.getValue()));
-            ConsumableTypeAlertFactory.getAlert(AlertFactoryType.DELETE_PASS).showAndWait();
-            comboBox.getItems().clear();
-            for (ConsumableType consumableType : consumableTypeManager.getAllConsumableTypes()) {
-                comboBox.getItems().add(consumableType.getName());
+            if (comboBox.getValue() == null) {
+                ConsumableTypeAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, "Veuillez selectionner un type à supprimer").showAndWait();
+            } else {
+                ConsumableTypeManager consumableTypeManager = new ConsumableTypeManager();
+                consumableTypeManager.deleteConsumableType(new ConsumableType(comboBox.getValue()));
+                ConsumableTypeAlertFactory.getAlert(AlertFactoryType.DELETE_PASS).showAndWait();
+                comboBox.getItems().clear();
+                for (ConsumableType consumableType : consumableTypeManager.getAllConsumableTypes()) {
+                    comboBox.getItems().add(consumableType.getName());
+                }
             }
         } catch (ReadErrorException | StringInputSizeException | DeleteErrorException e) {
-            ConsumableTypeAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL).showAndWait();
+            ConsumableTypeAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, e.getMessage()).showAndWait();
         }
     }
 }

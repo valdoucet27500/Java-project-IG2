@@ -67,7 +67,7 @@ public class UnitManagementChoice {
             Parent root = fxmlLoader.load();
             primaryPane.getChildren().setAll(root);
         } catch (IOException e) {
-            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
         }
     }
 
