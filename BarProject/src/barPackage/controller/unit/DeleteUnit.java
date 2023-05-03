@@ -40,7 +40,7 @@ public class DeleteUnit {
                 comboBox.getItems().add(unit.getName());
             }
         } catch (ReadErrorException e) {
-            UnitAlertFactory.getAlert(AlertFactoryType.READ_FAIL).showAndWait();
+            UnitAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
         }
     }
 
@@ -51,22 +51,26 @@ public class DeleteUnit {
             Parent root = fxmlLoader.load();
             primaryPan.getScene().setRoot(root);
         } catch (IOException e) {
-            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
         }
     }
 
     @FXML
     public void onDeleteBtnClick() {
         try {
-            UnitManager unitManager = new UnitManager();
-            unitManager.deleteUnit(new Unit(comboBox.getValue()));
-            UnitAlertFactory.getAlert(AlertFactoryType.DELETE_PASS).showAndWait();
-            comboBox.getItems().clear();
-            for (Unit unit : unitManager.getAllUnits()) {
-                comboBox.getItems().add(unit.getName());
+            if (comboBox.getValue() == null) {
+                UnitAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, "Veuillez selectionner une unité à supprimer.").showAndWait();
+            } else {
+                UnitManager unitManager = new UnitManager();
+                unitManager.deleteUnit(new Unit(comboBox.getValue()));
+                UnitAlertFactory.getAlert(AlertFactoryType.DELETE_PASS).showAndWait();
+                comboBox.getItems().clear();
+                for (Unit unit : unitManager.getAllUnits()) {
+                    comboBox.getItems().add(unit.getName());
+                }
             }
         } catch (ReadErrorException | StringInputSizeException | DeleteErrorException e) {
-            UnitAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL).showAndWait();
+            UnitAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, e.getMessage()).showAndWait();
         }
     }
 }

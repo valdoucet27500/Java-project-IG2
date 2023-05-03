@@ -42,7 +42,7 @@ public class UpdateUnit {
                 comboBox.getItems().add(unit.getName());
             }
         } catch (ReadErrorException e) {
-            UnitAlertFactory.getAlert(AlertFactoryType.READ_FAIL).showAndWait();
+            UnitAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
         }
     }
 
@@ -53,22 +53,26 @@ public class UpdateUnit {
             Parent root = fxmlLoader.load();
             primaryPan.getScene().setRoot(root);
         } catch (IOException e) {
-            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
         }
     }
 
     @FXML
     public void onUpdateBtnClick() {
         try {
-            UnitManager unitManager = new UnitManager();
-            unitManager.updateUnit(new Unit(comboBox.getValue()), new Unit(unitNameArea.getText()));
-            UnitAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
-            comboBox.getItems().clear();
-            for (Unit unit : unitManager.getAllUnits()) {
-                comboBox.getItems().add(unit.getName());
+            if (comboBox.getValue() == null) {
+                UnitAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, "Veuillez séléctionner une unité à mettre à jour.").showAndWait();
+            } else {
+                UnitManager unitManager = new UnitManager();
+                unitManager.updateUnit(new Unit(comboBox.getValue()), new Unit(unitNameArea.getText()));
+                UnitAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
+                comboBox.getItems().clear();
+                for (Unit unit : unitManager.getAllUnits()) {
+                    comboBox.getItems().add(unit.getName());
+                }
             }
         } catch (ReadErrorException | StringInputSizeException | UpdateErrorException e) {
-            UnitAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL).showAndWait();
+            UnitAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, e.getMessage()).showAndWait();
         }
     }
 }

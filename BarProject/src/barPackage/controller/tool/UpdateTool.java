@@ -7,6 +7,7 @@ import barPackage.exceptions.UpdateErrorException;
 import barPackage.model.Tool;
 import barPackage.view.alert.AlertFactoryType;
 import barPackage.view.alert.ToolAlertFactory;
+import barPackage.view.alert.ViewAlertFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -38,7 +39,7 @@ public class UpdateTool {
                 comboBox.getItems().add(tool.getName());
             }
         } catch (ReadErrorException e) {
-            throw new RuntimeException(e);
+            ToolAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
         }
     }
 
@@ -49,22 +50,26 @@ public class UpdateTool {
             AnchorPane root = fxmlLoader.load();
             primaryPan.getScene().setRoot(root);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
         }
     }
 
     @FXML
     public void onUpdateBtnClick() {
         try {
-            ToolManager toolManager = new ToolManager();
-            toolManager.updateTool(new Tool(comboBox.getValue()),new Tool(toolNameArea.getText()));
-            ToolAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
-            comboBox.getItems().clear();
-            for (Tool tool : toolManager.getAllTools()) {
-                comboBox.getItems().add(tool.getName());
+            if (comboBox.getValue() == null) {
+                ToolAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, "Veuillez sélectionner un outil à modifier.").showAndWait();
+            } else {
+                ToolManager toolManager = new ToolManager();
+                toolManager.updateTool(new Tool(comboBox.getValue()), new Tool(toolNameArea.getText()));
+                ToolAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
+                comboBox.getItems().clear();
+                for (Tool tool : toolManager.getAllTools()) {
+                    comboBox.getItems().add(tool.getName());
+                }
             }
         } catch (ReadErrorException | StringInputSizeException | UpdateErrorException e) {
-            ToolAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL).showAndWait();
+            ToolAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, e.getMessage()).showAndWait();
         }
     }
 

@@ -38,7 +38,7 @@ public class ViewUnit {
             UnitManager unitManager = new UnitManager();
             tableView.setItems(unitManager.getAllUnits());
         } catch (ReadErrorException e) {
-            UnitAlertFactory.getAlert(AlertFactoryType.READ_FAIL).showAndWait();
+            UnitAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
         }
     }
 
@@ -49,7 +49,7 @@ public class ViewUnit {
             Parent root = fxmlLoader.load();
             primaryPan.getScene().setRoot(root);
         } catch (IOException e) {
-            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
         }
     }
 }

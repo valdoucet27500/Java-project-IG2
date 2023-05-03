@@ -42,7 +42,7 @@ public class UpdateConsumableType {
                 comboBox.getItems().add(consumableType.getName());
             }
         } catch (ReadErrorException e) {
-            ConsumableTypeAlertFactory.getAlert(AlertFactoryType.READ_FAIL).showAndWait();
+            ConsumableTypeAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
         }
     }
 
@@ -53,22 +53,26 @@ public class UpdateConsumableType {
             Parent root = fxmlLoader.load();
             primaryPan.getScene().setRoot(root);
         } catch (IOException e) {
-            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
         }
     }
 
     @FXML
     public void onUpdateBtnClick() {
         try {
-            ConsumableTypeManager consumableTypeManager = new ConsumableTypeManager();
-            consumableTypeManager.updateConsumableType(new ConsumableType(comboBox.getValue()), new ConsumableType(ConsumableTypeNameArea.getText()));
-            ConsumableTypeAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
-            comboBox.getItems().clear();
-            for (ConsumableType consumableType : consumableTypeManager.getAllConsumableTypes()) {
-                comboBox.getItems().add(consumableType.getName());
+            if (comboBox.getValue() == null) {
+                ConsumableTypeAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, "Veuillez selectionner un type à modifier").showAndWait();
+            } else {
+                ConsumableTypeManager consumableTypeManager = new ConsumableTypeManager();
+                consumableTypeManager.updateConsumableType(new ConsumableType(comboBox.getValue()), new ConsumableType(ConsumableTypeNameArea.getText()));
+                ConsumableTypeAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
+                comboBox.getItems().clear();
+                for (ConsumableType consumableType : consumableTypeManager.getAllConsumableTypes()) {
+                    comboBox.getItems().add(consumableType.getName());
+                }
             }
         } catch (ReadErrorException | StringInputSizeException | UpdateErrorException e) {
-            ConsumableTypeAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL).showAndWait();
+            ConsumableTypeAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, e.getMessage()).showAndWait();
         }
     }
 }

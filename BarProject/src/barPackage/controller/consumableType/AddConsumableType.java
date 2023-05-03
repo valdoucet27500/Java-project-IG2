@@ -36,11 +36,10 @@ public class AddConsumableType {
         try {
             ConsumableTypeManager consumableTypeManager = new ConsumableTypeManager();
             consumableTypeManager.addConsumableType(new ConsumableType(ConsumableTypeNameArea.getText()));
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             ConsumableTypeNameArea.clear();
             ConsumableTypeAlertFactory.getAlert(AlertFactoryType.ADD_PASS).showAndWait();
-        } catch (AddErrorException | StringInputSizeException exception) {
-            ConsumableTypeAlertFactory.getAlert(AlertFactoryType.ADD_FAIL).showAndWait();
+        } catch (AddErrorException | StringInputSizeException e) {
+            ConsumableTypeAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, e.getMessage()).showAndWait();
         }
     }
     @FXML
@@ -50,7 +49,7 @@ public class AddConsumableType {
             Parent root = fxmlLoader.load();
             primaryPan.getScene().setRoot(root);
         } catch (IOException e) {
-            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
         }
     }
 }

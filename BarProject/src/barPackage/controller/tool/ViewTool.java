@@ -38,7 +38,7 @@ public class ViewTool {
             ToolManager toolManager = new ToolManager();
             tableView.setItems(toolManager.getAllTools());
         } catch (ReadErrorException e) {
-            ToolAlertFactory.getAlert(AlertFactoryType.READ_FAIL).showAndWait();
+            ToolAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
         }
     }
 
@@ -49,7 +49,7 @@ public class ViewTool {
             Parent root = fxmlLoader.load();
             primaryPan.getScene().setRoot(root);
         } catch (IOException e) {
-            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
         }
     }
 }
