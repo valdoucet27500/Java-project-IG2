@@ -35,7 +35,7 @@ public class DeleteTool {
     private void initialize() {
         try {
             ToolManager toolManager = new ToolManager();
-            for (Tool tool : toolManager.getAllTools()) {
+            for (Tool tool : toolManager.getAll()) {
                 comboBox.getItems().add(tool.getName());
             }
         } catch (ReadErrorException e) {
@@ -58,10 +58,10 @@ public class DeleteTool {
     public void onDeleteBtnClick() {
         try {
             ToolManager toolManager = new ToolManager();
-            toolManager.deleteTool(new Tool(comboBox.getValue()));
+            toolManager.delete(new Tool(comboBox.getValue()));
             ToolAlertFactory.getAlert(AlertFactoryType.DELETE_PASS).showAndWait();
             comboBox.getItems().clear();
-            for (Tool tool : toolManager.getAllTools()) {
+            for (Tool tool : toolManager.getAll()) {
                 comboBox.getItems().add(tool.getName());
             }
         } catch (ReadErrorException | StringInputSizeException | DeleteErrorException e) {

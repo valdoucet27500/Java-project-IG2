@@ -34,7 +34,7 @@ public class UpdateTool {
     public void initialize() {
         try {
             ToolManager toolManager = new ToolManager();
-            for (Tool tool : toolManager.getAllTools()) {
+            for (Tool tool : toolManager.getAll()) {
                 comboBox.getItems().add(tool.getName());
             }
         } catch (ReadErrorException e) {
@@ -57,10 +57,10 @@ public class UpdateTool {
     public void onUpdateBtnClick() {
         try {
             ToolManager toolManager = new ToolManager();
-            toolManager.updateTool(new Tool(comboBox.getValue()),new Tool(toolNameArea.getText()));
+            toolManager.update(new Tool(comboBox.getValue()),new Tool(toolNameArea.getText()));
             ToolAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
             comboBox.getItems().clear();
-            for (Tool tool : toolManager.getAllTools()) {
+            for (Tool tool : toolManager.getAll()) {
                 comboBox.getItems().add(tool.getName());
             }
         } catch (ReadErrorException | StringInputSizeException | UpdateErrorException e) {

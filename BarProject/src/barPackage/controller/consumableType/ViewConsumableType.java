@@ -37,7 +37,7 @@ public class ViewConsumableType {
         try {
             consumableTypeNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
             ConsumableTypeManager consumableTypeManager= new ConsumableTypeManager();
-            tableView.setItems(consumableTypeManager.getAllConsumableTypes());
+            tableView.setItems(consumableTypeManager.getAll());
         } catch (ReadErrorException e) {
             UnitAlertFactory.getAlert(AlertFactoryType.READ_FAIL).showAndWait();
         }

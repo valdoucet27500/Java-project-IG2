@@ -36,7 +36,7 @@ public class ViewTool {
         try {
             toolNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
             ToolManager toolManager = new ToolManager();
-            tableView.setItems(toolManager.getAllTools());
+            tableView.setItems(toolManager.getAll());
         } catch (ReadErrorException e) {
             ToolAlertFactory.getAlert(AlertFactoryType.READ_FAIL).showAndWait();
         }

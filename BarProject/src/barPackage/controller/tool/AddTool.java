@@ -35,7 +35,7 @@ public class AddTool {
     public void onAddBtnClick() {
         try {
             ToolManager toolManager = new ToolManager();
-            toolManager.addTool(new Tool(toolNameArea.getText()));
+            toolManager.add(new Tool(toolNameArea.getText()));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             toolNameArea.clear();
             ToolAlertFactory.getAlert(AlertFactoryType.ADD_PASS).showAndWait();

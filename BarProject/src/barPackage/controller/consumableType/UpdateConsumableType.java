@@ -38,7 +38,7 @@ public class UpdateConsumableType {
     private void initialize() {
         try {
             ConsumableTypeManager consumableTypeManager = new ConsumableTypeManager();
-            for (ConsumableType consumableType : consumableTypeManager.getAllConsumableTypes()) {
+            for (ConsumableType consumableType : consumableTypeManager.getAll()) {
                 comboBox.getItems().add(consumableType.getName());
             }
         } catch (ReadErrorException e) {
@@ -61,10 +61,10 @@ public class UpdateConsumableType {
     public void onUpdateBtnClick() {
         try {
             ConsumableTypeManager consumableTypeManager = new ConsumableTypeManager();
-            consumableTypeManager.updateConsumableType(new ConsumableType(comboBox.getValue()), new ConsumableType(ConsumableTypeNameArea.getText()));
+            consumableTypeManager.update(new ConsumableType(comboBox.getValue()), new ConsumableType(ConsumableTypeNameArea.getText()));
             ConsumableTypeAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
             comboBox.getItems().clear();
-            for (ConsumableType consumableType : consumableTypeManager.getAllConsumableTypes()) {
+            for (ConsumableType consumableType : consumableTypeManager.getAll()) {
                 comboBox.getItems().add(consumableType.getName());
             }
         } catch (ReadErrorException | StringInputSizeException | UpdateErrorException e) {

@@ -1,4 +1,4 @@
-package barPackage.controller.utils;
+package barPackage.utils;
 
 public enum ManagementActions {
     VIEW("Consultation"),
@@ -14,6 +14,15 @@ public enum ManagementActions {
 
     public String getName() {
         return this.name;
+    }
+
+    public static ManagementActions getConstant(String name) {
+        for (ManagementActions constant : ManagementActions.values()) {
+            if (constant.getName().equals(name)) {
+                return constant;
+            }
+        }
+        return null;
     }
 
 }

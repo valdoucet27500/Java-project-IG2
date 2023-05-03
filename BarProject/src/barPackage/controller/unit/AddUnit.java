@@ -36,7 +36,7 @@ public class AddUnit {
     public void onAddBtnClick() {
         try {
             UnitManager unitManager = new UnitManager();
-            unitManager.addUnit(new Unit(UnitNameArea.getText()));
+            unitManager.add(new Unit(UnitNameArea.getText()));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             UnitNameArea.clear();
             UnitAlertFactory.getAlert(AlertFactoryType.ADD_PASS).showAndWait();

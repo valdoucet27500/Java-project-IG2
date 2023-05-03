@@ -38,7 +38,7 @@ public class UpdateUnit {
     private void initialize() {
         try {
             UnitManager unitManager = new UnitManager();
-            for (Unit unit : unitManager.getAllUnits()) {
+            for (Unit unit : unitManager.getAll()) {
                 comboBox.getItems().add(unit.getName());
             }
         } catch (ReadErrorException e) {
@@ -61,10 +61,10 @@ public class UpdateUnit {
     public void onUpdateBtnClick() {
         try {
             UnitManager unitManager = new UnitManager();
-            unitManager.updateUnit(new Unit(comboBox.getValue()), new Unit(unitNameArea.getText()));
+            unitManager.update(new Unit(comboBox.getValue()), new Unit(unitNameArea.getText()));
             UnitAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
             comboBox.getItems().clear();
-            for (Unit unit : unitManager.getAllUnits()) {
+            for (Unit unit : unitManager.getAll()) {
                 comboBox.getItems().add(unit.getName());
             }
         } catch (ReadErrorException | StringInputSizeException | UpdateErrorException e) {

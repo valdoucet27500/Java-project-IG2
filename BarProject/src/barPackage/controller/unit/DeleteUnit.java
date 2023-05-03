@@ -36,7 +36,7 @@ public class DeleteUnit {
     private void initialize() {
         try {
             UnitManager unitManager = new UnitManager();
-            for (Unit unit : unitManager.getAllUnits()) {
+            for (Unit unit : unitManager.getAll()) {
                 comboBox.getItems().add(unit.getName());
             }
         } catch (ReadErrorException e) {
@@ -59,10 +59,10 @@ public class DeleteUnit {
     public void onDeleteBtnClick() {
         try {
             UnitManager unitManager = new UnitManager();
-            unitManager.deleteUnit(new Unit(comboBox.getValue()));
+            unitManager.delete(new Unit(comboBox.getValue()));
             UnitAlertFactory.getAlert(AlertFactoryType.DELETE_PASS).showAndWait();
             comboBox.getItems().clear();
-            for (Unit unit : unitManager.getAllUnits()) {
+            for (Unit unit : unitManager.getAll()) {
                 comboBox.getItems().add(unit.getName());
             }
         } catch (ReadErrorException | StringInputSizeException | DeleteErrorException e) {

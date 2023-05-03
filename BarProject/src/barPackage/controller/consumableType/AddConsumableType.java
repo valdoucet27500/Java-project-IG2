@@ -35,7 +35,7 @@ public class AddConsumableType {
     public void onAddBtnClick() {
         try {
             ConsumableTypeManager consumableTypeManager = new ConsumableTypeManager();
-            consumableTypeManager.addConsumableType(new ConsumableType(ConsumableTypeNameArea.getText()));
+            consumableTypeManager.add(new ConsumableType(ConsumableTypeNameArea.getText()));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             ConsumableTypeNameArea.clear();
             ConsumableTypeAlertFactory.getAlert(AlertFactoryType.ADD_PASS).showAndWait();

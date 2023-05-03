@@ -1,11 +1,5 @@
 package barPackage.controller;
 
-import barPackage.controller.consumable.ConsumableManagementChoice;
-import barPackage.controller.consumableType.ConsumableTypeManagementChoice;
-import barPackage.controller.drinkType.DrinkTypeManagementChoice;
-import barPackage.controller.recipe.RecipeManagementChoice;
-import barPackage.controller.unit.UnitManagementChoice;
-import barPackage.controller.tool.ToolManagementChoice;
 import barPackage.view.alert.AlertFactoryType;
 import barPackage.view.alert.ViewAlertFactory;
 import javafx.fxml.FXML;
@@ -67,8 +61,8 @@ public class MainViewController {
     @FXML
     public void onManageConsumableBtnClick() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/ManagementSelection.fxml")));
-            fxmlLoader.setController(new ConsumableManagementChoice());
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/Management.fxml")));
+            fxmlLoader.setController(new ManagementController());
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {
@@ -79,8 +73,8 @@ public class MainViewController {
     @FXML
     public void onManageRecipeBtnClick() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/ManagementSelection.fxml")));
-            fxmlLoader.setController(new RecipeManagementChoice());
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/Management.fxml")));
+//            fxmlLoader.setController(new RecipeManagementChoice());
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {
@@ -91,8 +85,8 @@ public class MainViewController {
     @FXML
     public void onManageToolBtnClick() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/ManagementSelection.fxml")));
-            fxmlLoader.setController(new ToolManagementChoice());
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/Management.fxml")));
+//            fxmlLoader.setController(new ToolManagementChoice());
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {
@@ -113,8 +107,8 @@ public class MainViewController {
     @FXML
     public void onManageUnitBtnClick() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/ManagementSelection.fxml")));
-            fxmlLoader.setController(new UnitManagementChoice());
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/Management.fxml")));
+//            fxmlLoader.setController(new UnitManagementChoice());
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {
@@ -124,8 +118,8 @@ public class MainViewController {
     @FXML
     public void onManageConsumableTypeBtnClick() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/ManagementSelection.fxml")));
-            fxmlLoader.setController(new ConsumableTypeManagementChoice());
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/Management.fxml")));
+//            fxmlLoader.setController(new ConsumableTypeManagementChoice());
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {
@@ -135,8 +129,8 @@ public class MainViewController {
     @FXML
     public void onManageDrinkTypeBtnClick() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/ManagementSelection.fxml")));
-            fxmlLoader.setController(new DrinkTypeManagementChoice());
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/Management.fxml")));
+//            fxmlLoader.setController(new DrinkTypeManagementChoice());
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {

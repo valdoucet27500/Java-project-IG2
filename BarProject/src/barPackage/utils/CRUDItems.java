@@ -1,4 +1,4 @@
-package barPackage.controller.utils;
+package barPackage.utils;
 
 public enum CRUDItems {
     TOOL("Matériel"),
@@ -16,6 +16,15 @@ public enum CRUDItems {
 
     public String getName() {
         return this.name;
+    }
+
+    public static CRUDItems getConstant(String name) {
+        for (CRUDItems constant : CRUDItems.values()) {
+            if (constant.getName().equals(name)) {
+                return constant;
+            }
+        }
+        return null;
     }
 
 }

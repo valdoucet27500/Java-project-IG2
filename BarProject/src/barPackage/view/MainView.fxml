@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -9,11 +10,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainPan" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.MainViewController">
+<AnchorPane fx:id="mainPan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.MainViewController">
    <children>
-      <BorderPane prefHeight="400.0" prefWidth="600.0">
+      <BorderPane prefHeight="600.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <MenuBar BorderPane.alignment="CENTER">
+            <MenuBar prefHeight="30.0" BorderPane.alignment="CENTER">
               <menus>
                   <Menu fx:id="homeBtn" mnemonicParsing="false" text="Accueil">
                      <items>
@@ -46,17 +47,23 @@
                         <MenuItem fx:id="manageConsumableTypeBtn" mnemonicParsing="false" onAction="#onManageConsumableTypeBtnClick" text="Type consommable" />
                      </items></Menu>
               </menus>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
             </MenuBar>
          </top>
          <center>
-            <AnchorPane fx:id="middlePane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="middlePane" BorderPane.alignment="CENTER">
                <children>
-                  <Text layoutX="220.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chef, un p'tit verre ?">
+                  <Text layoutX="344.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chef, un p'tit verre ?">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="24.0" />
                      </font>
                   </Text>
-                  <Button fx:id="consumeBtn" layoutX="259.0" layoutY="194.0" mnemonicParsing="false" text="Consommer" />
+                  <Button fx:id="consumeBtn" layoutX="390.0" layoutY="272.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Consommer">
+                     <font>
+                        <Font size="13.0" />
+                     </font></Button>
                </children>
             </AnchorPane>
          </center>

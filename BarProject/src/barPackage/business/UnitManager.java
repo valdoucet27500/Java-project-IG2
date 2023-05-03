@@ -1,7 +1,9 @@
 package barPackage.business;
 
+import barPackage.business.interfaces.Manager;
+import barPackage.dataAccess.utils.DAO;
+import barPackage.utils.CRUDItems;
 import barPackage.dataAccess.utils.DataConfiguration;
-import barPackage.dataAccess.utils.UnitDataAccess;
 import barPackage.exceptions.AddErrorException;
 import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
@@ -9,23 +11,29 @@ import barPackage.exceptions.UpdateErrorException;
 import barPackage.model.Unit;
 import javafx.collections.ObservableList;
 
-public class UnitManager {
-    private UnitDataAccess unitDataAccess;
+import java.util.HashSet;
+
+public class UnitManager implements Manager<Unit> {
+    private DAO dao;
 
     public UnitManager() {
-        unitDataAccess = DataConfiguration.getUnitDataAccess();
+        dao = DataConfiguration.getDAO(CRUDItems.UNIT);
     }
-    public void addUnit(Unit unit) throws AddErrorException {
-        unitDataAccess.addUnit(unit);
+    public void add(Unit unit) throws AddErrorException {
+        dao.add(unit);
     }
-    public ObservableList<Unit> getAllUnits() throws ReadErrorException {
-        return unitDataAccess.getAllUnits();
+    public ObservableList<Unit> getAll() throws ReadErrorException {
+        return dao.getAllRows();
     }
-    public void deleteUnit(Unit unit) throws DeleteErrorException {
-        unitDataAccess.deleteUnit(unit);
+    public void delete(Unit unit) throws DeleteErrorException {
+        dao.delete(unit);
     }
 
-    public void updateUnit(Unit unit, Unit newUnit) throws UpdateErrorException {
-        unitDataAccess.updateUnit(unit,newUnit);
+    public void update(Unit unit, Unit newUnit) throws UpdateErrorException {
+        dao.update(unit,newUnit);
+    }
+
+    public HashSet<String> getColumnsNames() throws ReadErrorException {
+        return dao.getColumnsNames();
     }
 }

@@ -1,6 +1,7 @@
 package barPackage.business;
 
-import barPackage.dataAccess.utils.ConsumableTypeDataAccess;
+import barPackage.business.interfaces.Manager;
+import barPackage.dataAccess.utils.DAO;
 import barPackage.dataAccess.utils.DataConfiguration;
 import barPackage.exceptions.AddErrorException;
 import barPackage.exceptions.DeleteErrorException;
@@ -9,23 +10,29 @@ import barPackage.exceptions.UpdateErrorException;
 import barPackage.model.ConsumableType;
 import javafx.collections.ObservableList;
 
-public class ConsumableTypeManager {
-    private ConsumableTypeDataAccess consumableTypeDataAccess;
+import java.util.HashSet;
+
+public class ConsumableTypeManager implements Manager<ConsumableType> {
+    private DAO dao;
 
     public ConsumableTypeManager() {
-        consumableTypeDataAccess = DataConfiguration.getConsumableTypeDataAccess();
+        dao = DataConfiguration.getConsumableTypeDataAccess();
     }
-    public void addConsumableType(ConsumableType consumableType) throws AddErrorException {
-        consumableTypeDataAccess.addConsumableType(consumableType);
+    public void add(ConsumableType consumableType) throws AddErrorException {
+        dao.add(consumableType);
     }
-    public ObservableList<ConsumableType> getAllConsumableTypes() throws ReadErrorException {
-        return consumableTypeDataAccess.getAllConsumableTypes();
+    public ObservableList<ConsumableType> getAll() throws ReadErrorException {
+        return dao.getAllRows();
     }
-    public void deleteConsumableType(ConsumableType consumableType) throws DeleteErrorException {
-        consumableTypeDataAccess.deleteConsumableType(consumableType);
+    public void delete(ConsumableType consumableType) throws DeleteErrorException {
+        dao.delete(consumableType);
     }
 
-    public void updateConsumableType(ConsumableType consumableType, ConsumableType newConsumableType) throws UpdateErrorException {
-        consumableTypeDataAccess.updateConsumableType(consumableType,newConsumableType);
+    public void update(ConsumableType consumableType, ConsumableType newConsumableType) throws UpdateErrorException {
+        dao.update(consumableType,newConsumableType);
+    }
+
+    public HashSet<String> getColumnsNames() throws ReadErrorException {
+        return dao.getColumnsNames();
     }
 }

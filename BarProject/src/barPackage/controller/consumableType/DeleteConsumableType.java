@@ -34,7 +34,7 @@ public class DeleteConsumableType {
     private void initialize() {
         try {
             ConsumableTypeManager consumableTypeManager = new ConsumableTypeManager();
-            for (ConsumableType consumableType : consumableTypeManager.getAllConsumableTypes()) {
+            for (ConsumableType consumableType : consumableTypeManager.getAll()) {
                 comboBox.getItems().add(consumableType.getName());
             }
         } catch (ReadErrorException e) {
@@ -55,10 +55,10 @@ public class DeleteConsumableType {
     public void onDeleteBtnClick() {
         try {
             ConsumableTypeManager consumableTypeManager = new ConsumableTypeManager();
-            consumableTypeManager.deleteConsumableType(new ConsumableType(comboBox.getValue()));
+            consumableTypeManager.delete(new ConsumableType(comboBox.getValue()));
             ConsumableTypeAlertFactory.getAlert(AlertFactoryType.DELETE_PASS).showAndWait();
             comboBox.getItems().clear();
-            for (ConsumableType consumableType : consumableTypeManager.getAllConsumableTypes()) {
+            for (ConsumableType consumableType : consumableTypeManager.getAll()) {
                 comboBox.getItems().add(consumableType.getName());
             }
         } catch (ReadErrorException | StringInputSizeException | DeleteErrorException e) {

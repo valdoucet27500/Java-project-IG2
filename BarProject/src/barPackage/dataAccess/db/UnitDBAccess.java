@@ -1,6 +1,6 @@
 package barPackage.dataAccess.db;
 
-import barPackage.dataAccess.utils.UnitDataAccess;
+import barPackage.dataAccess.utils.DAO;
 import barPackage.exceptions.AddErrorException;
 import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
@@ -12,13 +12,13 @@ import javafx.collections.ObservableList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashSet;
 
-public class UnitDBAccess implements UnitDataAccess {
+public class UnitDBAccess implements DAO<Unit> {
     public UnitDBAccess() {
     }
 
-    @Override
-    public ObservableList<Unit> getAllUnits() throws ReadErrorException {
+    public ObservableList<Unit> getAllRows() throws ReadErrorException {
         ObservableList<Unit> units = FXCollections.observableArrayList();
         try {
             Connection connection = SingletonConnexion.getConnection();
@@ -35,8 +35,7 @@ public class UnitDBAccess implements UnitDataAccess {
         return units;
     }
 
-    @Override
-    public void addUnit(Unit unit) throws AddErrorException {
+    public void add(Unit unit) throws AddErrorException {
         try {
             Connection connection = SingletonConnexion.getConnection();
             String sqlInstruction = "insert into unit (unit_name) values (?)";
@@ -48,8 +47,7 @@ public class UnitDBAccess implements UnitDataAccess {
         }
     }
 
-    @Override
-    public void deleteUnit(Unit unit) throws DeleteErrorException {
+    public void delete(Unit unit) throws DeleteErrorException {
         try {
             Connection connection = SingletonConnexion.getConnection();
             String sqlInstruction = "delete from unit where unit_name = ?";
@@ -61,8 +59,8 @@ public class UnitDBAccess implements UnitDataAccess {
         }
     }
 
-    @Override
-    public void updateUnit(Unit unit, Unit newUnit) throws UpdateErrorException {
+
+    public void update(Unit unit, Unit newUnit) throws UpdateErrorException {
         try {
             Connection connection = SingletonConnexion.getConnection();
             String sqlInstruction = "update unit set unit_name = ? where unit_name = ?";
@@ -73,5 +71,21 @@ public class UnitDBAccess implements UnitDataAccess {
         } catch (Exception e) {
             throw new UpdateErrorException("Erreur lors de la mise à jour de l'unité dans la base de données");
         }
+    }
+
+    public HashSet<String> getColumnsNames() throws ReadErrorException {
+        HashSet<String> columnsNames = new HashSet<>();
+        try {
+            Connection connection = SingletonConnexion.getConnection();
+            String sqlInstruction = "select * from unit";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++) {
+                columnsNames.add(resultSet.getMetaData().getColumnName(i));
+            }
+        } catch (Exception e) {
+            throw new ReadErrorException("Erreur lors de la lecture des colonnes de la table unit dans la base de données");
+        }
+        return columnsNames;
     }
 }
