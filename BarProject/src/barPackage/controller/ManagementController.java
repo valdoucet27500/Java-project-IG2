@@ -57,9 +57,9 @@ public class ManagementController {
                 CRUDItems item = CRUDItems.getConstant(elementComboBox.getValue());
                 switch (action) {
                     case VIEW:
-                        for (String s : ManagerFactory.getManager(item).getColumnsNames()) {
-                            System.out.println(s);
-                        }
+//                        for (String s : ManagerFactory.getManager(item).getColumnsNames()) {
+//                            System.out.println(s);
+//                        }
                         break;
                     case CREATE:
                         System.out.println("CREATE");
