@@ -1,5 +1,7 @@
 package barPackage.dataAccess.utils;
 
+import barPackage.dataAccess.db.ConsumableTypeDBAccess;
+import barPackage.dataAccess.db.DrinkTypeDBAccess;
 import barPackage.dataAccess.db.ToolDBAccess;
 import barPackage.dataAccess.db.UnitDBAccess;
 
@@ -22,9 +24,17 @@ public class DataConfiguration {
         }
     }
 
+    public static DrinkTypeDataAccess getDrinkTypeDataAccess() {
+        if (DATA_PERSISTENCE.equals("DB")) {
+            return new DrinkTypeDBAccess();
+        } else {
+            return null;
+        }
+    }
+
     public static ConsumableTypeDataAccess getConsumableTypeDataAccess() {
         if (DATA_PERSISTENCE.equals("DB")) {
-            return new barPackage.dataAccess.db.ConsumableTypeDBAccess();
+            return new ConsumableTypeDBAccess();
         } else {
             return null;
         }
