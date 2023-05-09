@@ -25,7 +25,7 @@ public class DrinkTypeDBAccess implements DrinkTypeDataAccess {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                DrinkType drinkType = new DrinkType(resultSet.getString("consumable_type_name"));
+                DrinkType drinkType = new DrinkType(resultSet.getString("alcohol_type_name"));
                 drinkTypes.add(drinkType);
             }
         } catch (Exception e) {

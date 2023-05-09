@@ -5,6 +5,7 @@ import barPackage.exceptions.AddErrorException;
 import barPackage.exceptions.StringInputSizeException;
 import barPackage.model.DrinkType;
 import barPackage.view.alert.AlertFactoryType;
+import barPackage.view.alert.DrinkTypeAlertFactory;
 import barPackage.view.alert.ViewAlertFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +37,7 @@ public class AddDrinkType {
             DrinkTypeManager consumableTypeManager = new DrinkTypeManager();
             consumableTypeManager.addDrinkType(new DrinkType(DrinkTypeNameArea.getText()));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            ConsumableTypeNameArea.clear();
+            DrinkTypeNameArea.clear();
             DrinkTypeAlertFactory.getAlert(AlertFactoryType.ADD_PASS).showAndWait();
         } catch (AddErrorException | StringInputSizeException exception) {
             DrinkTypeAlertFactory.getAlert(AlertFactoryType.ADD_FAIL).showAndWait();

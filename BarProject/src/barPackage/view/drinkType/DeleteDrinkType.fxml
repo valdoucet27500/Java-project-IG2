@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="barPackage.view.drinkType.DeleteDrinkType"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="primaryPan" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.drinkType.DeleteDrinkType">
+    <children>
+        <ComboBox fx:id="comboBox" layoutX="190.0" layoutY="173.0" prefHeight="26.0" prefWidth="220.0" />
+        <Text layoutX="207.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type de consommable à supprimer">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Text>
+        <Button fx:id="deleteBtn" layoutX="208.0" layoutY="227.0" mnemonicParsing="false" onAction="#onDeleteBtnClick" prefHeight="20.0" prefWidth="75.0" text="Supprimer" />
+        <Button fx:id="cancelBtn" layoutX="316.0" layoutY="227.0" mnemonicParsing="false" onAction="#onCancelBtnClick" prefHeight="20.0" prefWidth="75.0" text="Annuler" />
+    </children>
 </AnchorPane>

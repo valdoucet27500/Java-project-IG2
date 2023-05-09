@@ -29,4 +29,12 @@ public class DataConfiguration {
             return null;
         }
     }
+
+    public static DrinkTypeDataAccess getDrinkTypeDataAccess() {
+        if (DATA_PERSISTENCE.equals("DB")) {
+            return new barPackage.dataAccess.db.DrinkTypeDBAccess();
+        } else {
+            return null;
+        }
+    }
 }
