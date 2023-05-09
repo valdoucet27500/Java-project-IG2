@@ -20,7 +20,7 @@ import java.util.Objects;
 
 public class AddDrinkType {
     @FXML
-    private TextField DrinkTypeNameArea;
+    private TextField drinkTypeNameArea;
 
     @FXML
     private Button addBtn;
@@ -35,9 +35,9 @@ public class AddDrinkType {
     public void onAddBtnClick() {
         try {
             DrinkTypeManager consumableTypeManager = new DrinkTypeManager();
-            consumableTypeManager.addDrinkType(new DrinkType(DrinkTypeNameArea.getText()));
+            consumableTypeManager.addDrinkType(new DrinkType(drinkTypeNameArea.getText()));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            DrinkTypeNameArea.clear();
+            drinkTypeNameArea.clear();
             DrinkTypeAlertFactory.getAlert(AlertFactoryType.ADD_PASS).showAndWait();
         } catch (AddErrorException | StringInputSizeException exception) {
             DrinkTypeAlertFactory.getAlert(AlertFactoryType.ADD_FAIL).showAndWait();

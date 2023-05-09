@@ -20,7 +20,7 @@ import java.util.Objects;
 
 public class AddConsumableType {
     @FXML
-    private TextField ConsumableTypeNameArea;
+    private TextField consumableTypeNameArea;
 
     @FXML
     private Button addBtn;
@@ -35,8 +35,8 @@ public class AddConsumableType {
     public void onAddBtnClick() {
         try {
             ConsumableTypeManager consumableTypeManager = new ConsumableTypeManager();
-            consumableTypeManager.addConsumableType(new ConsumableType(ConsumableTypeNameArea.getText()));
-            ConsumableTypeNameArea.clear();
+            consumableTypeManager.addConsumableType(new ConsumableType(consumableTypeNameArea.getText()));
+            consumableTypeNameArea.clear();
             ConsumableTypeAlertFactory.getAlert(AlertFactoryType.ADD_PASS).showAndWait();
         } catch (AddErrorException | StringInputSizeException e) {
             ConsumableTypeAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, e.getMessage()).showAndWait();
