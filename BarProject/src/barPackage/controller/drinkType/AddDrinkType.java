@@ -34,8 +34,8 @@ public class AddDrinkType {
     @FXML
     public void onAddBtnClick() {
         try {
-            DrinkTypeManager consumableTypeManager = new DrinkTypeManager();
-            consumableTypeManager.addDrinkType(new DrinkType(drinkTypeNameArea.getText()));
+            DrinkTypeManager drinkTypeManager = new DrinkTypeManager();
+            drinkTypeManager.addDrinkType(new DrinkType(drinkTypeNameArea.getText()));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             drinkTypeNameArea.clear();
             DrinkTypeAlertFactory.getAlert(AlertFactoryType.ADD_PASS).showAndWait();

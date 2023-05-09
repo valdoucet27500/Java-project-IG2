@@ -21,7 +21,7 @@ import java.util.Objects;
 
 public class UpdateDrinkType {
     @FXML
-    private TextField DrinkTypeNameArea;
+    private TextField drinkTypeNameArea;
     @FXML
     private Button cancelBtn;
 
@@ -64,7 +64,7 @@ public class UpdateDrinkType {
                 DrinkTypeAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, "Veuillez selectionner un type à modifier").showAndWait();
             } else {
                 DrinkTypeManager drinkTypeManager = new DrinkTypeManager();
-                drinkTypeManager.updateDrinkType(new DrinkType(comboBox.getValue()), new DrinkType(DrinkTypeNameArea.getText()));
+                drinkTypeManager.updateDrinkType(new DrinkType(comboBox.getValue()), new DrinkType(drinkTypeNameArea.getText()));
                 DrinkTypeAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
                 comboBox.getItems().clear();
                 for (DrinkType consumableType : drinkTypeManager.getAllDrinkTypes()) {
