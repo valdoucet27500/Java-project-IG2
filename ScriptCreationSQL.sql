@@ -1,6 +1,5 @@
 set @@global.time_zone = '+00:00' ;
 set @@session.time_zone = '+00:00' ;
-
 -- tool table
 CREATE TABLE tool (
     tool_name VARCHAR(32),
