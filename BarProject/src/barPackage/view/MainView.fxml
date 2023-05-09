@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -13,14 +14,14 @@
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0">
          <top>
-            <MenuBar BorderPane.alignment="CENTER">
+            <MenuBar prefHeight="20.0" BorderPane.alignment="CENTER">
               <menus>
                   <Menu fx:id="homeBtn" mnemonicParsing="false" text="Accueil">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#onHomeBtnClick" text="Accueil" />
                      </items>
                   </Menu>
-                  <Menu mnemonicParsing="false" text="Consommables">
+                  <Menu mnemonicParsing="false" text="Stock">
                     <items>
                       <MenuItem fx:id="manageConsumableBtn" mnemonicParsing="false" onAction="#onManageConsumableBtnClick" text="Gestion" />
                         <MenuItem fx:id="supplyConsumableBtn" mnemonicParsing="false" text="Disponibilités" />
@@ -44,6 +45,7 @@
                         <MenuItem fx:id="manageUnitBtn" mnemonicParsing="false" onAction="#onManageUnitBtnClick" text="Unité" />
                         <MenuItem fx:id="manageDrinkTypeBtn" mnemonicParsing="false" onAction="#onManageDrinkTypeBtnClick" text="Type boisson" />
                         <MenuItem fx:id="manageConsumableTypeBtn" mnemonicParsing="false" onAction="#onManageConsumableTypeBtnClick" text="Type consommable" />
+                        <MenuItem mnemonicParsing="false" text="Consommable" />
                      </items></Menu>
               </menus>
             </MenuBar>
@@ -57,6 +59,7 @@
                      </font>
                   </Text>
                   <Button fx:id="consumeBtn" layoutX="259.0" layoutY="194.0" mnemonicParsing="false" text="Consommer" />
+                  <DatePicker layoutX="126.0" layoutY="74.0" />
                </children>
             </AnchorPane>
          </center>

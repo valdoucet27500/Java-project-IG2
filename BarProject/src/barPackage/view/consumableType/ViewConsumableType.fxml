@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="primaryPan" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.consumableType.ViewConsumableType">
+<AnchorPane fx:id="primaryPan" prefHeight="380.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.consumableType.ViewConsumableType">
     <children>
         <TableView fx:id="tableView" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0">
             <columns>
