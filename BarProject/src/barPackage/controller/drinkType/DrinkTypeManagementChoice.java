@@ -36,7 +36,6 @@ public class DrinkTypeManagementChoice {
             ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
         }
     }
-
     @FXML
     public void onRemoveBtnClick() {
         try {
@@ -47,7 +46,6 @@ public class DrinkTypeManagementChoice {
             ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
         }
     }
-
     @FXML
     public void onUpdateBtnClick() {
         try {
@@ -58,7 +56,6 @@ public class DrinkTypeManagementChoice {
             ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
         }
     }
-
     @FXML
     public void onViewBtnClick() {
         try {
