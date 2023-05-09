@@ -1,9 +1,5 @@
-set
-    @@global.time_zone = '+00:00';
-
-set
-    @@session.time_zone = '+00:00';
-
+set @@global.time_zone = '+00:00' ;
+set @@session.time_zone = '+00:00' ;
 -- tool table
 CREATE TABLE tool (
     tool_name VARCHAR(32),
@@ -12,7 +8,7 @@ CREATE TABLE tool (
 
 -- recipe table
 CREATE TABLE recipe (
-    recipe_id INT AUTO_INCREMENT PRIMARY KEY,
+    recipe_id NUMERIC(4) PRIMARY KEY,
     recipe_name VARCHAR(64) NOT NULL,
     steps VARCHAR(2048) NOT NULL,
     description VARCHAR(1024),
@@ -23,10 +19,10 @@ CREATE TABLE recipe (
 -- utensil table
 CREATE TABLE utensil (
     tool_id VARCHAR(32) NOT NULL,
-    recipe_id INT NOT NULL,
+    recipe_id NUMERIC(4) NOT NULL,
     CONSTRAINT tool_id_fk FOREIGN KEY (tool_id) REFERENCES tool(tool_name) ON UPDATE CASCADE,
     CONSTRAINT utensil_pk PRIMARY KEY (tool_id, recipe_id),
-    CONSTRAINT recipe_id_fk FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id) ON UPDATE CASCADE
+    CONSTRAINT recipe_id_fk FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id) ON UPDATE CASCADE 
 );
 
 -- unit table
@@ -55,7 +51,7 @@ CREATE TABLE consumable (
 
 -- content table
 CREATE TABLE content (
-    content_id INT AUTO_INCREMENT PRIMARY KEY,
+    content_id NUMERIC(4) PRIMARY KEY,
     consumable_id VARCHAR(32) NOT NULL,
     quantity NUMERIC(8, 2) DEFAULT 0 CONSTRAINT quantity_ck CHECK (
         quantity >= 0
@@ -80,7 +76,7 @@ CREATE TABLE drink (
         alcohol_level >= 0
         AND alcohol_level <= 100
     ) NOT NULL,
-    CONSTRAINT drink_name_fk FOREIGN KEY (drink_name) REFERENCES consumable(consumable_name),
+    CONSTRAINT drink_name_fk FOREIGN KEY (drink_name) REFERENCES consumable(consumable_name)  ,
     CONSTRAINT alcohol_type_fk FOREIGN KEY (alcohol_type_id) REFERENCES alcohol_type(alcohol_type_name)
 );
 
@@ -90,7 +86,7 @@ CREATE TABLE ingredient (
         required_quantity >= 0
         AND required_quantity <= 999999.99
     ) NOT NULL,
-    recipe_id INT NOT NULL,
+    recipe_id NUMERIC(4) NOT NULL,
     consumable_id VARCHAR(32) NOT NULL,
     CONSTRAINT ingredient_consumable_id_fk FOREIGN KEY (consumable_id) REFERENCES consumable(consumable_name) ON UPDATE CASCADE,
     CONSTRAINT ingredient_recipe_id_fk FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id) ON UPDATE CASCADE
