@@ -21,13 +21,10 @@ import java.util.Objects;
 public class DeleteConsumableType {
     @FXML
     private Button cancelBtn;
-
     @FXML
     private ComboBox<String> comboBox;
-
     @FXML
     private Button deleteBtn;
-
     @FXML
     private AnchorPane primaryPan;
     @FXML
