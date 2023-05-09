@@ -6,14 +6,14 @@ import javafx.beans.property.SimpleStringProperty;
 public class Tool {
     private final static int MAX_SIZE = 32;
 
-    private SimpleStringProperty name;
+    private String name;
 
     public Tool(String name) throws StringInputSizeException {
         setName(name);
     }
 
     public String getName() {
-        return name.get();
+        return name;
     }
 
     public void setName (String name) throws StringInputSizeException {
@@ -22,6 +22,6 @@ public class Tool {
         } else if (name.length() == 0) {
             throw new StringInputSizeException("Le nom de l'outil ne peut pas être vide.", 0, MAX_SIZE);
         }
-        this.name = new SimpleStringProperty(name);
+        this.name = name;
     }
 }

@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class DrinkType {
     private final static int MAX_SIZE = 32;
-    private SimpleStringProperty name;
+    private String name;
 
     public DrinkType(String name) throws StringInputSizeException {
         setName(name);
@@ -16,9 +16,9 @@ public class DrinkType {
         } else if (name.length() == 0) {
             throw new StringInputSizeException("Le nom du type de boisson ne peut pas être vide.", 0, MAX_SIZE);
         }
-        this.name = new SimpleStringProperty(name);
+        this.name = name;
     }
     public String getName() {
-        return name.get();
+        return name;
     }
 }

@@ -102,3 +102,6 @@ fabric.properties
 
 # Lib
 .idea/libraries/
+
+# XML conf
+*.xml

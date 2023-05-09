@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Unit {
     private final static int MAX_SIZE = 32;
-    private SimpleStringProperty name;
+    private String name;
 
     public Unit(String name) throws StringInputSizeException {
         setName(name);
@@ -16,10 +16,11 @@ public class Unit {
         } else if (name.length() == 0) {
             throw new StringInputSizeException("Le nom de l'unité ne peut pas être vide.", 0, MAX_SIZE);
         }
-        this.name = new SimpleStringProperty(name);
+        this.name = name;
     }
     public String getName() {
-        return name.get();
+        return name;
     }
+
 
 }
