@@ -11,9 +11,9 @@ import barPackage.view.alert.ViewAlertFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.TableView.TableViewSelectionModel;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class UpdateUnit {
     private Button cancelBtn;
 
     @FXML
-    private ComboBox<String> comboBox;
+    private TableView<Unit> tableView;
 
     @FXML
     private AnchorPane primaryPan;
@@ -37,9 +37,12 @@ public class UpdateUnit {
     @FXML
     private void initialize() {
         try {
+            TableColumn<Unit,String> nameColumn = new TableColumn<>(" Name");
+            nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            tableView.getColumns().add(nameColumn);
             UnitManager unitManager = new UnitManager();
             for (Unit unit : unitManager.getAllUnits()) {
-                comboBox.getItems().add(unit.getName());
+                tableView.getItems().add(unit);
             }
         } catch (ReadErrorException e) {
             UnitAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
@@ -60,15 +63,15 @@ public class UpdateUnit {
     @FXML
     public void onUpdateBtnClick() {
         try {
-            if (comboBox.getValue() == null) {
+            if (tableView.getSelectionModel() == null) {
                 UnitAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, "Veuillez séléctionner une unité à mettre à jour.").showAndWait();
             } else {
                 UnitManager unitManager = new UnitManager();
-                unitManager.updateUnit(new Unit(comboBox.getValue()), new Unit(unitNameArea.getText()));
+                unitManager.updateUnit(tableView.getSelectionModel().getSelectedItem(), new Unit(unitNameArea.getText()));
                 UnitAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
-                comboBox.getItems().clear();
+                tableView.getItems().clear();
                 for (Unit unit : unitManager.getAllUnits()) {
-                    comboBox.getItems().add(unit.getName());
+                    tableView.getItems().add(unit);
                 }
             }
         } catch (ReadErrorException | StringInputSizeException | UpdateErrorException e) {

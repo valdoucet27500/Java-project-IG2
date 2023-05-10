@@ -11,9 +11,8 @@ import barPackage.view.alert.ViewAlertFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -26,7 +25,7 @@ public class UpdateDrinkType {
     private Button cancelBtn;
 
     @FXML
-    private ComboBox<String> comboBox;
+    private TableView<DrinkType> tableView;
 
     @FXML
     private AnchorPane primaryPan;
@@ -37,9 +36,12 @@ public class UpdateDrinkType {
     @FXML
     private void initialize() {
         try {
+            TableColumn<DrinkType,String> nameColumn = new TableColumn<>(" Name");
+            nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            tableView.getColumns().add(nameColumn);
             DrinkTypeManager drinkTypeManager = new DrinkTypeManager();
             for (DrinkType drinkType : drinkTypeManager.getAllDrinkTypes()) {
-                comboBox.getItems().add(drinkType.getName());
+                tableView.getItems().add(drinkType);
             }
         } catch (ReadErrorException e) {
             DrinkTypeAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
@@ -60,15 +62,15 @@ public class UpdateDrinkType {
     @FXML
     public void onUpdateBtnClick() {
         try {
-            if (comboBox.getValue() == null) {
+            if (tableView.getSelectionModel() == null) {
                 DrinkTypeAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, "Veuillez selectionner un type à modifier").showAndWait();
             } else {
                 DrinkTypeManager drinkTypeManager = new DrinkTypeManager();
-                drinkTypeManager.updateDrinkType(new DrinkType(comboBox.getValue()), new DrinkType(drinkTypeNameArea.getText()));
+                drinkTypeManager.updateDrinkType(tableView.getSelectionModel().getSelectedItem(), new DrinkType(drinkTypeNameArea.getText()));
                 DrinkTypeAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
-                comboBox.getItems().clear();
-                for (DrinkType consumableType : drinkTypeManager.getAllDrinkTypes()) {
-                    comboBox.getItems().add(consumableType.getName());
+                tableView.getItems().clear();
+                for (DrinkType drinkType : drinkTypeManager.getAllDrinkTypes()) {
+                    tableView.getItems().add(drinkType);
                 }
             }
         } catch (ReadErrorException | StringInputSizeException | UpdateErrorException e) {

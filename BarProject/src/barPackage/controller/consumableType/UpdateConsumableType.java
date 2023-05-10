@@ -12,8 +12,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -26,7 +29,7 @@ public class UpdateConsumableType {
     private Button cancelBtn;
 
     @FXML
-    private ComboBox<String> comboBox;
+    private TableView<ConsumableType> tableView;
 
     @FXML
     private AnchorPane primaryPan;
@@ -37,9 +40,12 @@ public class UpdateConsumableType {
     @FXML
     private void initialize() {
         try {
+            TableColumn<ConsumableType,String> nameColumn = new TableColumn<>(" Name");
+            nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            tableView.getColumns().add(nameColumn);
             ConsumableTypeManager consumableTypeManager = new ConsumableTypeManager();
             for (ConsumableType consumableType : consumableTypeManager.getAllConsumableTypes()) {
-                comboBox.getItems().add(consumableType.getName());
+                tableView.getItems().add(consumableType);
             }
         } catch (ReadErrorException e) {
             ConsumableTypeAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
@@ -60,15 +66,15 @@ public class UpdateConsumableType {
     @FXML
     public void onUpdateBtnClick() {
         try {
-            if (comboBox.getValue() == null) {
+            if (tableView.getSelectionModel() == null) {
                 ConsumableTypeAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, "Veuillez selectionner un type à modifier").showAndWait();
             } else {
                 ConsumableTypeManager consumableTypeManager = new ConsumableTypeManager();
-                consumableTypeManager.updateConsumableType(new ConsumableType(comboBox.getValue()), new ConsumableType(ConsumableTypeNameArea.getText()));
+                consumableTypeManager.updateConsumableType(tableView.getSelectionModel().getSelectedItem(), new ConsumableType(ConsumableTypeNameArea.getText()));
                 ConsumableTypeAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
-                comboBox.getItems().clear();
+                tableView.getItems().clear();
                 for (ConsumableType consumableType : consumableTypeManager.getAllConsumableTypes()) {
-                    comboBox.getItems().add(consumableType.getName());
+                    tableView.getItems().add(consumableType);
                 }
             }
         } catch (ReadErrorException | StringInputSizeException | UpdateErrorException e) {

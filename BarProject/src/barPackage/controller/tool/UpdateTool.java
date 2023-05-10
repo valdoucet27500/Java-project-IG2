@@ -11,8 +11,10 @@ import barPackage.view.alert.ViewAlertFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 public class UpdateTool {
@@ -21,7 +23,7 @@ public class UpdateTool {
     private Button cancelBtn;
 
     @FXML
-    private ComboBox<String> comboBox;
+    private TableView<Tool> tableView;
 
     @FXML
     private AnchorPane primaryPan;
@@ -34,9 +36,12 @@ public class UpdateTool {
 
     public void initialize() {
         try {
+            TableColumn<Tool,String> nameColumn = new TableColumn<>(" Name");
+            nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            tableView.getColumns().add(nameColumn);
             ToolManager toolManager = new ToolManager();
             for (Tool tool : toolManager.getAllTools()) {
-                comboBox.getItems().add(tool.getName());
+                tableView.getItems().add(tool);
             }
         } catch (ReadErrorException e) {
             ToolAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
@@ -57,15 +62,15 @@ public class UpdateTool {
     @FXML
     public void onUpdateBtnClick() {
         try {
-            if (comboBox.getValue() == null) {
+            if (tableView.getSelectionModel() == null) {
                 ToolAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, "Veuillez sélectionner un outil à modifier.").showAndWait();
             } else {
                 ToolManager toolManager = new ToolManager();
-                toolManager.updateTool(new Tool(comboBox.getValue()), new Tool(toolNameArea.getText()));
+                toolManager.updateTool(tableView.getSelectionModel().getSelectedItem(), new Tool(toolNameArea.getText()));
                 ToolAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
-                comboBox.getItems().clear();
+                tableView.getItems().clear();
                 for (Tool tool : toolManager.getAllTools()) {
-                    comboBox.getItems().add(tool.getName());
+                    tableView.getItems().add(tool);
                 }
             }
         } catch (ReadErrorException | StringInputSizeException | UpdateErrorException e) {

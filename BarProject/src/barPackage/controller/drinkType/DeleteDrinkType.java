@@ -3,7 +3,6 @@ package barPackage.controller.drinkType;
 import barPackage.business.DrinkTypeManager;
 import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
-import barPackage.exceptions.StringInputSizeException;
 import barPackage.model.DrinkType;
 import barPackage.view.alert.AlertFactoryType;
 import barPackage.view.alert.DrinkTypeAlertFactory;
@@ -12,7 +11,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class DeleteDrinkType {
     private Button cancelBtn;
 
     @FXML
-    private ComboBox<String> comboBox;
+    private TableView<DrinkType> tableView;
 
     @FXML
     private Button deleteBtn;
@@ -33,9 +34,12 @@ public class DeleteDrinkType {
     @FXML
     private void initialize() {
         try {
+            TableColumn<DrinkType,String> nameColumn = new TableColumn<>(" Name");
+            nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            tableView.getColumns().add(nameColumn);
             DrinkTypeManager drinkTypeManager = new DrinkTypeManager();
-            for (DrinkType consumableType : drinkTypeManager.getAllDrinkTypes()) {
-                comboBox.getItems().add(consumableType.getName());
+            for (DrinkType drinkType : drinkTypeManager.getAllDrinkTypes()) {
+                tableView.getItems().add(drinkType);
             }
         } catch (ReadErrorException e) {
             DrinkTypeAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
@@ -54,18 +58,18 @@ public class DeleteDrinkType {
     @FXML
     public void onDeleteBtnClick() {
         try {
-            if (comboBox.getValue() == null) {
+            if (tableView.getSelectionModel() == null) {
                 DrinkTypeAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, "Veuillez selectionner un type à supprimer").showAndWait();
             } else {
                 DrinkTypeManager drinkTypeManager = new DrinkTypeManager();
-                drinkTypeManager.deleteDrinkType(new DrinkType(comboBox.getValue()));
+                drinkTypeManager.deleteDrinkType(tableView.getSelectionModel().getSelectedItem());
                 DrinkTypeAlertFactory.getAlert(AlertFactoryType.DELETE_PASS).showAndWait();
-                comboBox.getItems().clear();
+                tableView.getItems().clear();
                 for (DrinkType consumableType : drinkTypeManager.getAllDrinkTypes()) {
-                    comboBox.getItems().add(consumableType.getName());
+                    tableView.getItems().add(consumableType);
                 }
             }
-        } catch (ReadErrorException | StringInputSizeException | DeleteErrorException e) {
+        } catch (ReadErrorException | DeleteErrorException e) {
             DrinkTypeAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, e.getMessage()).showAndWait();
         }
     }

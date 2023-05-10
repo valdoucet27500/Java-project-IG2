@@ -3,8 +3,8 @@ package barPackage.controller.consumableType;
 import barPackage.business.ConsumableTypeManager;
 import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
-import barPackage.exceptions.StringInputSizeException;
 import barPackage.model.ConsumableType;
+import barPackage.model.Unit;
 import barPackage.view.alert.AlertFactoryType;
 import barPackage.view.alert.ConsumableTypeAlertFactory;
 import barPackage.view.alert.ViewAlertFactory;
@@ -12,7 +12,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -22,7 +25,7 @@ public class DeleteConsumableType {
     @FXML
     private Button cancelBtn;
     @FXML
-    private ComboBox<String> comboBox;
+    private TableView<ConsumableType> tableView;
     @FXML
     private Button deleteBtn;
     @FXML
@@ -30,9 +33,12 @@ public class DeleteConsumableType {
     @FXML
     private void initialize() {
         try {
+            TableColumn<ConsumableType,String> nameColumn = new TableColumn<>(" Name");
+            nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            tableView.getColumns().add(nameColumn);
             ConsumableTypeManager consumableTypeManager = new ConsumableTypeManager();
             for (ConsumableType consumableType : consumableTypeManager.getAllConsumableTypes()) {
-                comboBox.getItems().add(consumableType.getName());
+                tableView.getItems().add(consumableType);
             }
         } catch (ReadErrorException e) {
             ConsumableTypeAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
@@ -51,18 +57,18 @@ public class DeleteConsumableType {
     @FXML
     public void onDeleteBtnClick() {
         try {
-            if (comboBox.getValue() == null) {
+            if (tableView.getSelectionModel() == null) {
                 ConsumableTypeAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, "Veuillez selectionner un type à supprimer").showAndWait();
             } else {
                 ConsumableTypeManager consumableTypeManager = new ConsumableTypeManager();
-                consumableTypeManager.deleteConsumableType(new ConsumableType(comboBox.getValue()));
+                consumableTypeManager.deleteConsumableType(tableView.getSelectionModel().getSelectedItem());
                 ConsumableTypeAlertFactory.getAlert(AlertFactoryType.DELETE_PASS).showAndWait();
-                comboBox.getItems().clear();
+                tableView.getItems().clear();
                 for (ConsumableType consumableType : consumableTypeManager.getAllConsumableTypes()) {
-                    comboBox.getItems().add(consumableType.getName());
+                    tableView.getItems().add(consumableType);
                 }
             }
-        } catch (ReadErrorException | StringInputSizeException | DeleteErrorException e) {
+        } catch (ReadErrorException | DeleteErrorException e) {
             ConsumableTypeAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, e.getMessage()).showAndWait();
         }
     }
