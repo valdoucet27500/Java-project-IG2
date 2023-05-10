@@ -1,14 +1,8 @@
 package barPackage.controller.consumable;
 
-import barPackage.business.ConsumableManager;
-import barPackage.business.ConsumableTypeManager;
-import barPackage.business.DrinkTypeManager;
-import barPackage.business.UnitManager;
+import barPackage.business.*;
 import barPackage.exceptions.ReadErrorException;
-import barPackage.model.Consumable;
-import barPackage.model.ConsumableType;
-import barPackage.model.DrinkType;
-import barPackage.model.Unit;
+import barPackage.model.*;
 import barPackage.view.alert.AlertFactoryType;
 import barPackage.view.alert.ConsumableAlertFactory;
 import barPackage.view.alert.ConsumableTypeAlertFactory;
@@ -122,25 +116,44 @@ public class AddConsumable {
 
     @FXML
     public void onAddBtnClick() {
+        ConsumableManager consumableManager = new ConsumableManager();
         String name = nameText.getText();
-        Boolean vegan = veganCheck.isSelected();
+        Boolean isVegan = veganCheck.isSelected();
         String description = descriptionText.getText().equals("") ? null : descriptionText.getText();
         String unit = unitComboBox.getSelectionModel().getSelectedItem();
         Double kcal = kcalText.getText().equals("") ? null : Double.parseDouble(kcalText.getText());
         String consumableType = consumableTypeCombobox.getSelectionModel().getSelectedItem();
         try {
-            ConsumableManager consumableManager = new ConsumableManager();
             consumableManager.addConsumable(new Consumable(
                     name,
-                    vegan,
+                    isVegan,
                     description,
                     unit,
                     kcal,
                     consumableType
             ));
-            ConsumableAlertFactory.getAlert(AlertFactoryType.ADD_PASS, name).showAndWait();
         } catch (Exception e) {
             ConsumableAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, e.getMessage()).showAndWait();
+        }
+        if (drinkCheck.isSelected()) {
+            String drinkType = drinkTypeCombobox.getSelectionModel().getSelectedItem();
+            Double alcoholDegree = alcoholDegreeTextField.getText().equals("") ? null : Double.parseDouble(alcoholDegreeTextField.getText());
+            Boolean isSparkling = sparklingCheck.isSelected();
+            Boolean isSugarFree = sugarFreeCheck.isSelected();
+            try {
+                DrinkManager drinkManager = new DrinkManager();
+                drinkManager.addDrink(new Drink(
+                        name,
+                        drinkType,
+                        isSparkling,
+                        isSugarFree,
+                        alcoholDegree
+                ));
+            } catch (Exception e) {
+//                consumableManager.deleteConsumable(name);
+                ConsumableAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, e.getMessage()).showAndWait();
+            }
+            ConsumableAlertFactory.getAlert(AlertFactoryType.ADD_PASS, name).showAndWait();
         }
     }
 }

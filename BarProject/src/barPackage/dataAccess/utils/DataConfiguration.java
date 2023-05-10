@@ -44,4 +44,12 @@ public class DataConfiguration {
             return null;
         }
     }
+
+    public static DrinkDataAccess getDrinkDataAccess() {
+        if (DATA_PERSISTENCE.equals("DB")) {
+            return new DrinkDBAccess();
+        } else {
+            return null;
+        }
+    }
 }
