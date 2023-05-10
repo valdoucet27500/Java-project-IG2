@@ -44,7 +44,7 @@
                         <MenuItem fx:id="manageUnitBtn" mnemonicParsing="false" onAction="#onManageUnitBtnClick" text="Unité" />
                         <MenuItem fx:id="manageDrinkTypeBtn" mnemonicParsing="false" onAction="#onManageDrinkTypeBtnClick" text="Type boisson" />
                         <MenuItem fx:id="manageConsumableTypeBtn" mnemonicParsing="false" onAction="#onManageConsumableTypeBtnClick" text="Type consommable" />
-                        <MenuItem mnemonicParsing="false" text="Consommable" />
+                        <MenuItem mnemonicParsing="false" onAction="#onManageConsumableBtnClick" text="Consommable" />
                      </items></Menu>
               </menus>
             </MenuBar>
