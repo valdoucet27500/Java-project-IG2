@@ -1,13 +1,16 @@
 package barPackage.controller.consumable;
 
+import barPackage.business.ConsumableManager;
 import barPackage.business.ConsumableTypeManager;
 import barPackage.business.DrinkTypeManager;
 import barPackage.business.UnitManager;
 import barPackage.exceptions.ReadErrorException;
+import barPackage.model.Consumable;
 import barPackage.model.ConsumableType;
 import barPackage.model.DrinkType;
 import barPackage.model.Unit;
 import barPackage.view.alert.AlertFactoryType;
+import barPackage.view.alert.ConsumableAlertFactory;
 import barPackage.view.alert.ConsumableTypeAlertFactory;
 import barPackage.view.alert.ViewAlertFactory;
 import javafx.fxml.FXML;
@@ -119,15 +122,25 @@ public class AddConsumable {
 
     @FXML
     public void onAddBtnClick() {
+        String name = nameText.getText();
+        Boolean vegan = veganCheck.isSelected();
+        String description = descriptionText.getText().equals("") ? null : descriptionText.getText();
+        String unit = unitComboBox.getSelectionModel().getSelectedItem();
+        Double kcal = kcalText.getText().equals("") ? null : Double.parseDouble(kcalText.getText());
+        String consumableType = consumableTypeCombobox.getSelectionModel().getSelectedItem();
         try {
-            ConsumableTypeManager consumableTypeManager = new ConsumableTypeManager();
-            DrinkTypeManager drinkTypeManager = new DrinkTypeManager();
-            UnitManager unitManager = new UnitManager();
-            if (drinkCheck.isSelected()) {
-                drinkTypeManager.addDrinkType(new DrinkType(drinkTypeCombobox.getValue()));
-            }
+            ConsumableManager consumableManager = new ConsumableManager();
+            consumableManager.addConsumable(new Consumable(
+                    name,
+                    vegan,
+                    description,
+                    unit,
+                    kcal,
+                    consumableType
+            ));
+            ConsumableAlertFactory.getAlert(AlertFactoryType.ADD_PASS, name).showAndWait();
         } catch (Exception e) {
-            ConsumableTypeAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, e.getMessage()).showAndWait();
+            ConsumableAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, e.getMessage()).showAndWait();
         }
     }
 }

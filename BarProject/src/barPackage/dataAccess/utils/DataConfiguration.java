@@ -1,9 +1,6 @@
 package barPackage.dataAccess.utils;
 
-import barPackage.dataAccess.db.ConsumableTypeDBAccess;
-import barPackage.dataAccess.db.DrinkTypeDBAccess;
-import barPackage.dataAccess.db.ToolDBAccess;
-import barPackage.dataAccess.db.UnitDBAccess;
+import barPackage.dataAccess.db.*;
 
 public class DataConfiguration {
     private final static String DATA_PERSISTENCE = "DB"; // "DB" or "XML"
@@ -35,6 +32,14 @@ public class DataConfiguration {
     public static ConsumableTypeDataAccess getConsumableTypeDataAccess() {
         if (DATA_PERSISTENCE.equals("DB")) {
             return new ConsumableTypeDBAccess();
+        } else {
+            return null;
+        }
+    }
+
+    public static ConsumableDataAccess getConsumableDataAccess() {
+        if (DATA_PERSISTENCE.equals("DB")) {
+            return new ConsumableDBAccess();
         } else {
             return null;
         }

@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane fx:id="primaryPan" prefHeight="380.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.consumable.AddConsumable">
    <children>
       <GridPane layoutX="118.0" layoutY="110.0" prefHeight="380.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -140,7 +139,7 @@
                         <Insets bottom="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="70.0" text="Valider">
+                  <Button mnemonicParsing="false" onAction="#onAddBtnClick" prefHeight="20.0" prefWidth="70.0" text="Valider">
                      <HBox.margin>
                         <Insets bottom="10.0" left="20.0" right="10.0" />
                      </HBox.margin>
