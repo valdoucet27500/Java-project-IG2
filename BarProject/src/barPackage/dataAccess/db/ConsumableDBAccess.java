@@ -23,7 +23,12 @@ public class ConsumableDBAccess implements ConsumableDataAccess {
             preparedStatement.setBoolean(2, consumable.getIsVegan());
             preparedStatement.setString(3, consumable.getDescription());
             preparedStatement.setString(4, consumable.getUnit());
-            preparedStatement.setDouble(5, consumable.getKcal());
+            Double kcal = consumable.getKcal();
+            if (kcal == null) {
+                preparedStatement.setNull(5, java.sql.Types.DOUBLE);
+            } else {
+                preparedStatement.setDouble(5, kcal);
+            }
             preparedStatement.setDate(6, Date.valueOf(LocalDate.now()));
             preparedStatement.setString(7, consumable.getType());
             preparedStatement.executeUpdate();
