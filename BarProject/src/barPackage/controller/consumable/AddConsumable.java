@@ -1,6 +1,7 @@
 package barPackage.controller.consumable;
 
 import barPackage.business.*;
+import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
 import barPackage.model.*;
 import barPackage.view.alert.AlertFactoryType;
@@ -70,6 +71,9 @@ public class AddConsumable {
     @FXML
     private AnchorPane primaryPan;
 
+
+    private ConsumableManager consumableManager;
+    private Consumable newConsumable;
     @FXML
     private void initialize() {
         try {
@@ -115,8 +119,8 @@ public class AddConsumable {
     }
 
     @FXML
-    public void onAddBtnClick() {
-        ConsumableManager consumableManager = new ConsumableManager();
+    public void onAddBtnClick() throws DeleteErrorException {
+        consumableManager = new ConsumableManager();
         String name = nameText.getText();
         Boolean isVegan = veganCheck.isSelected();
         String description = descriptionText.getText().equals("") ? null : descriptionText.getText();
@@ -124,14 +128,8 @@ public class AddConsumable {
         Double kcal = kcalText.getText().equals("") ? null : Double.parseDouble(kcalText.getText());
         String consumableType = consumableTypeCombobox.getSelectionModel().getSelectedItem();
         try {
-            consumableManager.addConsumable(new Consumable(
-                    name,
-                    isVegan,
-                    description,
-                    unit,
-                    kcal,
-                    consumableType
-            ));
+            newConsumable = new Consumable(name, isVegan, description, unit, kcal, consumableType);
+            consumableManager.addConsumable(newConsumable);
         } catch (Exception e) {
             ConsumableAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, e.getMessage()).showAndWait();
         }
@@ -150,10 +148,13 @@ public class AddConsumable {
                         alcoholDegree
                 ));
             } catch (Exception e) {
-//                consumableManager.deleteConsumable(name);
+                cancelConsumable();
                 ConsumableAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, e.getMessage()).showAndWait();
             }
             ConsumableAlertFactory.getAlert(AlertFactoryType.ADD_PASS, name).showAndWait();
         }
+    }
+    private void cancelConsumable() throws DeleteErrorException {
+        consumableManager.deleteConsumable(newConsumable);
     }
 }

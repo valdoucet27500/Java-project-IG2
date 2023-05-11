@@ -3,10 +3,13 @@ package barPackage.dataAccess.db;
 import barPackage.dataAccess.utils.ConsumableDataAccess;
 import barPackage.exceptions.*;
 import barPackage.model.Consumable;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 
 public class ConsumableDBAccess implements ConsumableDataAccess {
@@ -40,7 +43,15 @@ public class ConsumableDBAccess implements ConsumableDataAccess {
 
     @Override
     public void deleteConsumable(Consumable consumable) throws DeleteErrorException {
-
+        try {
+            Connection connection = SingletonConnexion.getConnection();
+            String sqlInstruction = "delete from consumable where consumable_name = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            preparedStatement.setString(1, consumable.getName());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            throw new DeleteErrorException("Erreur lors de la suppression du consommable dans la base de données");
+        }
     }
 
     @Override
@@ -50,6 +61,23 @@ public class ConsumableDBAccess implements ConsumableDataAccess {
 
     @Override
     public ObservableList<Consumable> getAllConsumables() throws ReadErrorException {
-        return null;
+        ObservableList<Consumable> consumables = FXCollections.observableArrayList();
+        try {
+            Connection connection = SingletonConnexion.getConnection();
+            String sqlInstruction = "select consumable_name,is_vegan,unit_id,description,kcal,consumable_type_id from consumable";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Consumable consumable = new Consumable(resultSet.getString("consumable_name"),
+                        resultSet.getBoolean("is_vegan"), resultSet.getString("unit_id"),
+                        resultSet.getString("description"), //resultSet.getString("creation_date"),
+                        resultSet.getDouble("kcal"),
+                        resultSet.getString("consumable_type_id"));
+                consumables.add(consumable);
+            }
+        } catch (Exception e) {
+            throw new ReadErrorException("Erreur lors de la lecture du consommable dans la base de données");
+        }
+        return consumables;
     }
 }

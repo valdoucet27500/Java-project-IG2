@@ -2,6 +2,7 @@ package barPackage.controller.consumableType;
 
 import barPackage.business.ConsumableTypeManager;
 import barPackage.exceptions.ReadErrorException;
+import barPackage.model.Consumable;
 import barPackage.model.ConsumableType;
 import barPackage.view.alert.AlertFactoryType;
 import barPackage.view.alert.ConsumableTypeAlertFactory;
@@ -39,7 +40,7 @@ public class ViewConsumableType {
             ConsumableTypeManager consumableTypeManager= new ConsumableTypeManager();
             tableView.setItems(consumableTypeManager.getAllConsumableTypes());
         } catch (ReadErrorException e) {
-            UnitAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
+            ConsumableTypeAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
         }
     }
 
