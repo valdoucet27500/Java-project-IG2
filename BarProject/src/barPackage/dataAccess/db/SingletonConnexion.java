@@ -21,4 +21,14 @@ public class SingletonConnexion {
         }
         return connection;
     }
+
+    public static void CloseConnection() throws ConnectionException {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new ConnectionException("Impossible de se déconnecter de la base de données");
+            }
+        }
+    }
 }

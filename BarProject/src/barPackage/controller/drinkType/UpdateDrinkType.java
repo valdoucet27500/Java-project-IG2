@@ -33,6 +33,7 @@ public class UpdateDrinkType {
     @FXML
     private Button updateBtn;
 
+
     @FXML
     private void initialize() {
         try {
