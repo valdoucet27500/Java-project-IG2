@@ -6,10 +6,7 @@ import barPackage.model.Consumable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.time.LocalDate;
 
 public class ConsumableDBAccess implements ConsumableDataAccess {
@@ -36,7 +33,9 @@ public class ConsumableDBAccess implements ConsumableDataAccess {
             preparedStatement.setString(7, consumable.getType());
             preparedStatement.executeUpdate();
 
-        } catch (Exception e) {
+        } catch (ConnectionException e) {
+            throw new AddErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException e) {
             throw new AddErrorException("Erreur lors de l'ajout du consommable dans la base de données");
         }
     }
@@ -49,7 +48,9 @@ public class ConsumableDBAccess implements ConsumableDataAccess {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, consumable.getName());
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        } catch (ConnectionException e) {
+            throw new DeleteErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException e) {
             throw new DeleteErrorException("Erreur lors de la suppression du consommable dans la base de données");
         }
     }
@@ -76,8 +77,10 @@ public class ConsumableDBAccess implements ConsumableDataAccess {
                         resultSet.getString("consumable_type_id"));
                 consumables.add(consumable);
             }
-        } catch (Exception e) {
-            throw new ReadErrorException("Erreur lors de la lecture du consommable dans la base de données");
+        } catch (ConnectionException e) {
+            throw new ReadErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException | StringInputSizeException e) {
+            throw new ReadErrorException("Erreur lors de la lecture des consommables dans la base de données");
         }
         return consumables;
     }

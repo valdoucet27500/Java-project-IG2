@@ -1,10 +1,7 @@
 package barPackage.dataAccess.db;
 
 import barPackage.dataAccess.utils.DrinkTypeDataAccess;
-import barPackage.exceptions.AddErrorException;
-import barPackage.exceptions.DeleteErrorException;
-import barPackage.exceptions.ReadErrorException;
-import barPackage.exceptions.UpdateErrorException;
+import barPackage.exceptions.*;
 import barPackage.model.DrinkType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +9,7 @@ import javafx.collections.ObservableList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class DrinkTypeDBAccess implements DrinkTypeDataAccess {
     public DrinkTypeDBAccess() {
@@ -28,8 +26,10 @@ public class DrinkTypeDBAccess implements DrinkTypeDataAccess {
                 DrinkType drinkType = new DrinkType(resultSet.getString("alcohol_type_name"));
                 drinkTypes.add(drinkType);
             }
-        } catch (Exception e) {
-            throw new ReadErrorException("Erreur lors de la lecture des types de boisson dans la base de données");
+        } catch (ConnectionException e) {
+            throw new ReadErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException | StringInputSizeException e) {
+            throw new ReadErrorException("Erreur lors de la lecture des types de boissons dans la base de données");
         }
         return drinkTypes;
     }
@@ -42,7 +42,9 @@ public class DrinkTypeDBAccess implements DrinkTypeDataAccess {
             java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, drinkType.getName());
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        } catch (ConnectionException e) {
+            throw new AddErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException e) {
             throw new AddErrorException("Erreur lors de l'ajout du type de boisson dans la base de données");
         }
     }
@@ -55,7 +57,9 @@ public class DrinkTypeDBAccess implements DrinkTypeDataAccess {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, drinkType.getName());
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        } catch (ConnectionException e) {
+            throw new DeleteErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException e) {
             throw new DeleteErrorException("Erreur lors de la suppression du type de boisson dans la base de données");
         }
     }
@@ -69,7 +73,9 @@ public class DrinkTypeDBAccess implements DrinkTypeDataAccess {
             preparedStatement.setString(1, newdrinkType.getName());
             preparedStatement.setString(2, drinkType.getName());
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        } catch (ConnectionException e) {
+            throw new UpdateErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException e) {
             throw new UpdateErrorException("Erreur lors de la mise à jour du type de boisson dans la base de données");
         }
     }

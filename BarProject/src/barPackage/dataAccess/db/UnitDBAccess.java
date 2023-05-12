@@ -1,10 +1,7 @@
 package barPackage.dataAccess.db;
 
 import barPackage.dataAccess.utils.UnitDataAccess;
-import barPackage.exceptions.AddErrorException;
-import barPackage.exceptions.DeleteErrorException;
-import barPackage.exceptions.ReadErrorException;
-import barPackage.exceptions.UpdateErrorException;
+import barPackage.exceptions.*;
 import barPackage.model.Unit;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +9,7 @@ import javafx.collections.ObservableList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UnitDBAccess implements UnitDataAccess {
     public UnitDBAccess() {
@@ -29,7 +27,9 @@ public class UnitDBAccess implements UnitDataAccess {
                 Unit unit = new Unit(resultSet.getString("unit_name"));
                 units.add(unit);
             }
-        } catch (Exception e) {
+        } catch (ConnectionException e) {
+            throw new ReadErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException | StringInputSizeException e) {
             throw new ReadErrorException("Erreur lors de la lecture des unités dans la base de données");
         }
         return units;
@@ -43,7 +43,9 @@ public class UnitDBAccess implements UnitDataAccess {
             java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, unit.getName());
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        } catch (ConnectionException e) {
+            throw new AddErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException e) {
             throw new AddErrorException("Erreur lors de l'ajout de l'unité dans la base de données");
         }
     }
@@ -56,7 +58,9 @@ public class UnitDBAccess implements UnitDataAccess {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, unit.getName());
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        } catch (ConnectionException e) {
+            throw new DeleteErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException e) {
             throw new DeleteErrorException("Erreur lors de la suppression de l'unité dans la base de données");
         }
     }
@@ -70,7 +74,9 @@ public class UnitDBAccess implements UnitDataAccess {
             preparedStatement.setString(1, newUnit.getName());
             preparedStatement.setString(2, unit.getName());
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        } catch (ConnectionException e) {
+            throw new UpdateErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException e) {
             throw new UpdateErrorException("Erreur lors de la mise à jour de l'unité dans la base de données");
         }
     }

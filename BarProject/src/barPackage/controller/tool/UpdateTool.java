@@ -17,6 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
+
 public class UpdateTool {
 
     @FXML
@@ -54,7 +56,7 @@ public class UpdateTool {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../view/MainView.fxml"));
             AnchorPane root = fxmlLoader.load();
             primaryPan.getScene().setRoot(root);
-        } catch (Exception e) {
+        } catch (IOException e) {
             ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
         }
     }

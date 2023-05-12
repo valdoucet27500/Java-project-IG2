@@ -1,10 +1,7 @@
 package barPackage.dataAccess.db;
 
-import barPackage.exceptions.AddErrorException;
-import barPackage.exceptions.DeleteErrorException;
-import barPackage.exceptions.ReadErrorException;
+import barPackage.exceptions.*;
 import barPackage.dataAccess.utils.ToolDataAccess;
-import barPackage.exceptions.UpdateErrorException;
 import barPackage.model.Tool;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +9,7 @@ import javafx.collections.ObservableList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ToolDBAccess implements ToolDataAccess {
 
@@ -26,7 +24,9 @@ public class ToolDBAccess implements ToolDataAccess {
             java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, tool.getName());
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        } catch (ConnectionException e) {
+            throw new AddErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException e) {
             throw new AddErrorException("Erreur lors de l'ajout de l'outil dans la base de données");
         }
     }
@@ -39,7 +39,9 @@ public class ToolDBAccess implements ToolDataAccess {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, tool.getName());
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        } catch (ConnectionException e) {
+            throw new DeleteErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException e) {
             throw new DeleteErrorException("Erreur lors de la suppression de l'outil dans la base de données");
         }
     }
@@ -56,7 +58,9 @@ public class ToolDBAccess implements ToolDataAccess {
                 Tool tool = new Tool(resultSet.getString("tool_name"));
                 tools.add(tool);
             }
-        } catch (Exception e) {
+        } catch (ConnectionException e) {
+            throw new ReadErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException | StringInputSizeException e) {
             throw new ReadErrorException("Erreur lors de la lecture des outils dans la base de données");
         }
         return tools;
@@ -71,7 +75,9 @@ public class ToolDBAccess implements ToolDataAccess {
             preparedStatement.setString(1, newTool.getName());
             preparedStatement.setString(2, tool.getName());
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        } catch (ConnectionException e) {
+            throw new UpdateErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException e) {
             throw new UpdateErrorException("Erreur lors de la mise à jour de l'outil dans la base de données");
         }
     }

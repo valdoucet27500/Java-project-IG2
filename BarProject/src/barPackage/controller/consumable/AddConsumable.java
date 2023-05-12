@@ -1,8 +1,7 @@
 package barPackage.controller.consumable;
 
 import barPackage.business.*;
-import barPackage.exceptions.DeleteErrorException;
-import barPackage.exceptions.ReadErrorException;
+import barPackage.exceptions.*;
 import barPackage.model.*;
 import barPackage.view.alert.AlertFactoryType;
 import barPackage.view.alert.ConsumableAlertFactory;
@@ -140,7 +139,7 @@ public class AddConsumable {
                 consumableManager.addConsumable(consumable);
             }
             ConsumableAlertFactory.getAlert(AlertFactoryType.ADD_PASS, name).showAndWait();
-        } catch (Exception e) {
+        } catch (AddErrorException | StringInputSizeException | NumberInputValueException e) {
             ConsumableAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, e.getMessage()).showAndWait();
         }
     }

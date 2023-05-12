@@ -1,10 +1,7 @@
 package barPackage.dataAccess.db;
 
 import barPackage.dataAccess.utils.ConsumableTypeDataAccess;
-import barPackage.exceptions.AddErrorException;
-import barPackage.exceptions.DeleteErrorException;
-import barPackage.exceptions.ReadErrorException;
-import barPackage.exceptions.UpdateErrorException;
+import barPackage.exceptions.*;
 import barPackage.model.ConsumableType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +9,7 @@ import javafx.collections.ObservableList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ConsumableTypeDBAccess implements ConsumableTypeDataAccess {
     public ConsumableTypeDBAccess() {
@@ -28,8 +26,10 @@ public class ConsumableTypeDBAccess implements ConsumableTypeDataAccess {
                 ConsumableType consumableType = new ConsumableType(resultSet.getString("consumable_type_name"));
                 consumableTypes.add(consumableType);
             }
-        } catch (Exception e) {
-            throw new ReadErrorException("Erreur lors de la lecture des types de consommable dans la base de données");
+        } catch (ConnectionException e) {
+            throw new ReadErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException | StringInputSizeException e) {
+            throw new ReadErrorException("Erreur lors de la lecture des types de consommables dans la base de données");
         }
         return consumableTypes;
     }
@@ -42,7 +42,9 @@ public class ConsumableTypeDBAccess implements ConsumableTypeDataAccess {
             java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, consumableType.getName());
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        } catch (ConnectionException e) {
+            throw new AddErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException e) {
             throw new AddErrorException("Erreur lors de l'ajout du type de consommable dans la base de données");
         }
     }
@@ -55,7 +57,9 @@ public class ConsumableTypeDBAccess implements ConsumableTypeDataAccess {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, consumableType.getName());
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        } catch (ConnectionException e) {
+            throw new DeleteErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException e) {
             throw new DeleteErrorException("Erreur lors de la suppression du type de consommable dans la base de données");
         }
     }
@@ -69,7 +73,9 @@ public class ConsumableTypeDBAccess implements ConsumableTypeDataAccess {
             preparedStatement.setString(1, newConsumableType.getName());
             preparedStatement.setString(2, consumableType.getName());
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        } catch (ConnectionException e) {
+            throw new UpdateErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException e) {
             throw new UpdateErrorException("Erreur lors de la mise à jour du type de consommable dans la base de données");
         }
     }
