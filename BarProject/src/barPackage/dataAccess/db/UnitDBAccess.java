@@ -43,6 +43,7 @@ public class UnitDBAccess implements UnitDataAccess {
             java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, unit.getName());
             preparedStatement.executeUpdate();
+            connection.commit();
         } catch (Exception e) {
             throw new AddErrorException("Erreur lors de l'ajout de l'unité dans la base de données");
         }
@@ -56,6 +57,7 @@ public class UnitDBAccess implements UnitDataAccess {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, unit.getName());
             preparedStatement.executeUpdate();
+            connection.commit();
         } catch (Exception e) {
             throw new DeleteErrorException("Erreur lors de la suppression de l'unité dans la base de données");
         }
@@ -70,6 +72,7 @@ public class UnitDBAccess implements UnitDataAccess {
             preparedStatement.setString(1, newUnit.getName());
             preparedStatement.setString(2, unit.getName());
             preparedStatement.executeUpdate();
+            connection.commit();
         } catch (Exception e) {
             throw new UpdateErrorException("Erreur lors de la mise à jour de l'unité dans la base de données");
         }

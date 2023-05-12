@@ -23,6 +23,7 @@ public class DrinkDBAccess implements DrinkDataAccess {
             preparedStatement.setBoolean(4, drink.getIsSparkling());
             preparedStatement.setDouble(5, drink.getAlcoholLevel() != null ? drink.getAlcoholLevel() : 0);
             preparedStatement.executeUpdate();
+            connection.commit();
         } catch (Exception e) {
             throw new AddErrorException("Erreur lors de l'ajout de la boisson dans la base de données");
         }

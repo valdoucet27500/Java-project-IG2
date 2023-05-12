@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="primaryPan" prefHeight="380.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.unit.AddUnit">
+<AnchorPane fx:id="primaryPan" prefHeight="580.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.unit.AddUnit">
     <children>
         <TextField fx:id="UnitNameArea" layoutX="190.0" layoutY="173.0" prefHeight="26.0" prefWidth="220.0" promptText="Nom de l'unité" />
         <Button fx:id="addBtn" layoutX="208.0" layoutY="227.0" mnemonicParsing="false" onAction="#onAddBtnClick" prefHeight="20.0" prefWidth="75.0" text="Ajouter" />

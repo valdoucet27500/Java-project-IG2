@@ -15,6 +15,7 @@ public class SingletonConnexion {
                 connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/barproject",
                         "root",
                         "root");
+                connection.setAutoCommit(false);
             } catch (SQLException e) {
                 throw new ConnectionException("Impossible de se connecter à la base de données");
             }
