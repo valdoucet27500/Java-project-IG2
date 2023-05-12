@@ -3,18 +3,26 @@ package barPackage.model;
 import barPackage.exceptions.NumberInputValueException;
 import barPackage.exceptions.StringInputSizeException;
 
+import java.time.LocalDate;
+
 public class Drink extends Consumable {
     private String drinkType;
     private Boolean isSugarFree;
     private Boolean isSparkling;
     private Double alcoholLevel;
 
-    public Drink(String name, Boolean isVegan, String description, String unit, Double kcal, String consumableType, String drinkType, Double alcoholLevel, Boolean isSparkling, Boolean isSugarFree) throws NumberInputValueException, StringInputSizeException {
-        super(name, isVegan, description, unit, kcal, consumableType);
+    public Drink(String name, Boolean isVegan, String description, String unit, LocalDate creationDate, Double kcal, String type,
+                 String drinkType, Double alcoholLevel, Boolean isSparkling, Boolean isSugarFree) throws StringInputSizeException, NumberInputValueException {
+        super(name, isVegan, description, unit, creationDate, kcal, type);
         this.setDrinkType(drinkType);
         this.setAlcoholLevel(alcoholLevel);
         this.setIsSparkling(isSparkling);
         this.setIsSugarFree(isSugarFree);
+    }
+
+    public Drink(String name, Boolean isVegan, String description, String unit, Double kcal, String type,
+                 String drinkType, Double alcoholLevel, Boolean isSparkling, Boolean isSugarFree) throws StringInputSizeException, NumberInputValueException {
+        this(name, isVegan, description, unit, LocalDate.now(), kcal, type, drinkType, alcoholLevel, isSparkling, isSugarFree);
     }
 
     private void setIsSugarFree(Boolean isSugarFree) {

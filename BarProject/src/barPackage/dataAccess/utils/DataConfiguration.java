@@ -52,4 +52,20 @@ public class DataConfiguration {
             return null;
         }
     }
+
+    public static ContentDataAccess getContentDataAccess() {
+        if (DATA_PERSISTENCE.equals("DB")) {
+            return new ContentDBAccess();
+        } else {
+            return null;
+        }
+    }
+
+    public static IngredientDataAccess getIngredientDataAccess() {
+        if (DATA_PERSISTENCE.equals("DB")) {
+            return new IngredientDBAccess();
+        } else {
+            return null;
+        }
+    }
 }

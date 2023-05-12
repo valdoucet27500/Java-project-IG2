@@ -152,30 +152,29 @@ public class DrinkDBAccess implements DrinkDataAccess {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+                // Get drink attributes
                 String name = resultSet.getString("drink_name");
                 String drinkType = resultSet.getString("alcohol_type_id");
                 Boolean isSugarFree = resultSet.getBoolean("is_sugar_free");
                 Boolean isSparkling = resultSet.getBoolean("is_sparkling");
                 Double alcoholLevel = resultSet.getDouble("alcohol_level");
-
+                // Get consumable attributes
                 String description = resultSet.getString("description");
                 Boolean isVegan = resultSet.getBoolean("is_vegan");
                 String unit = resultSet.getString("unit_id");
                 Double kcal = resultSet.getDouble("kcal");
                 LocalDate creationDate = resultSet.getDate("creation_date").toLocalDate();
                 String type = resultSet.getString("consumable_type_id");
-
-                
+                // Create drink
+                Drink drink = new Drink(name, isVegan, description, unit, creationDate, kcal, type, drinkType, alcoholLevel, isSparkling, isSugarFree);
                 drinks.add(drink);
-
             }
-
         } catch (ConnectionException e) {
             throw new ReadErrorException("Erreur lors de la lecture des boissons dans la base de données");
         } catch (SQLException | NumberInputValueException | StringInputSizeException e) {
             throw new ReadErrorException("Erreur lors de la lecture des boissons dans la base de données");
         }
-
+        return drinks;
     }
 
 }

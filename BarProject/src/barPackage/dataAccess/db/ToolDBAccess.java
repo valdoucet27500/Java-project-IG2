@@ -20,8 +20,8 @@ public class ToolDBAccess implements ToolDataAccess {
     public void addTool(Tool tool) throws AddErrorException {
         try {
             Connection connection = SingletonConnexion.getConnection();
-            String sqlInstruction = "insert into tool (tool_name) values (?)";
-            java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            String sqlInstruction = "INSERT INTO tool (tool_name) VALUES (?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, tool.getName());
             preparedStatement.executeUpdate();
         } catch (ConnectionException e) {
