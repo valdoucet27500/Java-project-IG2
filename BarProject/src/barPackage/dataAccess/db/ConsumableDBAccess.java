@@ -57,7 +57,28 @@ public class ConsumableDBAccess implements ConsumableDataAccess {
 
     @Override
     public void updateConsumable(Consumable consumable, Consumable newConsumable) throws UpdateErrorException {
-
+        try {
+            Connection connection = SingletonConnexion.getConnection();
+            String sqlInstruction = "update consumable set consumable_name = ?, is_vegan = ?, description = ?, unit_id = ?, kcal = ?, consumable_type_id = ? where consumable_name = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            preparedStatement.setString(1, newConsumable.getName());
+            preparedStatement.setBoolean(2, newConsumable.getIsVegan());
+            preparedStatement.setString(3, newConsumable.getDescription());
+            preparedStatement.setString(4, newConsumable.getUnit());
+            Double kcal = newConsumable.getKcal();
+            if (kcal == null) {
+                preparedStatement.setNull(5, java.sql.Types.DOUBLE);
+            } else {
+                preparedStatement.setDouble(5, kcal);
+            }
+            preparedStatement.setString(6, newConsumable.getType());
+            preparedStatement.setString(7, consumable.getName());
+            preparedStatement.executeUpdate();
+        } catch (ConnectionException e) {
+            throw new UpdateErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException e) {
+            throw new UpdateErrorException("Erreur lors de la mise à jour du consommable dans la base de données");
+        }
     }
 
     @Override
