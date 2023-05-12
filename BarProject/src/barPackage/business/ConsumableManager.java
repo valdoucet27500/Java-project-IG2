@@ -5,6 +5,7 @@ import barPackage.dataAccess.utils.DataConfiguration;
 import barPackage.exceptions.AddErrorException;
 import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
+import barPackage.exceptions.UpdateErrorException;
 import barPackage.model.Consumable;
 import javafx.collections.ObservableList;
 
@@ -24,5 +25,9 @@ public class ConsumableManager {
 
     public ObservableList<Consumable> getAllConsumables() throws ReadErrorException {
         return consumableDataAccess.getAllConsumables();
+    }
+
+    public void updateConsumable(Consumable consumable, Consumable newConsumable) throws UpdateErrorException {
+        consumableDataAccess.updateConsumable(consumable, newConsumable);
     }
 }

@@ -49,7 +49,13 @@ public class ConsumableManagementChoice {
 
     @FXML
     public void onRemoveBtnClick() {
-        System.out.println("Remove Consumable");
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../../view/consumable/DeleteConsumable.fxml")));
+            Parent root = fxmlLoader.load();
+            primaryPane.getChildren().setAll(root);
+        } catch (IOException e) {
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
+        }
     }
 
     @FXML

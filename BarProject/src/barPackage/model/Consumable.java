@@ -2,6 +2,8 @@ package barPackage.model;
 
 import barPackage.exceptions.StringInputSizeException;
 
+import java.time.LocalDate;
+
 public class Consumable {
     private final static int MAX_NAME_SIZE = 32;
     private final static int MAX_DESCRIPTION_SIZE = 1024;
@@ -9,18 +11,23 @@ public class Consumable {
     private Boolean isVegan;
     private String description;
     private String unit;
+    private LocalDate creationDate;
     private Double kcal;
     private String type;
 
-    public Consumable(String name, Boolean isVegan, String description, String unit, Double kcal, String type) throws StringInputSizeException {
+    public Consumable(String name, Boolean isVegan, String description, String unit, LocalDate creationDate,
+                      Double kcal, String type) throws StringInputSizeException {
         setName(name);
         setIsVegan(isVegan);
         setDescription(description);
         setUnit(unit);
+        setCreationDate(creationDate);
         setKcal(kcal);
         setType(type);
     }
-
+    public Consumable(String name, Boolean isVegan, String description, String unit, Double kcal, String type) throws StringInputSizeException {
+        this(name, isVegan, description, unit, LocalDate.now(), kcal, type);
+    }
     public void setName (String name) throws StringInputSizeException {
         if (name.length() > MAX_NAME_SIZE) {
             throw new StringInputSizeException("La taille du nom du consommable est trop grande.", name.length(), MAX_NAME_SIZE);
@@ -52,6 +59,9 @@ public class Consumable {
     public void setType(String type) {
         this.type = type;
     }
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
 
     public String getName() {
         return name;
@@ -75,5 +85,9 @@ public class Consumable {
 
     public String getType() {
         return type;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
     }
 }
