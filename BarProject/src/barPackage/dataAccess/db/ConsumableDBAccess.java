@@ -69,8 +69,9 @@ public class ConsumableDBAccess implements ConsumableDataAccess {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Consumable consumable = new Consumable(resultSet.getString("consumable_name"),
-                        resultSet.getBoolean("is_vegan"), resultSet.getString("unit_id"),
-                        resultSet.getString("description"), //resultSet.getString("creation_date"),
+                        resultSet.getBoolean("is_vegan"),
+                        resultSet.getString("description"),
+                        resultSet.getString("unit_id"), //resultSet.getString("creation_date"),
                         resultSet.getDouble("kcal"),
                         resultSet.getString("consumable_type_id"));
                 consumables.add(consumable);
