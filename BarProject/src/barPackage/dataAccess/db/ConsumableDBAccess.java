@@ -35,7 +35,7 @@ public class ConsumableDBAccess implements ConsumableDataAccess {
             preparedStatement.setDate(6, Date.valueOf(LocalDate.now()));
             preparedStatement.setString(7, consumable.getType());
             preparedStatement.executeUpdate();
-            connection.commit();
+
         } catch (Exception e) {
             throw new AddErrorException("Erreur lors de l'ajout du consommable dans la base de données");
         }
@@ -49,7 +49,6 @@ public class ConsumableDBAccess implements ConsumableDataAccess {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, consumable.getName());
             preparedStatement.executeUpdate();
-            connection.commit();
         } catch (Exception e) {
             throw new DeleteErrorException("Erreur lors de la suppression du consommable dans la base de données");
         }

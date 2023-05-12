@@ -26,7 +26,6 @@ public class ToolDBAccess implements ToolDataAccess {
             java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, tool.getName());
             preparedStatement.executeUpdate();
-            connection.commit();
         } catch (Exception e) {
             throw new AddErrorException("Erreur lors de l'ajout de l'outil dans la base de données");
         }
@@ -40,7 +39,6 @@ public class ToolDBAccess implements ToolDataAccess {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, tool.getName());
             preparedStatement.executeUpdate();
-            connection.commit();
         } catch (Exception e) {
             throw new DeleteErrorException("Erreur lors de la suppression de l'outil dans la base de données");
         }
@@ -73,7 +71,6 @@ public class ToolDBAccess implements ToolDataAccess {
             preparedStatement.setString(1, newTool.getName());
             preparedStatement.setString(2, tool.getName());
             preparedStatement.executeUpdate();
-            connection.commit();
         } catch (Exception e) {
             throw new UpdateErrorException("Erreur lors de la mise à jour de l'outil dans la base de données");
         }

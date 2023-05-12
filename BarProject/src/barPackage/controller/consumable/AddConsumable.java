@@ -71,9 +71,6 @@ public class AddConsumable {
     @FXML
     private AnchorPane primaryPan;
 
-
-    private ConsumableManager consumableManager;
-    private Consumable newConsumable;
     @FXML
     private void initialize() {
         try {
@@ -120,29 +117,27 @@ public class AddConsumable {
 
     @FXML
     public void onAddBtnClick() throws DeleteErrorException {
+        // Consumable
+        String name = nameText.getText();
+        Boolean isVegan = veganCheck.isSelected();
+        String description = descriptionText.getText().equals("") ? null : descriptionText.getText();
+        String unit = unitComboBox.getSelectionModel().getSelectedItem();
+        Double kcal = kcalText.getText().equals("") ? null : Double.parseDouble(kcalText.getText());
+        String consumableType = consumableTypeCombobox.getSelectionModel().getSelectedItem();
+        // Drink
+        String drinkType = drinkTypeCombobox.getSelectionModel().getSelectedItem();
+        Double alcoholDegree = alcoholDegreeTextField.getText().equals("") ? null : Double.parseDouble(alcoholDegreeTextField.getText());
+        Boolean isSparkling = sparklingCheck.isSelected();
+        Boolean isSugarFree = sugarFreeCheck.isSelected();
         try {
-            consumableManager = new ConsumableManager();
-            String name = nameText.getText();
-            Boolean isVegan = veganCheck.isSelected();
-            String description = descriptionText.getText().equals("") ? null : descriptionText.getText();
-            String unit = unitComboBox.getSelectionModel().getSelectedItem();
-            Double kcal = kcalText.getText().equals("") ? null : Double.parseDouble(kcalText.getText());
-            String consumableType = consumableTypeCombobox.getSelectionModel().getSelectedItem();
-            newConsumable = new Consumable(name, isVegan, description, unit, kcal, consumableType);
-            consumableManager.addConsumable(newConsumable);
             if (drinkCheck.isSelected()) {
-                String drinkType = drinkTypeCombobox.getSelectionModel().getSelectedItem();
-                Double alcoholDegree = alcoholDegreeTextField.getText().equals("") ? null : Double.parseDouble(alcoholDegreeTextField.getText());
-                Boolean isSparkling = sparklingCheck.isSelected();
-                Boolean isSugarFree = sugarFreeCheck.isSelected();
+                Drink drink = new Drink(name, isVegan, description, unit, kcal, consumableType, drinkType, alcoholDegree, isSparkling, isSugarFree);
                 DrinkManager drinkManager = new DrinkManager();
-                drinkManager.addDrink(new Drink(
-                        name,
-                        drinkType,
-                        isSparkling,
-                        isSugarFree,
-                        alcoholDegree
-                ));
+                drinkManager.addDrink(drink);
+            } else {
+                Consumable consumable = new Consumable(name, isVegan, description, unit, kcal, consumableType);
+                ConsumableManager consumableManager = new ConsumableManager();
+                consumableManager.addConsumable(consumable);
             }
             ConsumableAlertFactory.getAlert(AlertFactoryType.ADD_PASS, name).showAndWait();
         } catch (Exception e) {

@@ -42,7 +42,6 @@ public class ConsumableTypeDBAccess implements ConsumableTypeDataAccess {
             java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, consumableType.getName());
             preparedStatement.executeUpdate();
-            connection.commit();
         } catch (Exception e) {
             throw new AddErrorException("Erreur lors de l'ajout du type de consommable dans la base de données");
         }
@@ -56,7 +55,6 @@ public class ConsumableTypeDBAccess implements ConsumableTypeDataAccess {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, consumableType.getName());
             preparedStatement.executeUpdate();
-            connection.commit();
         } catch (Exception e) {
             throw new DeleteErrorException("Erreur lors de la suppression du type de consommable dans la base de données");
         }
@@ -71,7 +69,6 @@ public class ConsumableTypeDBAccess implements ConsumableTypeDataAccess {
             preparedStatement.setString(1, newConsumableType.getName());
             preparedStatement.setString(2, consumableType.getName());
             preparedStatement.executeUpdate();
-            connection.commit();
         } catch (Exception e) {
             throw new UpdateErrorException("Erreur lors de la mise à jour du type de consommable dans la base de données");
         }

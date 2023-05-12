@@ -1,20 +1,20 @@
 package barPackage.model;
 
 import barPackage.exceptions.NumberInputValueException;
+import barPackage.exceptions.StringInputSizeException;
 
-public class Drink {
-    private String drinkId;
+public class Drink extends Consumable {
     private String drinkType;
     private Boolean isSugarFree;
     private Boolean isSparkling;
     private Double alcoholLevel;
 
-    public Drink(String drinkId, String drinkType, Boolean isSugarFree, Boolean isSparkling, Double alcoholLevel) throws NumberInputValueException {
-        setDrinkId(drinkId);
-        setDrinkType(drinkType);
-        setIsSugarFree(isSugarFree);
-        setIsSparkling(isSparkling);
-        setAlcoholLevel(alcoholLevel);
+    public Drink(String name, Boolean isVegan, String description, String unit, Double kcal, String consumableType, String drinkType, Double alcoholLevel, Boolean isSparkling, Boolean isSugarFree) throws NumberInputValueException, StringInputSizeException {
+        super(name, isVegan, description, unit, kcal, consumableType);
+        this.setDrinkType(drinkType);
+        this.setAlcoholLevel(alcoholLevel);
+        this.setIsSparkling(isSparkling);
+        this.setIsSugarFree(isSugarFree);
     }
 
     private void setIsSugarFree(Boolean isSugarFree) {
@@ -29,19 +29,11 @@ public class Drink {
         this.drinkType = drinkType;
     }
 
-    public void setDrinkId(String drinkId) {
-        this.drinkId = drinkId;
-    }
-
     private void setAlcoholLevel(Double alcoholLevel) throws NumberInputValueException {
         if (alcoholLevel < 0 || alcoholLevel > 100) {
             throw new NumberInputValueException("Le taux d'alcool doit être compris entre 0 et 100.", alcoholLevel, 0., 100.);
         }
         this.alcoholLevel = alcoholLevel;
-    }
-
-    public String getDrinkId() {
-        return drinkId;
     }
 
     public String getDrinkType() {
