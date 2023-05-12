@@ -2,6 +2,7 @@ package barPackage.dataAccess.db;
 
 import barPackage.dataAccess.utils.DrinkDataAccess;
 import barPackage.exceptions.AddErrorException;
+import barPackage.exceptions.DeleteErrorException;
 import barPackage.model.Drink;
 import javafx.collections.ObservableList;
 
@@ -35,7 +36,7 @@ public class DrinkDBAccess implements DrinkDataAccess {
             preparedStatement.setString(7, drink.getType());
             preparedStatement.executeUpdate();
 
-            sqlInstruction = "insert into drink (consumable_name, alcohol_type_id, is_sugar_free, is_sparkling, alcohol_level) values (?, ?, ?, ?, ?)";
+            sqlInstruction = "insert into drink (drink_name, alcohol_type_id, is_sugar_free, is_sparkling, alcohol_level) values (?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1, drink.getName());
             preparedStatement.setString(2, drink.getDrinkType());
@@ -56,7 +57,23 @@ public class DrinkDBAccess implements DrinkDataAccess {
     }
 
     @Override
-    public void deleteDrink(Drink drink) {
+    public void deleteDrink(Drink drink) throws DeleteErrorException {
+        try {
+            Connection connection = SingletonConnexion.getConnection();
+            connection.setAutoCommit(false);
+            String sqlInstruction = "delete from drink where drink_name = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            preparedStatement.setString(1, drink.getName());
+            preparedStatement.executeUpdate();
+
+            sqlInstruction = "delete from consumable where consumable_name = ?";
+            preparedStatement = connection.prepareStatement(sqlInstruction);
+            preparedStatement.setString(1, drink.getName());
+            preparedStatement.executeUpdate();
+            connection.commit();
+        } catch (Exception e) {
+            throw new DeleteErrorException("Erreur lors de la suppression de la boisson dans la base de données");
+        }
 
     }
 
