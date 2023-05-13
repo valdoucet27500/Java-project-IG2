@@ -93,7 +93,31 @@ public class ConsumableDBAccess implements ConsumableDataAccess {
                 Consumable consumable = new Consumable(resultSet.getString("consumable_name"),
                         resultSet.getBoolean("is_vegan"),
                         resultSet.getString("description"),
-                        resultSet.getString("unit_id"), //resultSet.getString("creation_date"),
+                        resultSet.getString("unit_id"), //resultSet.getDate("creation_date").toLocalDate(),
+                        resultSet.getDouble("kcal"),
+                        resultSet.getString("consumable_type_id"));
+                consumables.add(consumable);
+            }
+        } catch (ConnectionException e) {
+            throw new ReadErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException | StringInputSizeException e) {
+            throw new ReadErrorException("Erreur lors de la lecture des consommables dans la base de données");
+        }
+        return consumables;
+    }
+    @Override
+    public ObservableList<Consumable> getAllConsumableNoDrinks() throws ReadErrorException {
+        ObservableList<Consumable> consumables = FXCollections.observableArrayList();
+        try {
+            Connection connection = SingletonConnexion.getConnection();
+            String sqlInstruction = "select * from consumable where consumable_name NOT IN (select drink_name FROM  drink)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Consumable consumable = new Consumable(resultSet.getString("consumable_name"),
+                        resultSet.getBoolean("is_vegan"),
+                        resultSet.getString("description"),
+                        resultSet.getString("unit_id"), //resultSet.getDate("creation_date").toLocalDate(),
                         resultSet.getDouble("kcal"),
                         resultSet.getString("consumable_type_id"));
                 consumables.add(consumable);

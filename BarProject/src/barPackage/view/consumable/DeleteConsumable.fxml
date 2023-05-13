@@ -21,6 +21,6 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-      <ComboBox fx:id="comboBox" layoutX="376.0" layoutY="51.0" prefWidth="150.0" />
+      <ComboBox fx:id="comboBox" layoutX="376.0" layoutY="51.0" onAction="#onComboBoxChange" prefWidth="150.0" />
     </children>
 </AnchorPane>

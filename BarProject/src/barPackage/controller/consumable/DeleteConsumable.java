@@ -1,6 +1,7 @@
 package barPackage.controller.consumable;
 
 import barPackage.business.ConsumableManager;
+import barPackage.business.DrinkManager;
 import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
 import barPackage.model.Consumable;
@@ -37,6 +38,7 @@ public class DeleteConsumable {
     @FXML
     private void initialize() {
         try {
+            comboBox.getItems().addAll("Boisson", "Consommable");
             TableColumn<Consumable, String> consumableNameColumn = new TableColumn<>(" Name");
             TableColumn<Consumable, Boolean> isVeganColumn = new TableColumn<>("Vegan");
             TableColumn<Consumable, String> descriptionColumn = new TableColumn<>("Description");
@@ -94,15 +96,15 @@ public class DeleteConsumable {
         try {
             tableView.getItems().clear();
             ConsumableManager consumableManager = new ConsumableManager();
-//            if (comboBox.getItems().equals("Boisson")) {
-//                for (Drink drink : consumableManager.getAllDrinks()) {
-//
-//                    tableView.getItems().add(drink);
-//                }
-//            }
-            if (comboBox.getItems().equals("Consommable")) {
-                for (Consumable consumable : consumableManager.getAllConsumables()) {
-                    tableView.getItems().add(consumable);
+            DrinkManager drinkManager = new DrinkManager();
+            if (comboBox.getSelectionModel().getSelectedItem().equals("Boisson")) {
+                for (Drink drink : drinkManager.getAllDrinks()) {
+                    tableView.getItems().add(drink);
+                }
+            }
+            if (comboBox.getSelectionModel().getSelectedItem().equals("Consommable")) {
+                for (Consumable consumable : consumableManager.getAllConsumableNoDrinks()) {
+                            tableView.getItems().add(consumable);
                 }
             }
         } catch (ReadErrorException e) {

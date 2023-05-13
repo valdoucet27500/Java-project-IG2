@@ -12,4 +12,6 @@ public interface ConsumableDataAccess {
     public void addConsumable (Consumable consumable) throws AddErrorException;
     public void deleteConsumable (Consumable consumable) throws DeleteErrorException;
     public void updateConsumable (Consumable consumable, Consumable newConsumable) throws UpdateErrorException;
+
+    ObservableList<Consumable> getAllConsumableNoDrinks() throws ReadErrorException;
 }

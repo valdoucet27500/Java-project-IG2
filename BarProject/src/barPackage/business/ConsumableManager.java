@@ -30,4 +30,8 @@ public class ConsumableManager {
     public void updateConsumable(Consumable consumable, Consumable newConsumable) throws UpdateErrorException {
         consumableDataAccess.updateConsumable(consumable, newConsumable);
     }
+
+    public ObservableList<Consumable> getAllConsumableNoDrinks() throws ReadErrorException {
+        return consumableDataAccess.getAllConsumableNoDrinks();
+    }
 }

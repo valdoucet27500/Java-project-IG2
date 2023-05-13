@@ -60,7 +60,13 @@ public class ConsumableManagementChoice {
 
     @FXML
     public void onUpdateBtnClick() {
-        System.out.println("Update Consumable");
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../../view/consumable/UpdateConsumable.fxml")));
+            Parent root = fxmlLoader.load();
+            primaryPane.getChildren().setAll(root);
+        } catch (IOException e) {
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL, e.getMessage()).showAndWait();
+        }
     }
 
     @FXML
