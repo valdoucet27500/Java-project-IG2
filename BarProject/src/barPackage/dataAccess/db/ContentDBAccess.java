@@ -22,7 +22,7 @@ public class ContentDBAccess implements ContentDataAccess {
         ObservableList<Content> contents = FXCollections.observableArrayList();
         try {
             Connection connection = SingletonConnexion.getConnection();
-            String sqlInstruction = "select * from content";
+            String sqlInstruction = "select content_id, consumable_id, quantity, expiration_date, unit_id from content inner join consumable on content.consumable_id = consumable.consumable_name";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -30,7 +30,8 @@ public class ContentDBAccess implements ContentDataAccess {
                 String name = resultSet.getString("consumable_id");
                 Double quantity = resultSet.getDouble("quantity");
                 LocalDate date = resultSet.getDate("expiration_date").toLocalDate();
-                Content content = new Content(id, name, quantity, date);
+                String unit = resultSet.getString("unit_id");
+                Content content = new Content(id, name, quantity, date, unit);
                 contents.add(content);
             }
             return contents;

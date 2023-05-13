@@ -34,4 +34,8 @@ public class ConsumableManager {
     public ObservableList<Consumable> getAllConsumableNoDrinks() throws ReadErrorException {
         return consumableDataAccess.getAllConsumableNoDrinks();
     }
+
+    public Consumable getConsumableByName(String name) throws ReadErrorException {
+        return consumableDataAccess.getConsumableByName(name);
+    }
 }

@@ -131,7 +131,7 @@ public class UpdateConsumable {
     @FXML
     public void onTableViewSelect(){
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            updateBtn.setVisible(true);
+            updateBtn.setDisable(false);
             Consumable consumable = tableView.getSelectionModel().getSelectedItem();
             nameText.setText(consumable.getName());
             veganCheck.setSelected(consumable.getIsVegan());

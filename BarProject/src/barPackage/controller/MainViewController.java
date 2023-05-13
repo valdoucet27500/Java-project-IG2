@@ -20,23 +20,30 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class MainViewController {
-    @FXML
-    private AnchorPane mainPan;
-
-    @FXML
-    private AnchorPane middlePane;
 
     @FXML
     private Button consumeBtn;
 
     @FXML
-    private MenuItem supplyConsumableBtn;
-
-    @FXML
     private MenuItem favRecipeBtn;
 
     @FXML
+    private Menu homeBtn;
+
+    @FXML
+    private AnchorPane mainPan;
+
+    @FXML
     private MenuItem manageConsumableBtn;
+
+    @FXML
+    private MenuItem manageConsumableTypeBtn;
+
+    @FXML
+    private MenuItem manageContentBtn;
+
+    @FXML
+    private MenuItem manageDrinkTypeBtn;
 
     @FXML
     private MenuItem manageRecipeBtn;
@@ -45,7 +52,13 @@ public class MainViewController {
     private MenuItem manageToolBtn;
 
     @FXML
-    private MenuItem outdatedConsumableBtn;
+    private MenuItem manageUnitBtn;
+
+    @FXML
+    private AnchorPane middlePane;
+
+    @FXML
+    private MenuItem outdatedContentBtn;
 
     @FXML
     private Menu settingsBtn;
@@ -54,16 +67,7 @@ public class MainViewController {
     private Menu statBtn;
 
     @FXML
-    private Menu homeBtn;
-
-    @FXML
-    private MenuItem manageUnitBtn;
-
-    @FXML
-    private MenuItem manageDrinkTypeBtn;
-
-    @FXML
-    private MenuItem manageConsumableTypeBtn;
+    private MenuItem supplyContentBtn;
     @FXML
     public void onManageConsumableBtnClick() {
         try {
@@ -137,6 +141,17 @@ public class MainViewController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/ManagementSelection.fxml")));
             fxmlLoader.setController(new DrinkTypeManagementChoice());
+            Parent root = fxmlLoader.load();
+            middlePane.getChildren().setAll(root);
+        } catch (IOException e) {
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
+        }
+    }
+
+    @FXML
+    public void onManageContentBtn() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/content/ContentManagment.fxml")));
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {

@@ -6,12 +6,17 @@ import barPackage.exceptions.AddErrorException;
 import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
 import barPackage.model.Content;
+import javafx.collections.ObservableList;
 
 public class ContentManager {
     private ContentDataAccess contentDataAccess;
 
     public ContentManager() {
         contentDataAccess = DataConfiguration.getContentDataAccess();
+    }
+
+    public ObservableList<Content> getAllContents() throws ReadErrorException {
+        return contentDataAccess.getAllContents();
     }
 
     public void addContent(Content content) throws AddErrorException {

@@ -7,16 +7,19 @@ public class Content {
     private String consumableName;
     private Double quantity;
     private LocalDate expirationDate;
+    private String unit;
 
-    public Content(Integer id, String consumableName, Double quantity, LocalDate expirationDate) {
+    public Content(Integer id, String consumableName, Double quantity, LocalDate expirationDate, String unit) {
+        this.unit = unit;
         this.id = id;
         this.consumableName = consumableName;
         this.quantity = quantity;
         this.expirationDate = expirationDate;
     }
 
+
     public Content(String consumableName, Double quantity, LocalDate expirationDate) {
-        this(null, consumableName, quantity, expirationDate);
+        this(null, consumableName, quantity, expirationDate, null);
     }
 
     public Content(String consumableName, Double quantity) {
@@ -41,6 +44,10 @@ public class Content {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getUnit() {
+        return unit;
     }
 
     public String getConsumableName() {

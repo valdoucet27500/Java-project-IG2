@@ -138,7 +138,7 @@ public class AddConsumable {
                 ConsumableManager consumableManager = new ConsumableManager();
                 consumableManager.addConsumable(consumable);
             }
-            ConsumableAlertFactory.getAlert(AlertFactoryType.ADD_PASS, name).showAndWait();
+            ConsumableAlertFactory.getAlert(AlertFactoryType.ADD_PASS).showAndWait();
         } catch (AddErrorException | StringInputSizeException | NumberInputValueException e) {
             ConsumableAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, e.getMessage()).showAndWait();
         }

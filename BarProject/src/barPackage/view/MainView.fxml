@@ -22,9 +22,9 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Stock">
                     <items>
-                      <MenuItem fx:id="manageConsumableBtn" mnemonicParsing="false" onAction="#onManageConsumableBtnClick" text="Gestion" />
-                        <MenuItem fx:id="supplyConsumableBtn" mnemonicParsing="false" text="Disponibilités" />
-                        <MenuItem fx:id="outdatedConsumableBtn" mnemonicParsing="false" text="Périmés" />
+                      <MenuItem fx:id="manageContentBtn" mnemonicParsing="false" onAction="#onManageContentBtn" text="Gestion" />
+                        <MenuItem fx:id="supplyContentBtn" mnemonicParsing="false" text="Disponibilités" />
+                        <MenuItem fx:id="outdatedContentBtn" mnemonicParsing="false" text="Périmés" />
                     </items>
                   </Menu>
                 <Menu mnemonicParsing="false" text="Matériels">
@@ -44,7 +44,7 @@
                         <MenuItem fx:id="manageUnitBtn" mnemonicParsing="false" onAction="#onManageUnitBtnClick" text="Unité" />
                         <MenuItem fx:id="manageDrinkTypeBtn" mnemonicParsing="false" onAction="#onManageDrinkTypeBtnClick" text="Type boisson" />
                         <MenuItem fx:id="manageConsumableTypeBtn" mnemonicParsing="false" onAction="#onManageConsumableTypeBtnClick" text="Type consommable" />
-                        <MenuItem mnemonicParsing="false" onAction="#onManageConsumableBtnClick" text="Consommable" />
+                        <MenuItem fx:id="manageConsumableBtn" mnemonicParsing="false" onAction="#onManageConsumableBtnClick" text="Consommable" />
                      </items></Menu>
               </menus>
             </MenuBar>
