@@ -7,11 +7,11 @@
 
 <AnchorPane fx:id="primaryPan" prefHeight="580.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.drinkType.ViewDrinkType">
     <children>
-        <TableView fx:id="tableView" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0">
+        <TableView fx:id="tableView" layoutX="350.0" layoutY="101.0" prefHeight="200.0" prefWidth="200.0">
             <columns>
                 <TableColumn fx:id="drinkTypeNameColumn" editable="false" prefWidth="198.0" resizable="false" text="Nom" />
             </columns>
         </TableView>
-        <Button fx:id="backBtn" layoutX="274.0" layoutY="333.0" mnemonicParsing="false" onAction="#onBackBtnClick" text="Retour" />
+        <Button fx:id="backBtn" layoutX="424.0" layoutY="340.0" mnemonicParsing="false" onAction="#onBackBtnClick" text="Retour" />
     </children>
 </AnchorPane>

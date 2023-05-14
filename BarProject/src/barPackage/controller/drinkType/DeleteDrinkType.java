@@ -34,7 +34,7 @@ public class DeleteDrinkType {
     @FXML
     private void initialize() {
         try {
-            TableColumn<DrinkType,String> nameColumn = new TableColumn<>(" Name");
+            TableColumn<DrinkType,String> nameColumn = new TableColumn<>(" Nom");
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
             tableView.getColumns().add(nameColumn);
             DrinkTypeManager drinkTypeManager = new DrinkTypeManager();

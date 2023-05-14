@@ -39,7 +39,7 @@ public class UpdateConsumableType {
     @FXML
     private void initialize() {
         try {
-            TableColumn<ConsumableType,String> nameColumn = new TableColumn<>(" Name");
+            TableColumn<ConsumableType,String> nameColumn = new TableColumn<>(" Nom");
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
             tableView.getColumns().add(nameColumn);
             ConsumableTypeManager consumableTypeManager = new ConsumableTypeManager();

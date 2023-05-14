@@ -35,28 +35,15 @@ public class DeleteConsumable {
     private AnchorPane primaryPan;
     @FXML
     private ComboBox<String> comboBox;
+    private Boolean isDrink = false;
     @FXML
     private void initialize() {
         try {
             comboBox.getItems().addAll("Boisson", "Consommable");
-            TableColumn<Consumable, String> consumableNameColumn = new TableColumn<>(" Name");
-            TableColumn<Consumable, Boolean> isVeganColumn = new TableColumn<>("Vegan");
-            TableColumn<Consumable, String> descriptionColumn = new TableColumn<>("Description");
-            TableColumn<Consumable, String> unitIDColumn = new TableColumn<>("Unit");
-            TableColumn<Consumable, Double> kcalColumn = new TableColumn<>("Kcal");
-            TableColumn<Consumable, LocalDate> createdDateColumn = new TableColumn<>("Created Date");
-            TableColumn<Consumable, String> consumableTypeIDColumn = new TableColumn<>("Type");
-            consumableNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-            isVeganColumn.setCellValueFactory(new PropertyValueFactory<>("isVegan"));
-            descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-            unitIDColumn.setCellValueFactory(new PropertyValueFactory<>("unit"));
-            kcalColumn.setCellValueFactory(new PropertyValueFactory<>("kcal"));
-            createdDateColumn.setCellValueFactory(new PropertyValueFactory<>("creationDate"));
-            consumableTypeIDColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-            tableView.getColumns().addAll(consumableNameColumn, isVeganColumn, unitIDColumn, kcalColumn,
-                    createdDateColumn, consumableTypeIDColumn, descriptionColumn);
+            comboBox.getSelectionModel().select("Consommable");
+            setTableViewConsumable();
             ConsumableManager consumableManager = new ConsumableManager();
-            for (Consumable consumable : consumableManager.getAllConsumables()) {
+            for (Consumable consumable : consumableManager.getAllConsumableNoDrinks()) {
                 tableView.getItems().add(consumable);
             }
         } catch (ReadErrorException e) {
@@ -79,12 +66,28 @@ public class DeleteConsumable {
             if (tableView.getSelectionModel() == null) {
                 ConsumableAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, "Veuillez selectionner un consommable à supprimer").showAndWait();
             } else {
-                ConsumableManager consumableManager = new ConsumableManager();
-                consumableManager.deleteConsumable(tableView.getSelectionModel().getSelectedItem());
+                if (isDrink) {
+                    DrinkManager drinkManager = new DrinkManager();
+                    drinkManager.deleteDrink((Drink) tableView.getSelectionModel().getSelectedItem());
+                } else {
+                    ConsumableManager consumableManager = new ConsumableManager();
+                    consumableManager.deleteConsumable(tableView.getSelectionModel().getSelectedItem());
+                };
                 ConsumableAlertFactory.getAlert(AlertFactoryType.DELETE_PASS).showAndWait();
+                deleteBtn.setDisable(true);
                 tableView.getItems().clear();
-                for (Consumable consumable : consumableManager.getAllConsumables()) {
-                    tableView.getItems().add(consumable);
+                if (isDrink) {
+                    DrinkManager drinkManager = new DrinkManager();
+                    setTableViewDrink();
+                    for (Drink drink : drinkManager.getAllDrinks()) {
+                        tableView.getItems().add(drink);
+                    }
+                } else {
+                    ConsumableManager consumableManager = new ConsumableManager();
+                    setTableViewConsumable();
+                    for (Consumable consumable : consumableManager.getAllConsumables()) {
+                        tableView.getItems().add(consumable);
+                    }
                 }
             }
         } catch (ReadErrorException | DeleteErrorException e) {
@@ -98,11 +101,17 @@ public class DeleteConsumable {
             ConsumableManager consumableManager = new ConsumableManager();
             DrinkManager drinkManager = new DrinkManager();
             if (comboBox.getSelectionModel().getSelectedItem().equals("Boisson")) {
+                isDrink = true;
+                setTableViewDrink();
+                deleteBtn.setDisable(true);
                 for (Drink drink : drinkManager.getAllDrinks()) {
                     tableView.getItems().add(drink);
                 }
             }
             if (comboBox.getSelectionModel().getSelectedItem().equals("Consommable")) {
+                isDrink = false;
+                setTableViewConsumable();
+                deleteBtn.setDisable(true);
                 for (Consumable consumable : consumableManager.getAllConsumableNoDrinks()) {
                             tableView.getItems().add(consumable);
                 }
@@ -111,5 +120,57 @@ public class DeleteConsumable {
             ConsumableAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
         }
     }
-
+    public void setTableViewConsumable(){
+        tableView.getColumns().clear();
+        TableColumn<Consumable, String> consumableNameColumn = new TableColumn<>(" Nom");
+        TableColumn<Consumable, Boolean> isVeganColumn = new TableColumn<>("Vegan");
+        TableColumn<Consumable, String> descriptionColumn = new TableColumn<>("Description");
+        TableColumn<Consumable, String> unitIDColumn = new TableColumn<>("Unité");
+        TableColumn<Consumable, Double> kcalColumn = new TableColumn<>("Kcal");
+        TableColumn<Consumable, LocalDate> createdDateColumn = new TableColumn<>("Date de création");
+        TableColumn<Consumable, String> consumableTypeIDColumn = new TableColumn<>("Type");
+        consumableNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        isVeganColumn.setCellValueFactory(new PropertyValueFactory<>("isVegan"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        unitIDColumn.setCellValueFactory(new PropertyValueFactory<>("unit"));
+        kcalColumn.setCellValueFactory(new PropertyValueFactory<>("kcal"));
+        createdDateColumn.setCellValueFactory(new PropertyValueFactory<>("creationDate"));
+        consumableTypeIDColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        tableView.getColumns().addAll(consumableNameColumn, isVeganColumn, unitIDColumn, kcalColumn,
+                createdDateColumn, consumableTypeIDColumn, descriptionColumn);
+    }
+    public void setTableViewDrink(){
+        tableView.getColumns().clear();
+        TableColumn<Consumable, String> drinkNameColumn = new TableColumn<>(" Nom");
+        TableColumn<Consumable, Boolean> isVeganColumn = new TableColumn<>("Vegan");
+        TableColumn<Consumable, String> descriptionColumn = new TableColumn<>("Description");
+        TableColumn<Consumable, String> unitIDColumn = new TableColumn<>("Unité");
+        TableColumn<Consumable, Double> kcalColumn = new TableColumn<>("Kcal");
+        TableColumn<Consumable, LocalDate> createdDateColumn = new TableColumn<>("Date de création");
+        TableColumn<Consumable, String> consumableTypeIDColumn = new TableColumn<>("Type");
+        TableColumn<Consumable, String> drinkTypeIDColumn = new TableColumn<>("Type de boisson");
+        TableColumn<Consumable, Double> alcoholDegreeColumn = new TableColumn<>("Degré d'alcool");
+        TableColumn<Consumable, Boolean> isSparklingColumn = new TableColumn<>("Pétillant");
+        TableColumn<Consumable, Boolean> isSugarFreeColumn = new TableColumn<>("Sans sucre");
+        drinkNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        isVeganColumn.setCellValueFactory(new PropertyValueFactory<>("isVegan"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        unitIDColumn.setCellValueFactory(new PropertyValueFactory<>("unit"));
+        kcalColumn.setCellValueFactory(new PropertyValueFactory<>("kcal"));
+        createdDateColumn.setCellValueFactory(new PropertyValueFactory<>("creationDate"));
+        consumableTypeIDColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        drinkTypeIDColumn.setCellValueFactory(new PropertyValueFactory<>("drinkType"));
+        alcoholDegreeColumn.setCellValueFactory(new PropertyValueFactory<>("alcoholLevel"));
+        isSparklingColumn.setCellValueFactory(new PropertyValueFactory<>("isSparkling"));
+        isSugarFreeColumn.setCellValueFactory(new PropertyValueFactory<>("isSugarFree"));
+        tableView.getColumns().addAll(drinkNameColumn, isVeganColumn, unitIDColumn, kcalColumn,
+                createdDateColumn, consumableTypeIDColumn, descriptionColumn, drinkTypeIDColumn, alcoholDegreeColumn,
+                isSparklingColumn, isSugarFreeColumn);
+    }
+    @FXML
+    public void onTableViewSelect(){
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            deleteBtn.setDisable(false);
+        }
+    }
 }

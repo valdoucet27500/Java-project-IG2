@@ -37,7 +37,7 @@ public class UpdateUnit {
     @FXML
     private void initialize() {
         try {
-            TableColumn<Unit,String> nameColumn = new TableColumn<>(" Name");
+            TableColumn<Unit,String> nameColumn = new TableColumn<>(" Nom");
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
             tableView.getColumns().add(nameColumn);
             UnitManager unitManager = new UnitManager();

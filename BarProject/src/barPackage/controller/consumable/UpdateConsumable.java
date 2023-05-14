@@ -238,12 +238,12 @@ public class UpdateConsumable {
     }
     public void setTableViewConsumable(){
         tableView.getColumns().clear();
-        TableColumn<Consumable, String> consumableNameColumn = new TableColumn<>(" Name");
+        TableColumn<Consumable, String> consumableNameColumn = new TableColumn<>(" Nom");
         TableColumn<Consumable, Boolean> isVeganColumn = new TableColumn<>("Vegan");
         TableColumn<Consumable, String> descriptionColumn = new TableColumn<>("Description");
-        TableColumn<Consumable, String> unitIDColumn = new TableColumn<>("Unit");
+        TableColumn<Consumable, String> unitIDColumn = new TableColumn<>("Unité");
         TableColumn<Consumable, Double> kcalColumn = new TableColumn<>("Kcal");
-        TableColumn<Consumable, LocalDate> createdDateColumn = new TableColumn<>("Created Date");
+        TableColumn<Consumable, LocalDate> createdDateColumn = new TableColumn<>("Date de création");
         TableColumn<Consumable, String> consumableTypeIDColumn = new TableColumn<>("Type");
         consumableNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         isVeganColumn.setCellValueFactory(new PropertyValueFactory<>("isVegan"));
@@ -257,17 +257,17 @@ public class UpdateConsumable {
     }
     public void setTableViewDrink(){
         tableView.getColumns().clear();
-        TableColumn<Consumable, String> drinkNameColumn = new TableColumn<>(" Name");
+        TableColumn<Consumable, String> drinkNameColumn = new TableColumn<>(" Nom");
         TableColumn<Consumable, Boolean> isVeganColumn = new TableColumn<>("Vegan");
         TableColumn<Consumable, String> descriptionColumn = new TableColumn<>("Description");
-        TableColumn<Consumable, String> unitIDColumn = new TableColumn<>("Unit");
+        TableColumn<Consumable, String> unitIDColumn = new TableColumn<>("Unité");
         TableColumn<Consumable, Double> kcalColumn = new TableColumn<>("Kcal");
-        TableColumn<Consumable, LocalDate> createdDateColumn = new TableColumn<>("Created Date");
+        TableColumn<Consumable, LocalDate> createdDateColumn = new TableColumn<>("Date de création");
         TableColumn<Consumable, String> consumableTypeIDColumn = new TableColumn<>("Type");
-        TableColumn<Consumable, String> drinkTypeIDColumn = new TableColumn<>("Drink Type");
-        TableColumn<Consumable, Double> alcoholDegreeColumn = new TableColumn<>("Alcohol Degree");
-        TableColumn<Consumable, Boolean> isSparklingColumn = new TableColumn<>("Sparkling");
-        TableColumn<Consumable, Boolean> isSugarFreeColumn = new TableColumn<>("Sugar Free");
+        TableColumn<Consumable, String> drinkTypeIDColumn = new TableColumn<>("Type de boisson");
+        TableColumn<Consumable, Double> alcoholDegreeColumn = new TableColumn<>("Degré d'alcool");
+        TableColumn<Consumable, Boolean> isSparklingColumn = new TableColumn<>("Pétillant");
+        TableColumn<Consumable, Boolean> isSugarFreeColumn = new TableColumn<>("Sans sucre");
         drinkNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         isVeganColumn.setCellValueFactory(new PropertyValueFactory<>("isVegan"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
