@@ -81,18 +81,6 @@ public class MainViewController {
     }
 
     @FXML
-    public void onManageRecipeBtnClick() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/ManagementSelection.fxml")));
-            fxmlLoader.setController(new RecipeManagementChoice());
-            Parent root = fxmlLoader.load();
-            middlePane.getChildren().setAll(root);
-        } catch (IOException e) {
-            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
-        }
-    }
-
-    @FXML
     public void onManageToolBtnClick() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/ManagementSelection.fxml")));
@@ -151,7 +139,18 @@ public class MainViewController {
     @FXML
     public void onManageContentBtn() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/content/ContentManagment.fxml")));
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/content/ContentManagement.fxml")));
+            Parent root = fxmlLoader.load();
+            middlePane.getChildren().setAll(root);
+        } catch (IOException e) {
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
+        }
+    }
+
+    @FXML
+    public void onManageRecipeBtnClick() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/recipe/RecipeManagement.fxml")));
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {

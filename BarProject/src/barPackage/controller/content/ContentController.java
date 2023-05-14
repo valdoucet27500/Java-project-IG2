@@ -81,8 +81,8 @@ public class ContentController {
 
     @FXML
     private void refreshTable() {
+        tableView.getItems().clear();
         try {
-            tableView.getItems().clear();
             ContentManager contentManager = new ContentManager();
             ObservableList<Content> contents = contentManager.getAllContents();
             tableView.setItems(contents);

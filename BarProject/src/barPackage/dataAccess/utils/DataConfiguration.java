@@ -61,6 +61,14 @@ public class DataConfiguration {
         }
     }
 
+    public static RecipeDataAccess getRecipeDataAccess() {
+        if (DATA_PERSISTENCE.equals("DB")) {
+            return new RecipeDBAccess();
+        } else {
+            return null;
+        }
+    }
+
     public static IngredientDataAccess getIngredientDataAccess() {
         if (DATA_PERSISTENCE.equals("DB")) {
             return new IngredientDBAccess();
