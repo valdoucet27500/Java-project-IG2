@@ -8,10 +8,10 @@
 
 <AnchorPane fx:id="primaryPan" prefHeight="580.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.tool.AddTool">
    <children>
-      <TextField fx:id="toolNameArea" layoutX="190.0" layoutY="173.0" prefHeight="26.0" prefWidth="220.0" promptText="Nom de l'outil" />
-      <Button fx:id="addBtn" layoutX="208.0" layoutY="227.0" mnemonicParsing="false" onAction="#onAddBtnClick" prefHeight="20.0" prefWidth="75.0" text="Ajouter" />
-      <Button fx:id="cancelBtn" layoutX="316.0" layoutY="227.0" mnemonicParsing="false" onAction="#onCancelBtnClick" prefHeight="20.0" prefWidth="75.0" text="Annuler" />
-      <Text layoutX="256.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de l'outil">
+      <TextField fx:id="toolNameArea" layoutX="340.0" layoutY="271.0" prefHeight="26.0" prefWidth="220.0" promptText="Nom de l'outil" />
+      <Button fx:id="addBtn" layoutX="358.0" layoutY="325.0" mnemonicParsing="false" onAction="#onAddBtnClick" prefHeight="20.0" prefWidth="75.0" text="Ajouter" />
+      <Button fx:id="cancelBtn" layoutX="466.0" layoutY="325.0" mnemonicParsing="false" onAction="#onCancelBtnClick" prefHeight="20.0" prefWidth="75.0" text="Annuler" />
+      <Text layoutX="406.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de l'outil">
          <font>
             <Font size="14.0" />
          </font>

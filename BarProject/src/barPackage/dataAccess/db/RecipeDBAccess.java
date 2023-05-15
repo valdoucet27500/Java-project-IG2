@@ -1,13 +1,8 @@
 package barPackage.dataAccess.db;
 
 import barPackage.dataAccess.utils.RecipeDataAccess;
-import barPackage.exceptions.AddErrorException;
-import barPackage.exceptions.ConnectionException;
-import barPackage.exceptions.DeleteErrorException;
-import barPackage.exceptions.ReadErrorException;
-import barPackage.model.Ingredient;
-import barPackage.model.Recipe;
-import barPackage.model.Utensil;
+import barPackage.exceptions.*;
+import barPackage.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -242,6 +237,71 @@ public class RecipeDBAccess implements RecipeDataAccess {
                 }
             }
             throw new ReadErrorException("Erreur lors de la connexion à la base de données");
+        }
+    }
+
+    @Override
+    public ObservableList<RecipeWithConsumable> getRecipeWithConsumables(Consumable consumable) throws ReadErrorException {
+        ObservableList<RecipeWithConsumable> recipes = FXCollections.observableArrayList();
+        Connection connection = null;
+        try {
+            connection = SingletonConnexion.getConnection();
+            String sqlInstruction = "select  recipe_name from recipe\n" +
+                    "inner join ingredient on recipe_name = ingredient.recipe_id\n" +
+                    "inner join consumable on ingredient.consumable_id = consumable_name\n" +
+                    "where consumable_name = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            preparedStatement.setString(1, consumable.getName());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                RecipeWithConsumable recipe = new RecipeWithConsumable(resultSet.getString("recipe_name"));
+                recipes.add(recipe);
+            }
+        } catch (ConnectionException | SQLException e) {
+            throw new ReadErrorException("Erreur lors de la connexion à la base de données");
+        }
+        return recipes;
+    }
+
+    @Override
+    public ObservableList<MissingIngredient> getMissingIngredients(Recipe recipe, Double quantity) throws ReadErrorException {
+        ObservableList<MissingIngredient> missingIngredients = FXCollections.observableArrayList();
+        Connection connection = null;
+        try {
+            connection = SingletonConnexion.getConnection();
+            String sqlInstruction = "select  c.consumable_name, co.quantity, i.required_quantity  from ingredient i \n" +
+                    "inner join consumable c on c.consumable_name = i.consumable_id\n" +
+                    "inner join content co on co.consumable_id = i.consumable_id\n" +
+                    "where i.recipe_id = ?\n" +
+                    "and co.quantity < i.required_quantity * ?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            preparedStatement.setString(1, recipe.getRecipeName());
+            preparedStatement.setDouble(2, quantity);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                MissingIngredient missingIngredient = new MissingIngredient(resultSet.getString("consumable_name"),
+                        resultSet.getDouble("quantity"),
+                        resultSet.getDouble("required_quantity") * quantity);
+                missingIngredients.add(missingIngredient);
+            }
+        } catch (ConnectionException | SQLException e) {
+            throw new ReadErrorException("Erreur lors de la connexion à la base de données");
+        }
+        return missingIngredients;
+    }
+
+    @Override
+    public void consumeRecipe(Recipe recipe, Double quantity) throws UpdateErrorException {
+        Connection connection = null;
+        try {
+            connection = SingletonConnexion.getConnection();
+            String sqlInstruction = "update content set quantity = quantity - ? where consumable_id in (select consumable_id from ingredient where recipe_id = ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            preparedStatement.setDouble(1, quantity);
+            preparedStatement.setString(2, recipe.getRecipeName());
+            preparedStatement.executeUpdate();
+        } catch (ConnectionException | SQLException e) {
+            throw new UpdateErrorException("Erreur lors de la connexion à la base de données");
         }
     }
 }

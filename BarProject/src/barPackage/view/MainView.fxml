@@ -15,16 +15,12 @@
          <top>
             <MenuBar prefHeight="20.0" BorderPane.alignment="CENTER">
               <menus>
-                  <Menu fx:id="homeBtn" mnemonicParsing="false" text="Accueil">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#onHomeBtnClick" text="Accueil" />
-                     </items>
-                  </Menu>
+                  <Menu fx:id="homeBtn" mnemonicParsing="false" onShown="#onHomeBtnClick" text="Accueil" />
                   <Menu mnemonicParsing="false" text="Stock">
                     <items>
                       <MenuItem fx:id="manageContentBtn" mnemonicParsing="false" onAction="#onManageContentBtn" text="Gestion" />
-                        <MenuItem fx:id="supplyContentBtn" mnemonicParsing="false" text="Disponibilités" />
-                        <MenuItem fx:id="outdatedContentBtn" mnemonicParsing="false" text="Périmés" />
+                        <MenuItem fx:id="supplyContentBtn" mnemonicParsing="false" onAction="#onSupplyContentBtn" text="Disponibilités" />
+                        <MenuItem fx:id="outdatedContentBtn" mnemonicParsing="false" onAction="#onOutdatedContentBtn" text="Périmés" />
                     </items>
                   </Menu>
                 <Menu mnemonicParsing="false" text="Matériels">
@@ -36,6 +32,7 @@
                      <items>
                         <MenuItem fx:id="manageRecipeBtn" mnemonicParsing="false" onAction="#onManageRecipeBtnClick" text="Gestion" />
                         <MenuItem fx:id="favRecipeBtn" mnemonicParsing="false" onAction="#onFavRecipeBtnClick" text="Favoris" />
+                        <MenuItem fx:id="withCunsomableBtn" mnemonicParsing="false" onAction="#onWithConsumableBtnClick" text="recherche consommable" />
                      </items>
                 </Menu>
                   <Menu fx:id="statBtn" mnemonicParsing="false" text="Statistiques" />
@@ -52,15 +49,16 @@
          <center>
             <AnchorPane fx:id="middlePane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Text layoutX="220.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chef, un p'tit verre ?">
+                  <Text layoutX="370.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chef, un p'tit verre ?">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Button fx:id="consumeBtn" layoutX="259.0" layoutY="194.0" mnemonicParsing="false" text="Consommer" />
+                  <Button fx:id="consumeBtn" layoutX="409.0" layoutY="193.0" mnemonicParsing="false" onAction="#onConsumeBtnClick" text="Consommer" />
                </children>
             </AnchorPane>
          </center>
       </BorderPane>
+      <Button fx:id="home" mnemonicParsing="false" onMouseClicked="#onHomeBtnClick" prefHeight="25.0" prefWidth="63.0" style="-fx-background-color: transparent;" />
    </children>
 </AnchorPane>

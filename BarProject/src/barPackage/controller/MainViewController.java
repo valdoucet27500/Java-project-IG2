@@ -168,4 +168,47 @@ public class MainViewController {
         }
 
     }
+
+    @FXML
+    public void onSupplyContentBtn() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/content/ViewContent.fxml")));
+            Parent root = fxmlLoader.load();
+            middlePane.getChildren().setAll(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void onOutdatedContentBtn() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/content/OutdateContent.fxml")));
+            Parent root = fxmlLoader.load();
+            middlePane.getChildren().setAll(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void onWithConsumableBtnClick() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/recipe/RecipeWithConsumable.fxml")));
+            Parent root = fxmlLoader.load();
+            middlePane.getChildren().setAll(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void onConsumeBtnClick() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/Consume.fxml")));
+            Parent root = fxmlLoader.load();
+            middlePane.getChildren().setAll(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
