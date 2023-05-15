@@ -9,6 +9,7 @@ public class Utensil {
         this.recipeName = recipeName;
     }
 
+
     public String getToolName() {
         return toolName;
     }
@@ -16,5 +17,4 @@ public class Utensil {
     public String getRecipeName() {
         return recipeName;
     }
-
 }

@@ -8,11 +8,17 @@ public class Ingredient {
     private String consumableName;
     private String recipeName;
     private Double quantity;
+    private String unit;
 
-    public Ingredient(String consumableName, String recipeName, Double quantity) {
+    public Ingredient(String consumableName, String recipeName, Double quantity, String unit) {
         this.consumableName = consumableName;
         this.recipeName = recipeName;
         this.quantity = quantity;
+        this.unit = unit;
+    }
+
+    public Ingredient(String consumableName, String recipeName, Double quantity) {
+        this(consumableName, recipeName, quantity, null);
     }
 
     public void setQuantity(Double quantity) throws NumberInputValueException {
@@ -32,6 +38,10 @@ public class Ingredient {
 
     public Double getQuantity() {
         return quantity;
+    }
+
+    public String getUnit() {
+        return unit;
     }
 
 

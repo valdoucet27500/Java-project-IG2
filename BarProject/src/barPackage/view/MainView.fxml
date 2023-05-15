@@ -35,7 +35,7 @@
                 <Menu mnemonicParsing="false" text="Recettes">
                      <items>
                         <MenuItem fx:id="manageRecipeBtn" mnemonicParsing="false" onAction="#onManageRecipeBtnClick" text="Gestion" />
-                        <MenuItem fx:id="favRecipeBtn" mnemonicParsing="false" text="Favoris" />
+                        <MenuItem fx:id="favRecipeBtn" mnemonicParsing="false" onAction="#onFavRecipeBtnClick" text="Favoris" />
                      </items>
                 </Menu>
                   <Menu fx:id="statBtn" mnemonicParsing="false" text="Statistiques" />

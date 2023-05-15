@@ -29,7 +29,7 @@ public class DrinkTypeAlertFactory {
             case READ_FAIL -> {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erreur de lecture");
-                alert.setContentText("Une erreur est survenue lors de la lecture de la base de données.\n" + message);
+                alert.setContentText("Une erreur est survenue lors de la lecture du type de boisson.\n" + message);
             }
             case UPDATE_PASS -> {
                 alert = new Alert(Alert.AlertType.INFORMATION);

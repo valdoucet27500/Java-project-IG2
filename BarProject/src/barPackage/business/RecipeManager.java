@@ -20,6 +20,10 @@ public class RecipeManager {
         return recipeDataAccess.getAllRecipes();
     }
 
+    public ObservableList<Recipe> getAllFavoriteRecipes() throws ReadErrorException {
+        return recipeDataAccess.getAllFavoriteRecipes();
+    }
+
     public void addRecipe(Recipe recipe) throws AddErrorException {
         recipeDataAccess.addRecipe(recipe);
     }

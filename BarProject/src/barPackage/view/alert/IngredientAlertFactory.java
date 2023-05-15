@@ -24,12 +24,12 @@ public class IngredientAlertFactory {
             case DELETE_FAIL -> {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erreur de suppression");
-                alert.setContentText("Une erreur est survenue lors de la suppression de l'ingrédient de la recette.\n" + message);
+                alert.setContentText("Une erreur est survenue lors de la suppression de l'ingrédient.\n" + message);
             }
             case READ_FAIL -> {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erreur de lecture");
-                alert.setContentText("Une erreur est survenue lors de la lecture de la base de données.\n" + message);
+                alert.setContentText("Une erreur est survenue lors de la lecture de l'ingrédient.\n" + message);
             }
             case UPDATE_PASS -> {
                 alert = new Alert(Alert.AlertType.INFORMATION);
@@ -39,7 +39,7 @@ public class IngredientAlertFactory {
             case UPDATE_FAIL -> {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erreur de modification");
-                alert.setContentText("Une erreur est survenue lors de la modification de l'ingrédient dans la recette.\n" + message);
+                alert.setContentText("Une erreur est survenue lors de la modification de l'ingrédient.\n" + message);
             }
             default -> {
                 alert = new Alert(Alert.AlertType.ERROR);

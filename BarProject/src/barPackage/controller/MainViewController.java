@@ -3,7 +3,6 @@ package barPackage.controller;
 import barPackage.controller.consumable.ConsumableManagementChoice;
 import barPackage.controller.consumableType.ConsumableTypeManagementChoice;
 import barPackage.controller.drinkType.DrinkTypeManagementChoice;
-import barPackage.controller.recipe.RecipeManagementChoice;
 import barPackage.controller.unit.UnitManagementChoice;
 import barPackage.controller.tool.ToolManagementChoice;
 import barPackage.view.alert.AlertFactoryType;
@@ -156,5 +155,17 @@ public class MainViewController {
         } catch (IOException e) {
             ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
         }
+    }
+
+    @FXML
+    public void onFavRecipeBtnClick() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/recipe/FavoritesRecipes.fxml")));
+            Parent root = fxmlLoader.load();
+            middlePane.getChildren().setAll(root);
+        } catch (IOException e) {
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
+        }
+
     }
 }

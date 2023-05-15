@@ -17,8 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.recipe.RecipeController">
+<AnchorPane fx:id="primaryPan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.recipe.RecipeController">
    <children>
       <VBox alignment="CENTER" layoutX="487.0" layoutY="190.0" prefHeight="580.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -32,23 +31,22 @@
             </Text>
             <AnchorPane prefHeight="606.0" prefWidth="900.0">
                <children>
-                  <TableView fx:id="recipeTableView" prefHeight="389.0" prefWidth="271.0" AnchorPane.leftAnchor="30.0">
+                  <TableView fx:id="recipeTableView" onMouseClicked="#onMouseClickedRecipeTableView" prefHeight="236.0" prefWidth="302.0" AnchorPane.leftAnchor="30.0">
                      <columns>
-                        <TableColumn fx:id="nameColumn" prefWidth="191.19997596740723" text="Intitulé" />
-                        <TableColumn fx:id="isFavoriteColumn" text="Favorite" />
+                        <TableColumn fx:id="nameColumn" prefWidth="222.40004920959473" text="Intitulé" />
+                        <TableColumn fx:id="isFavoriteColumn" prefWidth="78.4000305175781" text="Favorite" />
                      </columns>
                   </TableView>
-                  <GridPane layoutX="333.0" prefHeight="390.0" prefWidth="567.0">
+                  <GridPane layoutX="333.0" prefHeight="362.0" prefWidth="567.0">
                     <columnConstraints>
-                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="206.20001220703125" minWidth="10.0" prefWidth="87.19998779296876" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="460.8000122070313" minWidth="10.0" prefWidth="460.8000122070313" />
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="206.20001220703125" minWidth="10.0" prefWidth="95.80003662109375" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="460.8000122070313" minWidth="10.0" prefWidth="450.99996337890633" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="120.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Intitulé :">
@@ -66,16 +64,6 @@
                               <Insets right="20.0" />
                            </GridPane.margin>
                         </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ingrédients :" GridPane.rowIndex="3">
-                           <GridPane.margin>
-                              <Insets right="20.0" />
-                           </GridPane.margin>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Favorite :" GridPane.rowIndex="4">
-                           <GridPane.margin>
-                              <Insets right="20.0" />
-                           </GridPane.margin>
-                        </Text>
                         <TextArea fx:id="recipeDescriptionInput" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets bottom="3.0" top="3.0" />
@@ -86,19 +74,13 @@
                               <Insets bottom="3.0" top="3.0" />
                            </GridPane.margin>
                         </TextArea>
-                        <CheckBox fx:id="isFavoriteRecipeCheck" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <TextField fx:id="recipeNameInput" prefHeight="26.0" prefWidth="227.0" GridPane.columnIndex="1">
-                           <GridPane.margin>
-                              <Insets right="230.0" />
-                           </GridPane.margin>
-                        </TextField>
                         <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <children>
-                              <TableView fx:id="ingredientTableView" prefHeight="117.0" prefWidth="227.0">
+                              <TableView fx:id="ingredientTableView" onMouseClicked="#onMouseClickedIngredientTableView" prefHeight="117.0" prefWidth="227.0">
                                  <columns>
-                                    <TableColumn prefWidth="104.00002896785736" text="Ingrédient" />
-                                    <TableColumn prefWidth="58.39997100830078" text="Quantité" />
-                                    <TableColumn prefWidth="60.00006103515625" text="Unité" />
+                                    <TableColumn fx:id="consumableName" prefWidth="104.00002896785736" text="Ingrédient" />
+                                    <TableColumn fx:id="quantity" prefWidth="64.0" text="Quantité" />
+                                    <TableColumn fx:id="unit" prefWidth="47.999963378906244" text="Unité" />
                                  </columns>
                               </TableView>
                               <VBox prefHeight="117.0" prefWidth="243.0">
@@ -143,12 +125,12 @@
                                                 <Insets left="3.0" right="3.0" />
                                              </HBox.margin>
                                           </Button>
-                                          <Button fx:id="updateIngredientBtn" mnemonicParsing="false" prefWidth="80.0" text="Modifier">
+                                          <Button fx:id="updateIngredientBtn" mnemonicParsing="false" onAction="#onUpdateIngredientBtnClick" prefWidth="80.0" text="Modifier">
                                              <HBox.margin>
                                                 <Insets left="3.0" right="3.0" />
                                              </HBox.margin>
                                           </Button>
-                                          <Button fx:id="deleteIngredientBtn" mnemonicParsing="false" prefWidth="80.0" text="Supprimer">
+                                          <Button fx:id="deleteIngredientBtn" mnemonicParsing="false" onAction="#onDeleteIngredientBtnClick" prefWidth="80.0" text="Supprimer">
                                              <HBox.margin>
                                                 <Insets left="3.0" right="3.0" />
                                              </HBox.margin>
@@ -162,6 +144,17 @@
                               <Insets top="3.0" />
                            </GridPane.margin>
                         </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                           <children>
+                              <TextField fx:id="recipeNameInput" prefHeight="26.0" prefWidth="227.0" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Favorite :">
+                                 <HBox.margin>
+                                    <Insets left="20.0" right="10.0" />
+                                 </HBox.margin>
+                              </Text>
+                              <CheckBox fx:id="isFavoriteRecipeCheck" mnemonicParsing="false" />
+                           </children>
+                        </HBox>
                      </children>
                      <padding>
                         <Insets right="20.0" />
@@ -169,29 +162,59 @@
                   </GridPane>
                   <HBox alignment="CENTER" layoutX="23.0" layoutY="395.0" prefHeight="54.0" prefWidth="854.0">
                      <children>
-                        <Button fx:id="consultBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" text="Consulter">
+                        <Button fx:id="addRecipeBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onAddRecipeBtnClick" prefHeight="30.0" prefWidth="140.0" text="Ajouter">
                            <HBox.margin>
                               <Insets left="30.0" right="30.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="addRecipeBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" text="Ajouter">
+                        <Button fx:id="deleteRecipeBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onDeleteRecipeBtnClick" prefHeight="30.0" prefWidth="140.0" text="Supprimer">
                            <HBox.margin>
                               <Insets left="30.0" right="30.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="deleteRecipeBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" text="Supprimer">
-                           <HBox.margin>
-                              <Insets left="30.0" right="30.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="updateRecipeBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" text="Modifier">
+                        <Button fx:id="updateRecipeBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onUpdateRecipeBtnClick" prefHeight="30.0" prefWidth="140.0" text="Modifier">
                            <HBox.margin>
                               <Insets left="30.0" right="30.0" />
                            </HBox.margin>
                         </Button>
                      </children>
                   </HBox>
-                  <Button fx:id="backBtn" layoutX="380.0" layoutY="465.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" text="Retour" />
+                  <Button fx:id="backBtn" layoutX="380.0" layoutY="465.0" mnemonicParsing="false" onAction="#onBackBtnClick" prefHeight="30.0" prefWidth="140.0" text="Retour" />
+                  <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="241.0" prefHeight="118.0" prefWidth="302.0">
+                     <children>
+                        <TableView fx:id="utensilTableView" onMouseClicked="#onMouseClickedUtensilTableView" prefHeight="118.0" prefWidth="160.0">
+                           <columns>
+                              <TableColumn fx:id="utensilName" prefWidth="137.60000648498536" text="Ustensil" />
+                           </columns>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </TableView>
+                        <VBox prefHeight="118.0" prefWidth="186.0">
+                           <children>
+                              <ComboBox fx:id="toolCombobox" prefHeight="26.0" prefWidth="153.0">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </ComboBox>
+                              <VBox alignment="CENTER" prefHeight="93.0" prefWidth="169.0">
+                                 <children>
+                                    <Button fx:id="addUtensilBtn" mnemonicParsing="false" onAction="#onAddUtensilBtnClick" prefWidth="80.0" text="Ajouter">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                    <Button fx:id="deleteUtensilBtn" mnemonicParsing="false" onAction="#onDeleteUtensilBtnClick" prefWidth="80.0" text="Supprimer">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
                </children>
             </AnchorPane>
          </children>

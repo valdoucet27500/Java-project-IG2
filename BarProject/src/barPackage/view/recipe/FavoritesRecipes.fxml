@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="primaryPan" prefHeight="580.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.recipe.FavoritesRecipesController">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="333.0" layoutY="128.0" prefHeight="580.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Recettes favorites">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="25.0" top="30.0" />
+               </VBox.margin>
+            </Text>
+            <HBox prefHeight="553.0" prefWidth="900.0">
+               <children>
+                  <TableView fx:id="recipeTableView" onMouseClicked="#onMouseClickedRecipeTableView" prefHeight="506.0" prefWidth="180.0">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="20.0" top="5.0" />
+                     </HBox.margin>
+                     <columns>
+                        <TableColumn fx:id="recipeColumn" prefWidth="179.20000648498535" text="Recette" />
+                     </columns>
+                  </TableView>
+                  <VBox prefHeight="506.0" prefWidth="708.0">
+                     <children>
+                        <GridPane prefHeight="239.0" prefWidth="704.0">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="346.199951171875" minWidth="10.0" prefWidth="96.5999755859375" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="604.6000244140625" minWidth="10.0" prefWidth="604.6000244140625" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="120.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="120.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Etapes :" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description :">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </Text>
+                              <TextArea fx:id="descriptionText" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" right="20.0" top="5.0" />
+                                 </GridPane.margin>
+                              </TextArea>
+                              <TextArea fx:id="stepsText" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" right="20.0" top="5.0" />
+                                 </GridPane.margin>
+                              </TextArea>
+                           </children>
+                        </GridPane>
+                        <HBox prefHeight="266.0" prefWidth="704.0">
+                           <children>
+                              <VBox alignment="TOP_CENTER" prefHeight="186.0" prefWidth="430.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ustensils">
+                                       <VBox.margin>
+                                          <Insets top="5.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <TableView fx:id="utensilTableView" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="145.0" prefWidth="142.0">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" top="10.0" />
+                                       </VBox.margin>
+                                       <columns>
+                                          <TableColumn fx:id="utensilColumn" prefWidth="140.00000303983688" text="Nom" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" prefHeight="186.0" prefWidth="468.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ingrédients">
+                                       <VBox.margin>
+                                          <Insets top="5.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <TableView fx:id="ingredientTableView" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="143.0" prefWidth="327.0">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" top="10.0" />
+                                       </VBox.margin>
+                                       <columns>
+                                          <TableColumn fx:id="ingredientNameColumn" prefWidth="155.99993932247162" text="Nom" />
+                                          <TableColumn fx:id="ingredientQuantityColumn" minWidth="9.60003662109375" prefWidth="74.4000244140625" text="Quantité" />
+                                          <TableColumn fx:id="ingredientUnitColumn" prefWidth="96.800048828125" text="Unité" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="backBtn" mnemonicParsing="false" onAction="#onBackBtnClick" prefHeight="30.0" prefWidth="120.0" text="Retour" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

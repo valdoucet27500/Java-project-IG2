@@ -12,8 +12,7 @@ CREATE TABLE tool (
 
 -- recipe table
 CREATE TABLE recipe (
-    recipe_id INT PRIMARY KEY AUTO_INCREMENT,
-    recipe_name VARCHAR(64) NOT NULL,
+    recipe_name VARCHAR(64) PRIMARY KEY,
     steps VARCHAR(2048) NOT NULL,
     description VARCHAR(1024),
     creation_date DATE NOT NULL,
@@ -23,10 +22,10 @@ CREATE TABLE recipe (
 -- utensil table
 CREATE TABLE utensil (
     tool_id VARCHAR(32) NOT NULL,
-    recipe_id INT NOT NULL,
+    recipe_id VARCHAR(64) NOT NULL,
     CONSTRAINT tool_id_fk FOREIGN KEY (tool_id) REFERENCES tool(tool_name) ON UPDATE CASCADE,
     CONSTRAINT utensil_pk PRIMARY KEY (tool_id, recipe_id),
-    CONSTRAINT recipe_id_fk FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id) ON UPDATE CASCADE
+    CONSTRAINT recipe_id_fk FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_name) ON UPDATE CASCADE
 );
 
 -- unit table
@@ -93,8 +92,8 @@ CREATE TABLE ingredient (
         required_quantity >= 0
         AND required_quantity <= 999999.99
     ) NOT NULL,
-    recipe_id INT NOT NULL,
+    recipe_id VARCHAR(64) NOT NULL,
     consumable_id VARCHAR(32) NOT NULL,
     CONSTRAINT ingredient_consumable_id_fk FOREIGN KEY (consumable_id) REFERENCES consumable(consumable_name) ON UPDATE CASCADE,
-    CONSTRAINT ingredient_recipe_id_fk FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id) ON UPDATE CASCADE
+    CONSTRAINT ingredient_recipe_id_fk FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_name) ON UPDATE CASCADE
 );

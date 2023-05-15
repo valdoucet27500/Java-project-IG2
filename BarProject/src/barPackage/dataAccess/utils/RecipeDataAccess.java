@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 
 public interface RecipeDataAccess {
     public ObservableList<Recipe> getAllRecipes () throws ReadErrorException;
+    public ObservableList<Recipe> getAllFavoriteRecipes () throws ReadErrorException;
     public void addRecipe (Recipe recipe) throws AddErrorException;
     public void deleteRecipe (Recipe recipe) throws DeleteErrorException;
     public void updateRecipe (Recipe recipe, Recipe newRecipe) throws ReadErrorException;
