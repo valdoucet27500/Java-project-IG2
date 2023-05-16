@@ -32,7 +32,8 @@
                      <items>
                         <MenuItem fx:id="manageRecipeBtn" mnemonicParsing="false" onAction="#onManageRecipeBtnClick" text="Gestion" />
                         <MenuItem fx:id="favRecipeBtn" mnemonicParsing="false" onAction="#onFavRecipeBtnClick" text="Favoris" />
-                        <MenuItem fx:id="withCunsomableBtn" mnemonicParsing="false" onAction="#onWithConsumableBtnClick" text="recherche consommable" />
+                        <MenuItem fx:id="withCunsomableBtn" mnemonicParsing="false" onAction="#onWithConsumableBtnClick" text="Recherche consommable" />
+                        <MenuItem mnemonicParsing="false" onAction="#onRecipeGenerateBtnClick" text="Générateur" />
                      </items>
                 </Menu>
                   <Menu fx:id="statBtn" mnemonicParsing="false" text="Statistiques" />

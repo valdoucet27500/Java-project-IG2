@@ -1,5 +1,6 @@
 package barPackage;
 
+import barPackage.business.ChatGPT;
 import barPackage.dataAccess.db.SingletonConnexion;
 import barPackage.exceptions.ConnectionException;
 import javafx.application.Application;
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Main extends Application {
-    public static void main (String[] args) {
+    public static void main (String[] args) throws Exception {
         launch(args);
     }
 
@@ -23,7 +24,6 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
-
 
     }
 
