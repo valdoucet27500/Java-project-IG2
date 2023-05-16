@@ -1,9 +1,6 @@
 package barPackage.dataAccess.utils;
 
-import barPackage.exceptions.AddErrorException;
-import barPackage.exceptions.DeleteErrorException;
-import barPackage.exceptions.ReadErrorException;
-import barPackage.exceptions.UpdateErrorException;
+import barPackage.exceptions.*;
 import barPackage.model.Consumable;
 import barPackage.model.MissingIngredient;
 import barPackage.model.Recipe;
@@ -21,5 +18,5 @@ public interface RecipeDataAccess {
 
     public ObservableList<MissingIngredient> getMissingIngredients(Recipe recipe, Double quantity) throws ReadErrorException;
 
-    public void consumeRecipe(Recipe recipe, Double parseDouble) throws UpdateErrorException;
+    public void consumeRecipe(Recipe recipe, Double parseDouble) throws UpdateErrorException, NumberInputValueException;
 }

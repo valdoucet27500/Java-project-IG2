@@ -1,9 +1,6 @@
 package barPackage.dataAccess.utils;
 
-import barPackage.exceptions.AddErrorException;
-import barPackage.exceptions.DeleteErrorException;
-import barPackage.exceptions.ReadErrorException;
-import barPackage.exceptions.UpdateErrorException;
+import barPackage.exceptions.*;
 import barPackage.model.Consumable;
 import barPackage.model.Content;
 import barPackage.model.Outdate;
@@ -23,7 +20,7 @@ public interface ContentDataAccess {
 
     ObservableList<Content> getContentByName(String name) throws ReadErrorException;
 
-    public void consumeContent(Consumable consumable, Double parseDouble) throws UpdateErrorException, ReadErrorException, DeleteErrorException;
+    public void consumeContent(Consumable consumable, Double parseDouble) throws UpdateErrorException, ReadErrorException, DeleteErrorException, NumberInputValueException;
 
     public Content getContentByConsumableName(String name) throws ReadErrorException;
 

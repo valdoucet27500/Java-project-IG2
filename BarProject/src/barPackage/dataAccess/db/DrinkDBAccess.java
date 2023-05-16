@@ -177,4 +177,37 @@ public class DrinkDBAccess implements DrinkDataAccess {
         return drinks;
     }
 
+    @Override
+    public Drink getDrinkByName(String name) throws ReadErrorException {
+        Drink drink = null;
+        try {
+            Connection connection = SingletonConnexion.getConnection();
+            String sqlInstruction = "select * from drink d join consumable c on d.drink_name = c.consumable_name where d.drink_name = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                // Get drink attributes
+                String drinkType = resultSet.getString("alcohol_type_id");
+                Boolean isSugarFree = resultSet.getBoolean("is_sugar_free");
+                Boolean isSparkling = resultSet.getBoolean("is_sparkling");
+                Double alcoholLevel = resultSet.getDouble("alcohol_level");
+                // Get consumable attributes
+                String description = resultSet.getString("description");
+                Boolean isVegan = resultSet.getBoolean("is_vegan");
+                String unit = resultSet.getString("unit_id");
+                Double kcal = resultSet.getDouble("kcal");
+                LocalDate creationDate = resultSet.getDate("creation_date").toLocalDate();
+                String type = resultSet.getString("consumable_type_id");
+                // Create drink
+                drink = new Drink(name, isVegan, description, unit, creationDate, kcal, type, drinkType, alcoholLevel, isSparkling, isSugarFree);
+            }
+        } catch (ConnectionException e) {
+            throw new ReadErrorException("Erreur lors de la lecture de la boisson dans la base de données");
+        } catch (SQLException | NumberInputValueException | StringInputSizeException e) {
+            throw new ReadErrorException("Erreur lors de la lecture de la boisson dans la base de données");
+        }
+        return drink;
+    }
+
 }

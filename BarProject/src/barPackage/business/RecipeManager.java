@@ -2,10 +2,7 @@ package barPackage.business;
 
 import barPackage.dataAccess.utils.RecipeDataAccess;
 import barPackage.dataAccess.utils.DataConfiguration;
-import barPackage.exceptions.AddErrorException;
-import barPackage.exceptions.DeleteErrorException;
-import barPackage.exceptions.ReadErrorException;
-import barPackage.exceptions.UpdateErrorException;
+import barPackage.exceptions.*;
 import barPackage.model.Consumable;
 import barPackage.model.MissingIngredient;
 import barPackage.model.Recipe;
@@ -46,7 +43,7 @@ public class RecipeManager {
         return recipeDataAccess.getMissingIngredients(recipe, quantity);
     }
 
-    public void consumeRecipe(Recipe recipe, double parseDouble) throws UpdateErrorException {
+    public void consumeRecipe(Recipe recipe, double parseDouble) throws UpdateErrorException, NumberInputValueException {
         recipeDataAccess.consumeRecipe(recipe, parseDouble);
     }
 }

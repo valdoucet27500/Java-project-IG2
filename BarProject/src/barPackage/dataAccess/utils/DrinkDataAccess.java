@@ -12,5 +12,6 @@ public interface DrinkDataAccess {
     public ObservableList<Drink> getAllDrinks() throws ReadErrorException;
     public void deleteDrink(Drink drink) throws DeleteErrorException;
     public void updateDrink(Drink drink, Drink newDrink) throws UpdateErrorException;
+    public Drink getDrinkByName(String name) throws ReadErrorException;
 
 }

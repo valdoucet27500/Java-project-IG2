@@ -2,9 +2,7 @@ package barPackage.controller.content;
 
 import barPackage.business.ConsumableManager;
 import barPackage.business.ContentManager;
-import barPackage.exceptions.AddErrorException;
-import barPackage.exceptions.DeleteErrorException;
-import barPackage.exceptions.ReadErrorException;
+import barPackage.exceptions.*;
 import barPackage.model.Consumable;
 import barPackage.model.Content;
 import barPackage.view.alert.AlertFactoryType;
@@ -107,60 +105,94 @@ public class ContentController {
     public void onAddBtnClick() {
         String consumableName = consumableCombobox.getValue();
         Double quantity;
-        try {
-            if (Double.parseDouble(quantityInput.getText()) <= 0) {
-                throw new NumberFormatException();
-            }
-            quantity = Double.parseDouble(quantityInput.getText());
-        } catch (NumberFormatException e) {
-            ContentAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, "La quantité doit être un nombre").showAndWait();
-            return;
-        }
         LocalDate expirationDate = datePicker.getValue();
-        try {
-            ContentManager contentManager = new ContentManager();
-            Content content = new Content(consumableName, quantity, expirationDate);
-            contentManager.addContent(content);
-            refreshTable();
-            ContentAlertFactory.getAlert(AlertFactoryType.ADD_PASS).showAndWait();
-        } catch (AddErrorException e) {
-            ContentAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, e.getMessage()).showAndWait();
+        if (!(expirationDate == null || consumableName == null || quantityInput.getText() == null)) {
+            try {
+                quantity = Double.parseDouble(quantityInput.getText());
+                if (quantity < 0) {
+                    ContentAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, "La quantité doit être un nombre positif").showAndWait();
+                } else {
+                    try {
+                        ContentManager contentManager = new ContentManager();
+                        Content content = new Content(consumableName, quantity, expirationDate);
+                        contentManager.addContent(content);
+                        refreshTable();
+                        ContentAlertFactory.getAlert(AlertFactoryType.ADD_PASS).showAndWait();
+                    } catch (AddErrorException e) {
+                        ContentAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, e.getMessage()).showAndWait();
+                    } catch (NumberInputValueException e) {
+                        ContentAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, e.getMessage()).showAndWait();
+                    }
+                }
+            } catch (NumberFormatException e) {
+                ContentAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, "La quantité doit être un nombre").showAndWait();
+            }
+        } else if (consumableName == null) {
+            ContentAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, "Veuillez choisir un consommable").showAndWait();
+        } else if (quantityInput.getText().isEmpty()) {
+            ContentAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, "Veuillez entrer une quantité").showAndWait();
+        } else if (expirationDate == null) {
+            ContentAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, "Veuillez entrer une date d'expiration").showAndWait();
         }
     }
 
     @FXML
     public void onDeleteBtnClick() {
         Content content = tableView.getSelectionModel().getSelectedItem();
-        try {
-            ContentManager contentManager = new ContentManager();
-            contentManager.deleteContent(content);
-            refreshTable();
-            ContentAlertFactory.getAlert(AlertFactoryType.DELETE_PASS).showAndWait();
-        } catch (DeleteErrorException e) {
-            ContentAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, e.getMessage()).showAndWait();
+        if (content == null) {
+            ContentAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, "Veuillez sélectionner un contenu").showAndWait();
+        } else {
+            try {
+                ContentManager contentManager = new ContentManager();
+                contentManager.deleteContent(content);
+                refreshTable();
+                ContentAlertFactory.getAlert(AlertFactoryType.DELETE_PASS).showAndWait();
+            } catch (DeleteErrorException e) {
+                ContentAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, e.getMessage()).showAndWait();
+            }
         }
+
     }
 
     @FXML
     public void onUpdateBtnClick() {
         Content content = tableView.getSelectionModel().getSelectedItem();
         String consumableName = consumableCombobox.getValue();
-        Double quantity = Double.parseDouble(quantityInput.getText());
+        Double quantity;
         LocalDate expirationDate = datePicker.getValue();
-        try {
-            ContentManager contentManager = new ContentManager();
-            Content newContent = new Content(consumableName, quantity, expirationDate);
-            if (newContent.getQuantity() == 0) {
-                contentManager.deleteContent(content);
-                refreshTable();
-                ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
-            } else {
-                contentManager.updateContent(content, newContent);
-                refreshTable();
-                ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
+        if (!(expirationDate == null || consumableName == null || quantityInput.getText() == null || content == null)) {
+            try {
+                quantity = Double.parseDouble(quantityInput.getText());
+                if (quantity < 0) {
+                    ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, "La quantité doit être un nombre positif").showAndWait();
+                } else {
+                    try {
+                        ContentManager contentManager = new ContentManager();
+                        if (quantity == 0) {
+                            contentManager.deleteContent(content);
+                        } else {
+                            Content newContent = new Content(consumableName, quantity, expirationDate);
+                            contentManager.updateContent(content, newContent);
+                        }
+                        refreshTable();
+                        ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
+                    } catch (ReadErrorException | DeleteErrorException e) {
+                        ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, e.getMessage()).showAndWait();
+                    } catch (NumberInputValueException e) {
+                        ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, e.getMessage()).showAndWait();
+                    }
+                }
+            } catch (NumberFormatException e) {
+                ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, "La quantité doit être un nombre").showAndWait();
             }
-        } catch (ReadErrorException | DeleteErrorException e) {
-            ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, e.getMessage()).showAndWait();
+        } else if (consumableName == null) {
+            ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, "Veuillez choisir un consommable").showAndWait();
+        } else if (quantityInput.getText().isEmpty()) {
+            ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, "Veuillez entrer une quantité").showAndWait();
+        } else if (expirationDate == null) {
+            ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, "Veuillez entrer une date d'expiration").showAndWait();
+        } else if (content == null) {
+            ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, "Veuillez sélectionner un contenu").showAndWait();
         }
     }
 

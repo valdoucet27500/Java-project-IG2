@@ -2,10 +2,7 @@ package barPackage.business;
 
 import barPackage.dataAccess.utils.ContentDataAccess;
 import barPackage.dataAccess.utils.DataConfiguration;
-import barPackage.exceptions.AddErrorException;
-import barPackage.exceptions.DeleteErrorException;
-import barPackage.exceptions.ReadErrorException;
-import barPackage.exceptions.UpdateErrorException;
+import barPackage.exceptions.*;
 import barPackage.model.Consumable;
 import barPackage.model.Content;
 import barPackage.model.Outdate;
@@ -45,7 +42,7 @@ public class ContentManager {
     public ObservableList<Content> getContentByName(String name) throws ReadErrorException {
         return contentDataAccess.getContentByName(name);
     }
-    public void consumeContent(Consumable consumable, double parseDouble) throws UpdateErrorException, ReadErrorException, DeleteErrorException {
+    public void consumeContent(Consumable consumable, double parseDouble) throws UpdateErrorException, ReadErrorException, DeleteErrorException, NumberInputValueException {
         contentDataAccess.consumeContent(consumable, parseDouble);
     }
     public Content getContentByConsumableName(String name) throws ReadErrorException {

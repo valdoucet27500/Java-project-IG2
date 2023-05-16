@@ -36,7 +36,6 @@
                         <MenuItem mnemonicParsing="false" onAction="#onRecipeGenerateBtnClick" text="Générateur" />
                      </items>
                 </Menu>
-                  <Menu fx:id="statBtn" mnemonicParsing="false" text="Statistiques" />
                 <Menu fx:id="settingsBtn" mnemonicParsing="false" text="Paramètres">
                      <items>
                         <MenuItem fx:id="manageUnitBtn" mnemonicParsing="false" onAction="#onManageUnitBtnClick" text="Unité" />

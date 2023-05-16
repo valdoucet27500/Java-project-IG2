@@ -294,7 +294,7 @@ public class RecipeDBAccess implements RecipeDataAccess {
     }
 
     @Override
-    public void consumeRecipe(Recipe recipe, Double quantity) throws UpdateErrorException {
+    public void consumeRecipe(Recipe recipe, Double quantity) throws NumberInputValueException {
         Connection connection = null;
         try {
             ContentDataAccess contentDataAccess = new ContentDBAccess();
@@ -303,9 +303,13 @@ public class RecipeDBAccess implements RecipeDataAccess {
                 contentDataAccess.consumeContent(consumableDataAccess.getConsumableByName(ingredient.getConsumableName()),
                         quantity * ingredient.getQuantity());
             }
-        } catch (ReadErrorException e) {
+        } catch (NumberInputValueException e) {
+            throw new RuntimeException(e);
+        } catch (UpdateErrorException e) {
             throw new RuntimeException(e);
         } catch (DeleteErrorException e) {
+            throw new RuntimeException(e);
+        } catch (ReadErrorException e) {
             throw new RuntimeException(e);
         }
     }

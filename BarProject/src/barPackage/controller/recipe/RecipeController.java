@@ -288,25 +288,25 @@ public class RecipeController {
     }
 
     @FXML
-    public void onAddRecipeBtnClick() throws StringInputSizeException {
+    public void onAddRecipeBtnClick() {
         if (!recipeNameInput.getText().isEmpty() && !recipeStepsInput.getText().isEmpty() && ingredientTableView.getItems().size() > 0 && utensilTableView.getItems().size() > 0) {
-            String name = recipeNameInput.getText();
-            String description = recipeDescriptionInput.getText();
-            String steps = recipeStepsInput.getText();
-            boolean isFavorite = isFavoriteRecipeCheck.isSelected();
-            Recipe recipe = new Recipe(name, steps, description, isFavorite);
-            for (Ingredient ingredient : ingredientTableView.getItems()) {
-                recipe.addIngredient(ingredient);
-            }
-            for (Utensil utensil : utensilTableView.getItems()) {
-                recipe.addUtensil(utensil);
-            }
             try {
+                String name = recipeNameInput.getText();
+                String description = recipeDescriptionInput.getText();
+                String steps = recipeStepsInput.getText();
+                boolean isFavorite = isFavoriteRecipeCheck.isSelected();
+                Recipe recipe = new Recipe(name, steps, description, isFavorite);
+                for (Ingredient ingredient : ingredientTableView.getItems()) {
+                    recipe.addIngredient(ingredient);
+                }
+                for (Utensil utensil : utensilTableView.getItems()) {
+                    recipe.addUtensil(utensil);
+                }
                 RecipeManager recipeManager = new RecipeManager();
                 recipeManager.addRecipe(recipe);
                 IngredientAlertFactory.getAlert(AlertFactoryType.ADD_PASS, "La recette a été ajoutée avec succès.").showAndWait();
                 refreshRecipeTableView();
-            } catch (AddErrorException e) {
+            } catch (AddErrorException | StringInputSizeException e) {
                 RecipeAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, e.getMessage()).showAndWait();
             }
         } else if (recipeNameInput.getText().isEmpty()) {
@@ -338,26 +338,26 @@ public class RecipeController {
     }
 
     @FXML
-    public void onUpdateRecipeBtnClick() throws StringInputSizeException {
+    public void onUpdateRecipeBtnClick() {
         if (recipeTableView.getSelectionModel().getSelectedItem() != null) {
             if (!recipeNameInput.getText().isEmpty() && !recipeStepsInput.getText().isEmpty() && ingredientTableView.getItems().size() > 0 && utensilTableView.getItems().size() > 0) {
-                String name = recipeNameInput.getText();
-                String description = recipeDescriptionInput.getText();
-                String steps = recipeStepsInput.getText();
-                boolean isFavorite = isFavoriteRecipeCheck.isSelected();
-                Recipe recipe = new Recipe(name, steps, description, isFavorite);
-                for (Ingredient ingredient : ingredientTableView.getItems()) {
-                    recipe.addIngredient(ingredient);
-                }
-                for (Utensil utensil : utensilTableView.getItems()) {
-                    recipe.addUtensil(utensil);
-                }
                 try {
+                    String name = recipeNameInput.getText();
+                    String description = recipeDescriptionInput.getText();
+                    String steps = recipeStepsInput.getText();
+                    boolean isFavorite = isFavoriteRecipeCheck.isSelected();
+                    Recipe recipe = new Recipe(name, steps, description, isFavorite);
+                    for (Ingredient ingredient : ingredientTableView.getItems()) {
+                        recipe.addIngredient(ingredient);
+                    }
+                    for (Utensil utensil : utensilTableView.getItems()) {
+                        recipe.addUtensil(utensil);
+                    }
                     RecipeManager recipeManager = new RecipeManager();
                     recipeManager.updateRecipe(recipeTableView.getSelectionModel().getSelectedItem(), recipe);
                     RecipeAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS, "La recette a été modifiée avec succès.").showAndWait();
                     refreshRecipeTableView();
-                } catch (ReadErrorException e) {
+                } catch (ReadErrorException | StringInputSizeException e) {
                     RecipeAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, e.getMessage()).showAndWait();
                 }
             } else if (recipeNameInput.getText().isEmpty()) {

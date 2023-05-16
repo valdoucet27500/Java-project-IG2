@@ -4,6 +4,7 @@ import barPackage.business.ConsumableManager;
 import barPackage.business.ContentManager;
 import barPackage.business.RecipeManager;
 import barPackage.exceptions.DeleteErrorException;
+import barPackage.exceptions.NumberInputValueException;
 import barPackage.exceptions.ReadErrorException;
 import barPackage.exceptions.UpdateErrorException;
 import barPackage.model.Consumable;
@@ -138,7 +139,7 @@ public class ConsumeController {
         }
     }
     @FXML
-    public void onConsumeBtnClick() throws ReadErrorException, UpdateErrorException, DeleteErrorException {
+    public void onConsumeBtnClick() throws ReadErrorException, UpdateErrorException, DeleteErrorException, NumberInputValueException {
         if (consumeComboBox.getSelectionModel().getSelectedItem().equals("Recipe")) {
             Recipe recipe = ((Recipe)tableviewChoice.getSelectionModel().getSelectedItem());
             RecipeManager recipeManager = new RecipeManager();

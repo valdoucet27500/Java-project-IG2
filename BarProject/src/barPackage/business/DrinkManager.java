@@ -30,4 +30,8 @@ public class DrinkManager {
     public void updateDrink(Drink drink, Drink newDrink) throws UpdateErrorException {
         drinkDataAccess.updateDrink(drink, newDrink);
     }
+
+    public Drink getDrinkByName(String name) throws ReadErrorException {
+        return drinkDataAccess.getDrinkByName(name);
+    }
 }

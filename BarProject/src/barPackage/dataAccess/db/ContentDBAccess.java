@@ -36,7 +36,7 @@ public class ContentDBAccess implements ContentDataAccess {
             return contents;
         } catch (ConnectionException e) {
             throw new ReadErrorException("Erreur lors de la connexion à la base de données");
-        } catch (SQLException e) {
+        } catch (SQLException | NumberInputValueException e) {
             throw new ReadErrorException("Erreur lors de la lecture des contenus dans la base de données");
         }
     }
@@ -111,7 +111,7 @@ public class ContentDBAccess implements ContentDataAccess {
             return contents;
         } catch (ConnectionException e) {
             throw new ReadErrorException("Erreur lors de la connexion à la base de données");
-        } catch (SQLException e) {
+        } catch (SQLException | NumberInputValueException e) {
             throw new ReadErrorException("Erreur lors de la lecture des contenus dans la base de données");
         }
     }
@@ -166,7 +166,7 @@ public class ContentDBAccess implements ContentDataAccess {
             return contents;
         } catch (ConnectionException e) {
             throw new ReadErrorException("Erreur lors de la connexion à la base de données");
-        } catch (SQLException e) {
+        } catch (SQLException | NumberInputValueException e) {
             throw new ReadErrorException("Erreur lors de la lecture des contenus dans la base de données");
         }
     }
@@ -193,12 +193,12 @@ public class ContentDBAccess implements ContentDataAccess {
             return content;
         } catch (ConnectionException e) {
             throw new ReadErrorException("Erreur lors de la connexion à la base de données");
-        } catch (SQLException e) {
+        } catch (SQLException | NumberInputValueException e) {
             throw new ReadErrorException("Erreur lors de la lecture des contenus dans la base de données");
         }
     }
     @Override
-    public void consumeContent(Consumable consumable, Double quantity) throws ReadErrorException, DeleteErrorException {
+    public void consumeContent(Consumable consumable, Double quantity) throws ReadErrorException, DeleteErrorException, NumberInputValueException {
             for (Content c : getContentByName(consumable.getName())) {
                 if (quantity != 0 && c.getQuantity() == quantity) {
                     deleteContent(c);

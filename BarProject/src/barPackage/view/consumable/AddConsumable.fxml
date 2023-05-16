@@ -15,25 +15,26 @@
 
 <AnchorPane fx:id="primaryPan" prefHeight="580.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.consumable.AddConsumable">
    <children>
-      <GridPane layoutY="300.0" prefHeight="580.0" prefWidth="582.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="318.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <columnConstraints>
-            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="180.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="400.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="5.0" vgrow="SOMETIMES" />
+      <GridPane layoutY="300.0" prefHeight="580.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="280.6" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="628.0" minWidth="10.0" prefWidth="619.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="170.3999694824219" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="66.4000305175781" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :" GridPane.rowIndex="1">
                <GridPane.margin>
@@ -47,12 +48,12 @@
             </Text>
             <TextField fx:id="nameText" promptText="Nom" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets right="250.0" />
+                  <Insets right="400.0" />
                </GridPane.margin>
             </TextField>
             <TextArea fx:id="descriptionText" prefHeight="70.0" prefWidth="322.0" promptText="(Description)" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
-                  <Insets right="40.0" />
+                  <Insets right="360.0" />
                </GridPane.margin>
             </TextArea>
             <ComboBox fx:id="unitComboBox" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -78,7 +79,7 @@
             </Text>
             <TextField fx:id="kcalText" promptText="(kcal/u)" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <GridPane.margin>
-                  <Insets right="345.0" />
+                  <Insets right="560.0" />
                </GridPane.margin>
             </TextField>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vegan :" GridPane.rowIndex="6">
@@ -110,7 +111,7 @@
             </Text>
             <TextField fx:id="alcoholDegreeTextField" text="0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="10">
                <GridPane.margin>
-                  <Insets right="345.0" />
+                  <Insets right="560.0" />
                </GridPane.margin>
             </TextField>
             <ComboBox fx:id="drinkTypeCombobox" prefWidth="170.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
@@ -132,7 +133,7 @@
                   </CheckBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12">
                <children>
                   <Button mnemonicParsing="false" onAction="#onCancelBtnClick" prefHeight="20.0" prefWidth="70.0" text="Annuler">
                      <HBox.margin>
