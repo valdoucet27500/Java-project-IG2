@@ -3,7 +3,6 @@ package barPackage.dataAccess.db;
 import barPackage.dataAccess.utils.ConsumableDataAccess;
 import barPackage.exceptions.*;
 import barPackage.model.Consumable;
-import barPackage.model.Content;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

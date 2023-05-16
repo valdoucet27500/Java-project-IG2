@@ -11,7 +11,6 @@ import barPackage.model.Content;
 import barPackage.model.MissingIngredient;
 import barPackage.model.Recipe;
 import barPackage.view.alert.AlertFactoryType;
-import barPackage.view.alert.ContentAlertFactory;
 import barPackage.view.alert.RecipeAlertFactory;
 import barPackage.view.alert.ViewAlertFactory;
 import javafx.fxml.FXML;

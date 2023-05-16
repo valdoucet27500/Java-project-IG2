@@ -1,7 +1,6 @@
 package barPackage.model;
 
 import barPackage.exceptions.StringInputSizeException;
-import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

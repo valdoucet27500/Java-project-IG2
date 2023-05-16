@@ -1,7 +1,6 @@
 package barPackage.controller.content;
 
 import barPackage.business.ContentManager;
-import barPackage.model.Content;
 import barPackage.model.Outdate;
 import barPackage.view.alert.AlertFactoryType;
 import barPackage.view.alert.ViewAlertFactory;

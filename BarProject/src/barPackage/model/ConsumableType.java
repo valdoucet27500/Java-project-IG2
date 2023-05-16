@@ -1,7 +1,6 @@
 package barPackage.model;
 
 import barPackage.exceptions.StringInputSizeException;
-import javafx.beans.property.SimpleStringProperty;
 
 public class ConsumableType {
     private final static int MAX_SIZE = 32;

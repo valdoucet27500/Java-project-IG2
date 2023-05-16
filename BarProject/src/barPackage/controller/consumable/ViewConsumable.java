@@ -4,12 +4,10 @@ import barPackage.business.ConsumableManager;
 import barPackage.business.DrinkManager;
 import barPackage.exceptions.ReadErrorException;
 import barPackage.model.Consumable;
-import barPackage.model.ConsumableType;
 import barPackage.model.Drink;
 import barPackage.view.alert.AlertFactoryType;
 import barPackage.view.alert.ConsumableAlertFactory;
 import barPackage.view.alert.ViewAlertFactory;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,10 +16,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Locale;
 import java.util.Objects;
 
 public class ViewConsumable {
