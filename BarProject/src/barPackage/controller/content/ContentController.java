@@ -75,7 +75,7 @@ public class ContentController {
             tableView.getColumns().addAll(contentIdColumn, consumableNameColumn, quantityColumn, unitColumn, expirationDateColumn);
             refreshTable();
         } catch (ReadErrorException e) {
-            throw new RuntimeException(e);
+            ContentAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
         }
     }
 
@@ -87,7 +87,7 @@ public class ContentController {
             ObservableList<Content> contents = contentManager.getAllContents();
             tableView.setItems(contents);
         } catch (ReadErrorException e) {
-            throw new RuntimeException(e);
+            ContentAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
         }
     }
 
@@ -99,7 +99,7 @@ public class ContentController {
             Consumable consumable = consumableManager.getConsumableByName(consumableName);
             unitText.setText(consumable.getUnit());
         } catch (ReadErrorException e) {
-            throw new RuntimeException(e);
+            ContentAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
         }
     }
 
@@ -160,7 +160,7 @@ public class ContentController {
                 ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
             }
         } catch (ReadErrorException | DeleteErrorException e) {
-            throw new RuntimeException(e);
+            ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, e.getMessage()).showAndWait();
         }
     }
 

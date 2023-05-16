@@ -35,7 +35,6 @@ public class DeleteConsumable {
     private AnchorPane primaryPan;
     @FXML
     private ComboBox<String> comboBox;
-    private Boolean isDrink = false;
     @FXML
     private void initialize() {
         try {
@@ -66,7 +65,7 @@ public class DeleteConsumable {
             if (tableView.getSelectionModel() == null) {
                 ConsumableAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, "Veuillez selectionner un consommable à supprimer").showAndWait();
             } else {
-                if (isDrink) {
+                if (comboBox.getSelectionModel().getSelectedItem().equals("Boisson")) {
                     DrinkManager drinkManager = new DrinkManager();
                     drinkManager.deleteDrink((Drink) tableView.getSelectionModel().getSelectedItem());
                 } else {
@@ -76,7 +75,7 @@ public class DeleteConsumable {
                 ConsumableAlertFactory.getAlert(AlertFactoryType.DELETE_PASS).showAndWait();
                 deleteBtn.setDisable(true);
                 tableView.getItems().clear();
-                if (isDrink) {
+                if (comboBox.getSelectionModel().getSelectedItem().equals("Boisson")) {
                     DrinkManager drinkManager = new DrinkManager();
                     setTableViewDrink();
                     for (Drink drink : drinkManager.getAllDrinks()) {
@@ -85,7 +84,7 @@ public class DeleteConsumable {
                 } else {
                     ConsumableManager consumableManager = new ConsumableManager();
                     setTableViewConsumable();
-                    for (Consumable consumable : consumableManager.getAllConsumables()) {
+                    for (Consumable consumable : consumableManager.getAllConsumableNoDrinks()) {
                         tableView.getItems().add(consumable);
                     }
                 }
@@ -101,7 +100,6 @@ public class DeleteConsumable {
             ConsumableManager consumableManager = new ConsumableManager();
             DrinkManager drinkManager = new DrinkManager();
             if (comboBox.getSelectionModel().getSelectedItem().equals("Boisson")) {
-                isDrink = true;
                 setTableViewDrink();
                 deleteBtn.setDisable(true);
                 for (Drink drink : drinkManager.getAllDrinks()) {
@@ -109,7 +107,6 @@ public class DeleteConsumable {
                 }
             }
             if (comboBox.getSelectionModel().getSelectedItem().equals("Consommable")) {
-                isDrink = false;
                 setTableViewConsumable();
                 deleteBtn.setDisable(true);
                 for (Consumable consumable : consumableManager.getAllConsumableNoDrinks()) {
