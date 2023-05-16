@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.util.IllegalFormatConversionException;
 import java.util.Objects;
 
 public class RecipeController {
@@ -160,7 +161,16 @@ public class RecipeController {
         if (!recipeNameInput.getText().isEmpty() && !ingredientQuantityInput.getText().isEmpty() && consumableCombobox.getValue() != null) {
             String consumableName = consumableCombobox.getValue();
             String recipeName = recipeNameInput.getText();
-            Double quantity = Double.parseDouble(ingredientQuantityInput.getText());
+            Double quantity;
+            try {
+                if (Double.parseDouble(ingredientQuantityInput.getText()) <= 0) {
+                    throw new NumberFormatException();
+                }
+                quantity = Double.parseDouble(ingredientQuantityInput.getText());
+            } catch (NumberFormatException e) {
+                IngredientAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, "Veuillez insérer une quantité valide (supérieure ou égale a 1).").showAndWait();
+                return;
+            }
             String unit = ingredientUnitText.getText();
             Ingredient ingredient = new Ingredient(consumableName, recipeName, quantity, unit);
             // Check if ingredient name already exists
@@ -177,9 +187,7 @@ public class RecipeController {
             }
         } else if (recipeNameInput.getText().isEmpty()) {
             IngredientAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, "Veuillez insérer un nom de recette.").showAndWait();
-        } else if (ingredientQuantityInput.getText().isEmpty()) {
-            IngredientAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, "Veuillez insérer une quantité.").showAndWait();
-        } else if (consumableCombobox.getValue() == null) {
+        }  else if (consumableCombobox.getValue() == null) {
             IngredientAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, "Veuillez sélectionner un consommable.").showAndWait();
         }
     }

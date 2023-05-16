@@ -115,17 +115,29 @@ public class AddConsumable {
     }
 
     @FXML
-    public void onAddBtnClick() throws DeleteErrorException {
+    public void onAddBtnClick() throws Exception {
         // Consumable
         String name = nameText.getText();
         Boolean isVegan = veganCheck.isSelected();
         String description = descriptionText.getText().equals("") ? null : descriptionText.getText();
         String unit = unitComboBox.getSelectionModel().getSelectedItem();
-        Double kcal = kcalText.getText().equals("") ? null : Double.parseDouble(kcalText.getText());
+        Double kcal = null;
+        try {
+            kcal = Double.parseDouble(kcalText.getText());
+        }catch (NumberFormatException e) {
+            ConsumableAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, "Kcal doit etre entre 0 et 9999").showAndWait();
+            return;
+        }
         String consumableType = consumableTypeCombobox.getSelectionModel().getSelectedItem();
         // Drink
         String drinkType = drinkTypeCombobox.getSelectionModel().getSelectedItem();
-        Double alcoholDegree = alcoholDegreeTextField.getText().equals("") ? null : Double.parseDouble(alcoholDegreeTextField.getText());
+        Double alcoholDegree = 0.0;
+        try {
+            alcoholDegree = Double.parseDouble(alcoholDegreeTextField.getText());
+        }catch (NumberFormatException e) {
+            ConsumableAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, "le degréé d'alcool doit etre entre 0 et 9").showAndWait();
+            return;
+        }
         Boolean isSparkling = sparklingCheck.isSelected();
         Boolean isSugarFree = sugarFreeCheck.isSelected();
         try {

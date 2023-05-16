@@ -106,7 +106,16 @@ public class ContentController {
     @FXML
     public void onAddBtnClick() {
         String consumableName = consumableCombobox.getValue();
-        Double quantity = Double.parseDouble(quantityInput.getText());
+        Double quantity;
+        try {
+            if (Double.parseDouble(quantityInput.getText()) <= 0) {
+                throw new NumberFormatException();
+            }
+            quantity = Double.parseDouble(quantityInput.getText());
+        } catch (NumberFormatException e) {
+            ContentAlertFactory.getAlert(AlertFactoryType.ADD_FAIL, "La quantité doit être un nombre").showAndWait();
+            return;
+        }
         LocalDate expirationDate = datePicker.getValue();
         try {
             ContentManager contentManager = new ContentManager();

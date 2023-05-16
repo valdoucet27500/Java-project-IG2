@@ -162,11 +162,19 @@ public class UpdateConsumable {
                     description = descriptionText.getText().equals("") ? null : descriptionText.getText();
                 }
                 String unit = unitComboBox.getSelectionModel().getSelectedItem();
-                Double kcal = kcalText.getText().equals("") ? null : Double.parseDouble(kcalText.getText());
+                Double kcal = null;
+                if (!kcalText.getText().equals("") && kcalText.getText().compareTo("0") > 0
+                        && kcalText.getText().compareTo("9") < 0 && Double.parseDouble(kcalText.getText()) > 0) {
+                    kcal = Double.parseDouble(kcalText.getText());
+                }
                 String consumableType = consumableTypeCombobox.getSelectionModel().getSelectedItem();
                 // Drink
                 String drinkType = drinkTypeCombobox.getSelectionModel().getSelectedItem();
-                Double alcoholDegree = alcoholDegreeTextField.getText().equals("") ? null : Double.parseDouble(alcoholDegreeTextField.getText());
+                Double alcoholDegree = (double) 0;
+                if (!alcoholDegreeTextField.getText().equals("") && alcoholDegreeTextField.getText().compareTo("0") >= 0
+                        && alcoholDegreeTextField.getText().compareTo("9") < 0 ) {
+                    alcoholDegree = Double.parseDouble(alcoholDegreeTextField.getText());
+                }
                 Boolean isSparkling = sparklingCheck.isSelected();
                 Boolean isSugarFree = sugarFreeCheck.isSelected();
                 if (isDrink) {
@@ -224,7 +232,7 @@ public class UpdateConsumable {
     }
     public void tableViewClear(){
         tableView.getItems().clear();
-        updateBtn.setVisible(false);
+        updateBtn.setDisable(true);
         nameText.setText("");
         veganCheck.setSelected(false);
         descriptionText.setText("");
