@@ -38,4 +38,7 @@ public class ConsumableManager {
     public Consumable getConsumableByName(String name) throws ReadErrorException {
         return consumableDataAccess.getConsumableByName(name);
     }
+    public ObservableList<Consumable> getAllConsumableInContent() throws ReadErrorException {
+        return consumableDataAccess.getAllConsumableInContent();
+    }
 }

@@ -141,10 +141,16 @@ public class ContentController {
         try {
             ContentManager contentManager = new ContentManager();
             Content newContent = new Content(consumableName, quantity, expirationDate);
-            contentManager.updateContent(content, newContent);
-            refreshTable();
-            ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
-        } catch (ReadErrorException e) {
+            if (newContent.getQuantity() == 0) {
+                contentManager.deleteContent(content);
+                refreshTable();
+                ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
+            } else {
+                contentManager.updateContent(content, newContent);
+                refreshTable();
+                ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS).showAndWait();
+            }
+        } catch (ReadErrorException | DeleteErrorException e) {
             throw new RuntimeException(e);
         }
     }

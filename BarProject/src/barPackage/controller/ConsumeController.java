@@ -1,9 +1,12 @@
 package barPackage.controller;
 
+import barPackage.business.ConsumableManager;
 import barPackage.business.ContentManager;
 import barPackage.business.RecipeManager;
+import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
 import barPackage.exceptions.UpdateErrorException;
+import barPackage.model.Consumable;
 import barPackage.model.Content;
 import barPackage.model.MissingIngredient;
 import barPackage.model.Recipe;
@@ -56,11 +59,11 @@ public class ConsumeController {
         consumeComboBox.getItems().addAll("Consumable","Recipe");
         consumeComboBox.getSelectionModel().select("Consumable");
         TableColumn<Object,String> name = new TableColumn<>("Nom");
-        name.setCellValueFactory(new PropertyValueFactory<>("consumableName"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
         tableviewChoice.getColumns().add(name);
-        ContentManager contentManager = new ContentManager();
-        for (Content content : contentManager.getAllContentAvailables()) {
-            tableviewChoice.getItems().add(content);
+        ConsumableManager consumableManager = new ConsumableManager();
+        for (Consumable consumable : consumableManager.getAllConsumableInContent()) {
+            tableviewChoice.getItems().add(consumable);
         }
         tableViewMissingIngredient.setVisible(false);
         ingredientText.setVisible(false);
@@ -99,11 +102,11 @@ public class ConsumeController {
                 }
             } else {
                 TableColumn<Object,String> name = new TableColumn<>("Nom");
-                name.setCellValueFactory(new PropertyValueFactory<>("consumableName"));
+                name.setCellValueFactory(new PropertyValueFactory<>("name"));
                 tableviewChoice.getColumns().add(name);
-                ContentManager contentManager = new ContentManager();
-                for (Content content : contentManager.getAllContentAvailables()) {
-                    tableviewChoice.getItems().add(content);
+                ConsumableManager consumableManager = new ConsumableManager();
+                for (Consumable consumable : consumableManager.getAllConsumableInContent()) {
+                    tableviewChoice.getItems().add(consumable);
                 }
                 consumeBtn.setDisable(false);
             }
@@ -111,7 +114,7 @@ public class ConsumeController {
     }
     @FXML
     public void onTableViewSelect() throws ReadErrorException {
-        if (tableviewChoice.getSelectionModel().getSelectedItem() != null) {
+        if (tableviewChoice.getSelectionModel().getSelectedItem() != null && !textArea.getText().equals("") && Double.parseDouble(textArea.getText()) > 0) {
             if (consumeComboBox.getSelectionModel().getSelectedItem().equals("Recipe")) {
                 Recipe recipe = ((Recipe)tableviewChoice.getSelectionModel().getSelectedItem());
                 tableViewMissingIngredient.getItems().clear();
@@ -121,6 +124,8 @@ public class ConsumeController {
                 }
                 if (tableViewMissingIngredient.getItems().isEmpty()) {
                     consumeBtn.setDisable(false);
+                    ingredientText.setVisible(false);
+                    tableViewMissingIngredient.setVisible(false);
                 } else {
                     consumeBtn.setDisable(true);
                     ingredientText.setVisible(true);
@@ -134,7 +139,7 @@ public class ConsumeController {
         }
     }
     @FXML
-    public void onConsumeBtnClick() throws ReadErrorException, UpdateErrorException {
+    public void onConsumeBtnClick() throws ReadErrorException, UpdateErrorException, DeleteErrorException {
         if (consumeComboBox.getSelectionModel().getSelectedItem().equals("Recipe")) {
             Recipe recipe = ((Recipe)tableviewChoice.getSelectionModel().getSelectedItem());
             RecipeManager recipeManager = new RecipeManager();
@@ -145,36 +150,50 @@ public class ConsumeController {
                 RecipeAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, recipe.getRecipeName()).showAndWait();
             }
         } else {
-            Content content = ((Content)tableviewChoice.getSelectionModel().getSelectedItem());
+            Consumable consumable = ((Consumable)tableviewChoice.getSelectionModel().getSelectedItem());
             ContentManager contentManager = new ContentManager();
-            if (content.getQuantity() < Double.parseDouble(textArea.getText())) {
-                ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_FAIL, content.getConsumableName()).showAndWait();
-            } else {
-                contentManager.consumeContent(content, Double.parseDouble(textArea.getText()));
-                ContentAlertFactory.getAlert(AlertFactoryType.UPDATE_PASS, content.getConsumableName()).showAndWait();
-            }
+            contentManager.consumeContent(consumable, Double.parseDouble(textArea.getText()));
         }
     }
     public void onQuantityChange() throws ReadErrorException {
-        if (tableviewChoice.getSelectionModel().getSelectedItem() != null) {
+        if (tableviewChoice.getSelectionModel().getSelectedItem() != null && !textArea.getText().equals("") && Double.parseDouble(textArea.getText()) > 0) {
+            tableViewMissingIngredient.getItems().clear();
             if (consumeComboBox.getSelectionModel().getSelectedItem().equals("Recipe")) {
                 Recipe recipe = ((Recipe)tableviewChoice.getSelectionModel().getSelectedItem());
-                tableViewMissingIngredient.getItems().clear();
                 RecipeManager recipeManager = new RecipeManager();
                 for (MissingIngredient missingIngredient : recipeManager.getMissingIngredients(recipe, Double.parseDouble(textArea.getText()))) {
                     tableViewMissingIngredient.getItems().add(missingIngredient);
                 }
                 if (tableViewMissingIngredient.getItems().isEmpty()) {
                     consumeBtn.setDisable(false);
+                    ingredientText.setVisible(false);
+                    tableViewMissingIngredient.setVisible(false);
                 } else {
                     consumeBtn.setDisable(true);
                     ingredientText.setVisible(true);
                     tableViewMissingIngredient.setVisible(true);
                 }
             } else {
-                tableViewMissingIngredient.setVisible(false);
-                ingredientText.setVisible(false);
-                consumeBtn.setDisable(false);
+                ContentManager contentManager = new ContentManager();
+                double quantity = 0;
+                Consumable consumable = ((Consumable)tableviewChoice.getSelectionModel().getSelectedItem());
+                for (Content content : contentManager.getAllContentAvailables()) {
+                    if (content.getConsumableName().equals(consumable.getName())) {
+                        quantity += content.getQuantity();
+                    }
+                }
+                if (quantity < Double.parseDouble(textArea.getText())) {
+                    consumeBtn.setDisable(true);
+                    ingredientText.setVisible(true);
+                    tableViewMissingIngredient.setVisible(true);
+                    MissingIngredient missingIngredient =
+                            new MissingIngredient(consumable.getName(), quantity, Double.parseDouble(textArea.getText()));
+                    tableViewMissingIngredient.getItems().add(missingIngredient);
+                } else {
+                    consumeBtn.setDisable(false);
+                    ingredientText.setVisible(false);
+                    tableViewMissingIngredient.setVisible(false);
+                }
             }
         }
     }

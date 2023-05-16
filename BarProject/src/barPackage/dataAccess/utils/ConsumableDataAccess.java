@@ -14,4 +14,6 @@ public interface ConsumableDataAccess {
     public void updateConsumable (Consumable consumable, Consumable newConsumable) throws UpdateErrorException;
     ObservableList<Consumable> getAllConsumableNoDrinks() throws ReadErrorException;
     Consumable getConsumableByName(String name) throws ReadErrorException;
+
+    public ObservableList<Consumable> getAllConsumableInContent() throws ReadErrorException;
 }

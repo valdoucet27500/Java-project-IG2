@@ -23,6 +23,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy></TableView>
       <Text fx:id="quantityText" layoutX="513.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="quantité consommé" />
-      <TextField fx:id="textArea" layoutX="491.0" layoutY="211.0" onKeyPressed="#onQuantityChange" promptText="quantité par default 1" />
+      <TextField fx:id="textArea" layoutX="491.0" layoutY="211.0" onKeyPressed="#onQuantityChange" onKeyReleased="#onQuantityChange" promptText="quantité par default 1" />
    </children>
 </AnchorPane>

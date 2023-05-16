@@ -155,4 +155,30 @@ public class ConsumableDBAccess implements ConsumableDataAccess {
         }
         return consumable;
     }
+    @Override
+    public ObservableList<Consumable> getAllConsumableInContent() throws ReadErrorException {
+        ObservableList<Consumable> consumables = FXCollections.observableArrayList();
+        try {
+            Connection connection = SingletonConnexion.getConnection();
+            String sqlInstruction = "select * from consumable \n" +
+                    "where consumable_name IN (select consumable_id FROM  content);";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Consumable consumable = new Consumable(resultSet.getString("consumable_name"),
+                        resultSet.getBoolean("is_vegan"),
+                        resultSet.getString("description"),
+                        resultSet.getString("unit_id"),
+                        resultSet.getDate("creation_date").toLocalDate(),
+                        resultSet.getDouble("kcal"),
+                        resultSet.getString("consumable_type_id"));
+                consumables.add(consumable);
+            }
+        } catch (ConnectionException e) {
+            throw new ReadErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException | StringInputSizeException e) {
+            throw new ReadErrorException("Erreur lors de la lecture des consommables dans la base de données");
+        }
+        return consumables;
+    }
 }
