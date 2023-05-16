@@ -49,12 +49,12 @@
          <center>
             <AnchorPane fx:id="middlePane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Text layoutX="370.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chef, un p'tit verre ?">
+                  <Text layoutX="370.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chef, un p'tit verre ?">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Button fx:id="consumeBtn" layoutX="409.0" layoutY="193.0" mnemonicParsing="false" onAction="#onConsumeBtnClick" text="Consommer" />
+                  <Button fx:id="consumeBtn" layoutX="409.0" layoutY="300.0" mnemonicParsing="false" onAction="#onConsumeBtnClick" text="Consommer" />
                </children>
             </AnchorPane>
          </center>

@@ -8,10 +8,10 @@
 
 <AnchorPane fx:id="primaryPan" prefHeight="580.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barPackage.controller.drinkType.AddDrinkType">
     <children>
-        <TextField fx:id="drinkTypeNameArea" layoutX="357.0" layoutY="176.0" prefHeight="26.0" prefWidth="220.0" promptText="Nom du type de boisson" />
-        <Button fx:id="addBtn" layoutX="376.0" layoutY="231.0" mnemonicParsing="false" onAction="#onAddBtnClick" prefHeight="20.0" prefWidth="75.0" text="Ajouter" />
-        <Button fx:id="cancelBtn" layoutX="484.0" layoutY="231.0" mnemonicParsing="false" onAction="#onCancelBtnClick" prefHeight="20.0" prefWidth="75.0" text="Annuler" />
-        <Text layoutX="391.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom du type de boisson">
+        <TextField fx:id="drinkTypeNameArea" layoutX="340.0" layoutY="275.0" prefHeight="26.0" prefWidth="220.0" promptText="Nom du type de boisson" />
+        <Button fx:id="addBtn" layoutX="359.0" layoutY="330.0" mnemonicParsing="false" onAction="#onAddBtnClick" prefHeight="20.0" prefWidth="75.0" text="Ajouter" />
+        <Button fx:id="cancelBtn" layoutX="467.0" layoutY="330.0" mnemonicParsing="false" onAction="#onCancelBtnClick" prefHeight="20.0" prefWidth="75.0" text="Annuler" />
+        <Text layoutX="374.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom du type de boisson">
             <font>
                 <Font size="14.0" />
             </font>

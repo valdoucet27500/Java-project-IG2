@@ -35,7 +35,7 @@ public class DeleteTool {
     @FXML
     private void initialize() {
         try {
-            TableColumn<Tool,String> nameColumn = new TableColumn<>(" Name");
+            TableColumn<Tool,String> nameColumn = new TableColumn<>(" Nom");
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
             tableView.getColumns().add(nameColumn);
             ToolManager toolManager = new ToolManager();

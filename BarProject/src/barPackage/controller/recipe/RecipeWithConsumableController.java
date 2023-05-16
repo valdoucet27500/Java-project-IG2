@@ -36,7 +36,7 @@ public class RecipeWithConsumableController {
             for(Consumable consumable : consumableManager.getAllConsumables()) {
                 consumableComboBox.getItems().add(consumable.getName());
             }
-            TableColumn<barPackage.model.RecipeWithConsumable,String> recipeName = new TableColumn<>("Recipe Name");
+            TableColumn<barPackage.model.RecipeWithConsumable,String> recipeName = new TableColumn<>("Nom de la recette");
             recipeName.setCellValueFactory(new PropertyValueFactory<>("recipeName"));
             tableView.getColumns().add(recipeName);
         } catch (Exception e) {
