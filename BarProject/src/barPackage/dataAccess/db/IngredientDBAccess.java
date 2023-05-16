@@ -6,7 +6,6 @@ import barPackage.exceptions.ConnectionException;
 import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
 import barPackage.model.Ingredient;
-import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

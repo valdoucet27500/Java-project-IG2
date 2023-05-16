@@ -2,11 +2,9 @@ package barPackage.controller.consumableType;
 
 import barPackage.business.ConsumableTypeManager;
 import barPackage.exceptions.ReadErrorException;
-import barPackage.model.Consumable;
 import barPackage.model.ConsumableType;
 import barPackage.view.alert.AlertFactoryType;
 import barPackage.view.alert.ConsumableTypeAlertFactory;
-import barPackage.view.alert.UnitAlertFactory;
 import barPackage.view.alert.ViewAlertFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +14,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.IOException;
 import java.util.Objects;
 

@@ -2,6 +2,7 @@ package barPackage.dataAccess.db;
 
 import barPackage.dataAccess.utils.ContentDataAccess;
 import barPackage.exceptions.*;
+import barPackage.model.Consumable;
 import barPackage.model.Content;
 import barPackage.model.Outdate;
 import javafx.collections.FXCollections;
@@ -141,18 +142,75 @@ public class ContentDBAccess implements ContentDataAccess {
             throw new ReadErrorException("Erreur lors de la lecture des contenus dans la base de données");
         }
     }
-
     @Override
-    public void consumeContent(Content content, Double quantity) throws UpdateErrorException {
+    public ObservableList<Content> getContentByName(String name) throws ReadErrorException {
+        ObservableList<Content> contents = FXCollections.observableArrayList();
         try {
             Connection connection = SingletonConnexion.getConnection();
-            String sqlInstruction = "update content set quantity = quantity - ? where content_id = ?";
+            String sqlInstruction = "select content_id, consumable_id, quantity, expiration_date, unit_id from content \n" +
+                    "inner join consumable on content.consumable_id = consumable.consumable_name \n" +
+                    "where consumable_id = ?\n" +
+                    "order by  expiration_date;";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
-            preparedStatement.setDouble(1, quantity);
-            preparedStatement.setInt(2, content.getId());
-            preparedStatement.executeUpdate();
-        } catch (ConnectionException | SQLException e) {
-            throw new UpdateErrorException("Erreur lors de la connexion à la base de données");
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt("content_id");
+                String nameContent = resultSet.getString("consumable_id");
+                Double quantity = resultSet.getDouble("quantity");
+                LocalDate date = resultSet.getDate("expiration_date").toLocalDate();
+                String unit = resultSet.getString("unit_id");
+                Content content = new Content(id, nameContent, quantity, date, unit);
+                contents.add(content);
+            }
+            return contents;
+        } catch (ConnectionException e) {
+            throw new ReadErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException e) {
+            throw new ReadErrorException("Erreur lors de la lecture des contenus dans la base de données");
         }
     }
+    @Override
+    public Content getContentByConsumableName(String name) throws ReadErrorException {
+        Content content = null;
+        try {
+            Connection connection = SingletonConnexion.getConnection();
+            String sqlInstruction = "select content_id, consumable_id, quantity, expiration_date, unit_id from content \n" +
+                    "inner join consumable on content.consumable_id = consumable.consumable_name \n" +
+                    "where consumable_id = ?\n" +
+                    "order by  expiration_date;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt("content_id");
+                String nameContent = resultSet.getString("consumable_id");
+                Double quantity = resultSet.getDouble("quantity");
+                LocalDate date = resultSet.getDate("expiration_date").toLocalDate();
+                String unit = resultSet.getString("unit_id");
+                content = new Content(id, nameContent, quantity, date, unit);
+            }
+            return content;
+        } catch (ConnectionException e) {
+            throw new ReadErrorException("Erreur lors de la connexion à la base de données");
+        } catch (SQLException e) {
+            throw new ReadErrorException("Erreur lors de la lecture des contenus dans la base de données");
+        }
+    }
+    @Override
+    public void consumeContent(Consumable consumable, Double quantity) throws ReadErrorException, DeleteErrorException {
+            for (Content c : getContentByName(consumable.getName())) {
+                if (quantity != 0 && c.getQuantity() == quantity) {
+                    deleteContent(c);
+                    quantity = 0.0;
+                } else if (quantity != 0 && c.getQuantity() > quantity) {
+                    updateContent(c, new Content(c.getId(), c.getConsumableName(),
+                            c.getQuantity() - quantity, c.getExpirationDate(), c.getUnit()));
+                    quantity = 0.0;
+                } else if (quantity != 0) {
+                    quantity -= c.getQuantity();
+                    deleteContent(c);
+                }
+            }
+        }
 }

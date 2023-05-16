@@ -4,7 +4,6 @@ import barPackage.business.ConsumableTypeManager;
 import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
 import barPackage.model.ConsumableType;
-import barPackage.model.Unit;
 import barPackage.view.alert.AlertFactoryType;
 import barPackage.view.alert.ConsumableTypeAlertFactory;
 import barPackage.view.alert.ViewAlertFactory;
@@ -14,10 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.IOException;
 import java.util.Objects;
 

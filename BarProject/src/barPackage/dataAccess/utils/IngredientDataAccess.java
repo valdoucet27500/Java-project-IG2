@@ -4,7 +4,6 @@ import barPackage.exceptions.AddErrorException;
 import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
 import barPackage.model.Ingredient;
-import javafx.collections.ObservableList;
 
 public interface IngredientDataAccess {
     public void addIngredient(Ingredient ingredient) throws AddErrorException;

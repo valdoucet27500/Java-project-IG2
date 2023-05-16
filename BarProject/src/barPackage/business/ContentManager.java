@@ -6,6 +6,7 @@ import barPackage.exceptions.AddErrorException;
 import barPackage.exceptions.DeleteErrorException;
 import barPackage.exceptions.ReadErrorException;
 import barPackage.exceptions.UpdateErrorException;
+import barPackage.model.Consumable;
 import barPackage.model.Content;
 import barPackage.model.Outdate;
 import javafx.collections.ObservableList;
@@ -41,7 +42,14 @@ public class ContentManager {
     public ObservableList<Outdate> getAllOutdatedContent(LocalDate outdate) throws ReadErrorException {
         return contentDataAccess.getAllOutdatedContent(outdate);
     }
-    public void consumeContent(Content content, double parseDouble) throws UpdateErrorException {
-        contentDataAccess.consumeContent(content, parseDouble);
+    public ObservableList<Content> getContentByName(String name) throws ReadErrorException {
+        return contentDataAccess.getContentByName(name);
     }
+    public void consumeContent(Consumable consumable, double parseDouble) throws UpdateErrorException, ReadErrorException, DeleteErrorException {
+        contentDataAccess.consumeContent(consumable, parseDouble);
+    }
+    public Content getContentByConsumableName(String name) throws ReadErrorException {
+        return contentDataAccess.getContentByConsumableName(name);
+    }
+
 }
