@@ -176,7 +176,7 @@ public class MainViewController {
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {
-            e.printStackTrace();
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
         }
     }
 
@@ -187,7 +187,7 @@ public class MainViewController {
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {
-            e.printStackTrace();
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
         }
     }
 
@@ -198,7 +198,7 @@ public class MainViewController {
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {
-            e.printStackTrace();
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
         }
     }
     @FXML
@@ -208,7 +208,18 @@ public class MainViewController {
             Parent root = fxmlLoader.load();
             middlePane.getChildren().setAll(root);
         } catch (IOException e) {
-            e.printStackTrace();
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
+        }
+    }
+
+    @FXML
+    public void onRecipeGenerateBtnClick() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/recipe/RecipeGeneration.fxml")));
+            Parent root = fxmlLoader.load();
+            middlePane.getChildren().setAll(root);
+        } catch (IOException e) {
+            ViewAlertFactory.getAlert(AlertFactoryType.PAGE_LOAD_FAIL).showAndWait();
         }
     }
 }
