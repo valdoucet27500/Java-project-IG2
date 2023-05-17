@@ -54,7 +54,7 @@ public class DeleteConsumableType {
     @FXML
     public void onDeleteBtnClick() {
         try {
-            if (tableView.getSelectionModel() == null) {
+            if (tableView.getSelectionModel().getSelectedItem() == null) {
                 ConsumableTypeAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, "Veuillez selectionner un type à supprimer").showAndWait();
             } else {
                 ConsumableTypeManager consumableTypeManager = new ConsumableTypeManager();

@@ -58,7 +58,7 @@ public class DeleteUnit {
     @FXML
     public void onDeleteBtnClick() {
         try {
-            if (tableView.getSelectionModel() == null) {
+            if (tableView.getSelectionModel().getSelectedItem() == null) {
                 UnitAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, "Veuillez selectionner une unité à supprimer.").showAndWait();
             } else {
                 UnitManager unitManager = new UnitManager();

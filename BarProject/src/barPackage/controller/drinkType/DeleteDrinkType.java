@@ -58,7 +58,7 @@ public class DeleteDrinkType {
     @FXML
     public void onDeleteBtnClick() {
         try {
-            if (tableView.getSelectionModel() == null) {
+            if (tableView.getSelectionModel().getSelectedItem() == null) {
                 DrinkTypeAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, "Veuillez selectionner un type à supprimer").showAndWait();
             } else {
                 DrinkTypeManager drinkTypeManager = new DrinkTypeManager();

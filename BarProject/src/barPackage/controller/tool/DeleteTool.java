@@ -61,7 +61,7 @@ public class DeleteTool {
     @FXML
     public void onDeleteBtnClick() {
         try {
-            if (tableView.getSelectionModel() == null) {
+            if (tableView.getSelectionModel().getSelectedItem() == null) {
                 ToolAlertFactory.getAlert(AlertFactoryType.DELETE_FAIL, "Veuillez selectionner un outils à supprimer.").showAndWait();
             } else {
                 ToolManager toolManager = new ToolManager();
