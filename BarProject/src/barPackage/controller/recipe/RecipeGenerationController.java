@@ -41,47 +41,51 @@ public class RecipeGenerationController {
     private CheckBox veganCheck;
 
     @FXML
-    public void onGenerateBtnClick() throws ReadErrorException {
-        ArrayList<Content> contents = new ArrayList<>();
-        ConsumableManager consumableManager = new ConsumableManager();
-        DrinkManager drinkManager = new DrinkManager();
-        ContentManager contentManager = new ContentManager();
-        // Obtain all distinct contents
-        for (Content newContent : contentManager.getAllContents()) {
-            for (Content content : contents) {
-                if (content.getConsumableName().equals(newContent.getConsumableName())) {
-                    content.addQuantity(newContent.getQuantity());
-                    break;
+    public void onGenerateBtnClick()  {
+        try {
+            ArrayList<Content> contents = new ArrayList<>();
+            ConsumableManager consumableManager = new ConsumableManager();
+            DrinkManager drinkManager = new DrinkManager();
+            ContentManager contentManager = new ContentManager();
+            // Obtain all distinct contents
+            for (Content newContent : contentManager.getAllContents()) {
+                for (Content content : contents) {
+                    if (content.getConsumableName().equals(newContent.getConsumableName())) {
+                        content.addQuantity(newContent.getQuantity());
+                        break;
+                    }
+                }
+                contents.add(newContent);
+            }
+            ArrayList<Content> contentsToRemove = new ArrayList<>();
+            // Remove all non-vegan contents
+            if (veganCheck.isSelected()) {
+                for (Content content : contents) {
+                    if (!consumableManager.getConsumableByName(content.getConsumableName()).getIsVegan()) {
+                        contentsToRemove.add(content);
+                    }
                 }
             }
-            contents.add(newContent);
-        }
-        ArrayList<Content> contentsToRemove = new ArrayList<>();
-        // Remove all non-vegan contents
-        if (veganCheck.isSelected()) {
-            for (Content content : contents) {
-                if (!consumableManager.getConsumableByName(content.getConsumableName()).getIsVegan()) {
-                    contentsToRemove.add(content);
+            // Remove all alcoholic contents
+            if (!alcoholCheck.isSelected()) {
+                for (Content content : contents) {
+                    Drink drink = drinkManager.getDrinkByName(content.getConsumableName());
+                    if (drink != null && drink.getAlcoholLevel() > 0) {
+                        contentsToRemove.add(content);
+                    }
                 }
             }
-        }
-        // Remove all alcoholic contents
-        if (!alcoholCheck.isSelected()) {
-            for (Content content : contents) {
-                Drink drink = drinkManager.getDrinkByName(content.getConsumableName());
-                if (drink != null && drink.getAlcoholLevel() > 0) {
-                    contentsToRemove.add(content);
-                }
-            }
-        }
-        // Remove all contents
-        contents.removeAll(contentsToRemove);
+            // Remove all contents
+            contents.removeAll(contentsToRemove);
 
-        // Generate the recipe
-        textArea.setText("Chargement...");
-        RecipeGenerationThread recipeGenerationThread = new RecipeGenerationThread(contents, this);
-        Thread thread = new Thread(recipeGenerationThread);
-        thread.start();
+            // Generate the recipe
+            textArea.setText("Chargement...");
+            RecipeGenerationThread recipeGenerationThread = new RecipeGenerationThread(contents, this);
+            Thread thread = new Thread(recipeGenerationThread);
+            thread.start();
+        } catch (ReadErrorException e) {
+            ViewAlertFactory.getAlert(AlertFactoryType.READ_FAIL, e.getMessage()).showAndWait();
+        }
     }
 
     @FXML
