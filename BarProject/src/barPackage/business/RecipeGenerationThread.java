@@ -17,7 +17,7 @@ public class RecipeGenerationThread implements Runnable {
 
     public void run() {
         StringBuilder request = new StringBuilder();
-        request.append("Tu es barman depuis 20 ans. Donne moi une recette (Ingrédients, quantités et instructions) que je peux faire avec ce que j'ai dans mon bar (tu n'est pas obligé d'utiliser tous les ingrédients, MAIS tu ne peut PAS utiliser des ingrédients qui ne sont pas présents dans le bar !). Dans mon bar, j'ai :");
+        request.append("Tu es barman depuis 20 ans. Donne moi une recette (Ingrédients, quantités et instructions) pour une personne que je peux faire avec ce que j'ai dans mon bar (tu n'est pas obligé d'utiliser tous les ingrédients, MAIS tu ne peut PAS utiliser des ingrédients qui ne sont pas présents dans le bar !). Dans mon bar, j'ai :");
         for (Content content : contents) {
             request.append(" - ").append(content.getQuantity()).append(" (").append(content.getUnit()).append(") de ").append(content.getConsumableName());
         }
